@@ -18,7 +18,7 @@ const StyledBottomNavigationAction = styled(BottomNavigationAction)(() => ({
 }));
 
 const NavbarMobile = () => {
-  const [value, setValue] = useState<NavbarAction>(null);
+  const [curPage, setCurPage] = useState<NavbarAction>(null);
 
   return (
     <div className={styles.container}>
@@ -27,8 +27,8 @@ const NavbarMobile = () => {
           backgroundColor: "#2E2E2E",
           width: "100%",
         }}
-        value={value}
-        onChange={(event, newValue) => setValue(newValue)}
+        value={curPage}
+        onChange={(event, newValue) => setCurPage(newValue)}
       >
         <StyledBottomNavigationAction
           disableRipple={true}

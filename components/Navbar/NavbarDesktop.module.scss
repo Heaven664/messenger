@@ -23,13 +23,17 @@
     align-items: center;
     margin-top: 15%;
     height: 100%;
+
     li {
       padding: 30px 0;
       font-size: 28px;
       color: $navbar-action-color;
       cursor: pointer;
-    }
 
+      &.selected {
+        color: $navbar-action-active-color;
+      }
+    }
     &:last-child {
       flex-direction: column-reverse;
     }
