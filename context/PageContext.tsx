@@ -1,4 +1,4 @@
-import { NavbarAction } from "@/types/Navbar/types";
+import { PageStatesType } from "@/types/Navbar/types";
 import { createContext, useState } from "react";
 import { ComponentProps } from "@/types/Layout/types";
 import { PageContextType } from "@/types/Context/types";
@@ -6,9 +6,9 @@ import { PageContextType } from "@/types/Context/types";
 const PageContext = createContext<PageContextType | null>(null);
 
 const PageContextProvider = ({ children }: ComponentProps) => {
-  const [curPage, setCurPage] = useState<NavbarAction>("chats");
+  const [curPage, setCurPage] = useState<PageStatesType>("chats");
 
-  const changePage = (value: NavbarAction) => {
+  const changePage = (value: PageStatesType) => {
     setCurPage(value);
   };
 

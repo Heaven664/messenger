@@ -1,6 +1,6 @@
-import { NavbarAction } from "../Navbar/types";
+import { PageStatesType } from "../Navbar/types";
 
 export type PageContextType = {
-  curPage: NavbarAction;
-  changePage: (page: NavbarAction) => void;
+  curPage: PageStatesType;
+  changePage: (page: PageStatesType) => void;
 };
