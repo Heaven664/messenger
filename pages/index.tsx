@@ -1,6 +1,6 @@
 import Head from "next/head";
-import NavbarMobile from "@/components/Navbar/NavbarMobile";
 import Layout from "@/components/Layout/Layout";
+import { PageContextProvider } from "@/context/PageContext";
 
 export default function Home() {
   return (
@@ -9,7 +9,9 @@ export default function Home() {
         <title>Messenger</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Layout></Layout>
+      <PageContextProvider>
+        <Layout />
+      </PageContextProvider>
     </>
   );
 }

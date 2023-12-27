@@ -6,13 +6,16 @@ import {
 } from "@mui/icons-material/";
 import styles from "./NavbarDesktop.module.scss";
 import { NavbarAction } from "@/types/Navbar/types";
-import { useState } from "react";
+import { useContext } from "react";
+import PageContext from "@/context/PageContext";
+import { PageContextType } from "@/types/Context/types";
 
 const NavbarDesktop = () => {
-  const [curPage, setCurPage] = useState<NavbarAction>(null);
+  const pageContext = useContext<PageContextType | null>(PageContext);
+  const { curPage, changePage } = pageContext as PageContextType;
 
   const handleNavClick = (value: NavbarAction) => {
-    setCurPage(value);
+    changePage(value);
   };
 
   return (

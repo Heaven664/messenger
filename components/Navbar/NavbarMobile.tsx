@@ -8,7 +8,9 @@ import {
 } from "@mui/icons-material/";
 import { NavbarAction } from "@/types/Navbar/types";
 import styles from "./NavbarMobile.module.scss";
-import { useState } from "react";
+import { useContext } from "react";
+import PageContext from "@/context/PageContext";
+import { PageContextType } from "@/types/Context/types";
 
 // Setting up color for active Navigation Icon
 const StyledBottomNavigationAction = styled(BottomNavigationAction)(() => ({
@@ -18,7 +20,8 @@ const StyledBottomNavigationAction = styled(BottomNavigationAction)(() => ({
 }));
 
 const NavbarMobile = () => {
-  const [curPage, setCurPage] = useState<NavbarAction>(null);
+  const pageContext = useContext<PageContextType | null>(PageContext);
+  const { curPage, changePage } = pageContext as PageContextType;
 
   return (
     <div className={styles.container}>
@@ -28,7 +31,7 @@ const NavbarMobile = () => {
           width: "100%",
         }}
         value={curPage}
-        onChange={(event, newValue) => setCurPage(newValue)}
+        onChange={(event, newValue) => changePage(newValue)}
       >
         <StyledBottomNavigationAction
           disableRipple={true}
