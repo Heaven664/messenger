@@ -7,7 +7,7 @@ import {
   AccountCircleRounded,
 } from "@mui/icons-material/";
 import { NavbarAction } from "@/types/Navbar/types";
-import styles from "./NavBar.module.scss";
+import styles from "./NavbarMobile.module.scss";
 import { useState } from "react";
 
 // Setting up color for active Navigation Icon
@@ -17,7 +17,7 @@ const StyledBottomNavigationAction = styled(BottomNavigationAction)(() => ({
   },
 }));
 
-const Navbar = () => {
+const NavbarMobile = () => {
   const [value, setValue] = useState<NavbarAction>(null);
 
   return (
@@ -59,4 +59,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default NavbarMobile;

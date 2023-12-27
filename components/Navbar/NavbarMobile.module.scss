@@ -6,7 +6,8 @@
   left: 0;
   overflow: hidden;
   max-height: 100%;
-  transition: max-height 0.3s ease;
+  transition: max-height 0.2s ease;
+  z-index: 998;
 
   @media (min-width: 1000px) {
     max-height: 0;

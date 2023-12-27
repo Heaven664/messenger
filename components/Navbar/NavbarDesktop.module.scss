@@ -1,0 +1,41 @@
+@import "@/styles/_variables";
+
+.container {
+  background-color: $navbar-color;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  width: 72px;
+  max-width: 72px;
+  height: 100%;
+  transition: max-width 0.2s ease;
+  z-index: 999;
+
+  ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15%;
+    height: 100%;
+    li {
+      padding: 30px 0;
+      font-size: 28px;
+      color: $navbar-action-color;
+      cursor: pointer;
+    }
+
+    &:last-child {
+      flex-direction: column-reverse;
+    }
+  }
+
+  @media (max-width: 999px) {
+    max-width: 0;
+  }
+}
