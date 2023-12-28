@@ -3,7 +3,7 @@
 .container {
   background-color: $dark-background-color;
   height: 100vh;
-  padding-bottom: $desktop-navbar-width;
+  margin-bottom: $desktop-navbar-width;
 
   @media (min-width: 999px) {
     position: fixed;
