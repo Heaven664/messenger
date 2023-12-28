@@ -1,7 +1,7 @@
 import styles from "@/components/Profile/Profile.module.scss";
 import { useState } from "react";
 import ProfileBackground from "./ProfileBackground";
-import Hero from "./Hero";
+import ProfileHero from "./ProfileHero";
 import ProfileInfo from "./ProfileInfo";
 
 const Profile = () => {
@@ -28,7 +28,7 @@ const Profile = () => {
         handleClose={handleClose}
         anchorEl={anchorEl}
       />
-      <Hero />
+      <ProfileHero />
       <ProfileInfo />
     </div>
   );

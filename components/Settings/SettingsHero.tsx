@@ -1,7 +1,8 @@
 import Image from "next/image";
-import styles from "./Hero.module.scss";
+import styles from "@/components/Settings/SettingsHero.module.scss";
+import { CameraAltRounded } from "@mui/icons-material/";
 
-const Hero = () => {
+const SettingsHero = () => {
   return (
     <div className={styles.layout}>
       <div className={styles.container}>
@@ -13,6 +14,9 @@ const Hero = () => {
               height={150}
               alt="hero-image"
             />
+            <div className={styles.changeIconContainer}>
+              <CameraAltRounded className={styles.changeIcon} />
+            </div>
           </div>
         </div>
         <p>Omar Hamid</p>
@@ -21,5 +25,4 @@ const Hero = () => {
     </div>
   );
 };
-
-export default Hero;
+export default SettingsHero;

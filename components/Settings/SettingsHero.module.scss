@@ -1,0 +1,77 @@
+@import "@/styles/_variables";
+
+.layout {
+  .container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: $dark-background-color;
+    width: 100%;
+    padding: 33px 0 12px 0;
+
+    .imageContainer {
+      position: absolute;
+      width: 88px;
+      height: 88px;
+      border-radius: 44px;
+      top: -50px;
+      background-color: $dark-background-color;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .imageBackground {
+        border-radius: 40px;
+        width: 80px;
+        height: 80px;
+        position: relative;
+        overflow: hidden;
+        
+        img {
+          position: absolute;
+          object-fit: cover;
+          width: 100%;
+          height: auto;
+        }
+
+        .changeIconContainer {
+          position: absolute;
+          bottom: 5px;
+          right: 2px;
+          width: 26px;
+          height: 26px;
+          border-radius: 13px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: $dark-background-color;
+  
+          .changeIcon {
+            font-size: 15px;
+            color: $light-background-text-color-primary;
+          }
+  
+          @media (min-width: 999px) {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+    p {
+      margin-top: 10px;
+      font-size: 16.5px;
+      font-weight: 400;
+      color: $light-background-text-color-primary;
+    }
+  }
+
+  hr {
+    border: 0;
+    height: 1px;
+    opacity: 0.2;
+    background-color: $light-background-text-color-primary;
+  }
+
+}
