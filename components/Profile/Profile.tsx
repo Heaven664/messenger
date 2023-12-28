@@ -1,6 +1,6 @@
 import styles from "@/components/Profile/Profile.module.scss";
 import { useState } from "react";
-import Background from "./Background";
+import ProfileBackground from "./ProfileBackground";
 import Hero from "./Hero";
 import ProfileInfo from "./ProfileInfo";
 
@@ -22,7 +22,7 @@ const Profile = () => {
 
   return (
     <div className={styles.container}>
-      <Background
+      <ProfileBackground
         handleClick={handleClick}
         handleLogOut={handleLogOut}
         handleClose={handleClose}

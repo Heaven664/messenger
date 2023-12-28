@@ -1,10 +1,10 @@
 import Image from "next/image";
-import styles from "@/components/Profile/Profile.module.scss";
+import styles from "@/components/Profile/ProfileBackground.module.scss";
 import { MoreVert, Logout } from "@mui/icons-material/";
 import { Menu, MenuItem } from "@mui/material";
 import { BackgroundProps } from "@/types/Profile/types";
 
-const Background = ({
+const ProfileBackground = ({
   handleClick,
   anchorEl,
   handleClose,
@@ -54,4 +54,4 @@ const Background = ({
   );
 };
 
-export default Background;
+export default ProfileBackground;

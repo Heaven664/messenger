@@ -1,9 +1,6 @@
-const Settings = () => {
-  return (
-    <div>
-      <h1>Settings</h1>
-    </div>
-  );
+import Settings from "@/components/Settings/Settings";
+const SettingsPage = () => {
+  return <Settings />;
 };
 
-export default Settings;
+export default SettingsPage;
