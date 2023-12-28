@@ -9,9 +9,6 @@ export default function Home() {
         <title>Messenger</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <PageContextProvider>
-        <Layout />
-      </PageContextProvider>
     </>
   );
 }
