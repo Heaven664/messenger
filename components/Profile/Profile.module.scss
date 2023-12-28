@@ -3,7 +3,7 @@
 .container {
   background-color: $dark-background-color;
   height: 100vh;
-  padding-bottom: 72px;
+  padding-bottom: $desktop-navbar-width;
 
   .backgroundContainer {
     position: relative;
@@ -12,10 +12,11 @@
       width: 100%;
       height: 160px;
       object-fit: cover;
+      filter: brightness(0.8);
     }
     h5 {
       color: $light-background-text-color-secondary;
-      font-size: 20px;
+      font-size: 18.5px;
       position: absolute;
       top: 10px;
       left: 10px;
@@ -28,14 +29,23 @@
       right: 10px;
       color: $light-background-text-color-secondary;
     }
-    .optionsContainer {
-      position: absolute;
-      top: 40px;
-      right: 10px;
+    .logoutOption {
+      display: flex;
+      flex-direction: row;
 
-      ul {
-        background-color: $dark-background-color;
+      p {
+        margin-right: 10px;
       }
+    }
+  }
+
+  @media (min-width: 999px) {
+    position: fixed;
+    margin-left: $desktop-navbar-width;
+    width: 300px;
+
+    .moreVertContainer {
+      cursor: pointer;
     }
   }
 }
