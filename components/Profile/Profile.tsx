@@ -1,10 +1,7 @@
 import styles from "@/components/Profile/Profile.module.scss";
-import Image from "next/image";
-import { MoreVert, Logout } from "@mui/icons-material/";
-import { Menu, MenuItem } from "@mui/material/";
 import { useState } from "react";
-import { NULL } from "sass";
 import Background from "./Background";
+import Hero from "./Hero";
 
 const Profile = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -30,7 +27,7 @@ const Profile = () => {
         handleClose={handleClose}
         anchorEl={anchorEl}
       />
-      <div>Profile Hero</div>
+      <Hero />
       <div>Profile Info</div>
     </div>
   );
