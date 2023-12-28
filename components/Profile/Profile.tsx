@@ -2,6 +2,7 @@ import styles from "@/components/Profile/Profile.module.scss";
 import { useState } from "react";
 import Background from "./Background";
 import Hero from "./Hero";
+import ProfileInfo from "./ProfileInfo";
 
 const Profile = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -28,7 +29,7 @@ const Profile = () => {
         anchorEl={anchorEl}
       />
       <Hero />
-      <div>Profile Info</div>
+      <ProfileInfo />
     </div>
   );
 };
