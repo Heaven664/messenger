@@ -1,5 +1,5 @@
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
+import { Box } from "@mui/material/";
+import { TextField } from "@mui/material/";
 
 import {
   Accordion,
@@ -14,7 +14,6 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 import styles from "@/components/Settings/SettingsInfo.module.scss";
 import { useState } from "react";
-import exp from "constants";
 
 const SettingsInfo = () => {
   const [nameValue, setNameValue] = useState("Omar Hamid");
@@ -41,6 +40,7 @@ const SettingsInfo = () => {
     setLastSeenStatus(checked);
     console.log("last seen option allowed:", checked);
   };
+
   return (
     <div className={styles.container}>
       <Accordion
