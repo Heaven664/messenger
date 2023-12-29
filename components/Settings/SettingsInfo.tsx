@@ -6,6 +6,7 @@ import {
   AccordionDetails,
   AccordionSummary,
   Button,
+  Switch,
   Typography,
 } from "@mui/material";
 
@@ -20,6 +21,7 @@ const SettingsInfo = () => {
   const [emailValue, setEmailValue] = useState("omarhamid@example.com");
   const [residenceValue, setResidenceValue] = useState("Calgary, CA");
   const [isExpanded, setIsExpanded] = useState(false);
+  const [lastSeenStatus, setLastSeenStatus] = useState(true);
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -32,6 +34,13 @@ const SettingsInfo = () => {
     console.log(newData);
   };
 
+  const handleLastSeenChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    checked: boolean
+  ) => {
+    setLastSeenStatus(checked);
+    console.log("last seen option allowed:", checked);
+  };
   return (
     <div className={styles.container}>
       <Accordion
@@ -76,7 +85,11 @@ const SettingsInfo = () => {
               value={residenceValue}
               onChange={(e) => setResidenceValue(e.target.value)}
             />
-            <Button variant="outlined" className={styles.submitButton} type="submit">
+            <Button
+              variant="outlined"
+              className={styles.submitButton}
+              type="submit"
+            >
               Submit Changes
             </Button>
           </Box>
@@ -90,7 +103,10 @@ const SettingsInfo = () => {
           <Typography>Privacy </Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>Some Privacy Info</Typography>
+          <div className={styles.privacyAccordionOptions}>
+            <p>Last seen</p>
+            <Switch checked={lastSeenStatus} onChange={handleLastSeenChange} />
+          </div>
         </AccordionDetails>
       </Accordion>
       <hr />
