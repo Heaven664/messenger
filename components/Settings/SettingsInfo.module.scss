@@ -1,0 +1,33 @@
+@import "@/styles/variables.scss";
+
+.container {
+  .accordionUnit {
+    background-color: $dark-background-color;
+    color: $light-background-text-color-primary;
+    .inputFormComponent {
+      border-color: $light-background-text-color-primary;
+      display: flex;
+      gap: 20px;
+      flex-direction: column;
+      .inputField {
+        max-width: 250px;
+        margin-left: 10px;
+        input {
+          color: $light-background-text-color-primary;
+        }
+        label {
+          color: $light-background-text-color-primary;
+        }
+        fieldset {
+          border-color: $light-background-text-color-primary;
+        }
+      }
+    }
+  }
+  hr {
+    border: 0;
+    height: 1px;
+    opacity: 0.2;
+    background-color: $light-background-text-color-primary;
+  }
+}
