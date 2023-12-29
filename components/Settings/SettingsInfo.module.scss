@@ -22,6 +22,12 @@
           border-color: $light-background-text-color-primary;
         }
       }
+      .submitButton {
+        color: $submit-button-color;
+        border-color: $submit-button-color;
+        align-self: center;
+        margin-right: 10px;
+      }
     }
   }
   hr {

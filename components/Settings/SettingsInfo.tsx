@@ -5,6 +5,7 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Button,
   Typography,
 } from "@mui/material";
 
@@ -12,15 +13,32 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 import styles from "@/components/Settings/SettingsInfo.module.scss";
 import { useState } from "react";
+import exp from "constants";
 
 const SettingsInfo = () => {
   const [nameValue, setNameValue] = useState("Omar Hamid");
   const [emailValue, setEmailValue] = useState("omarhamid@example.com");
   const [residenceValue, setResidenceValue] = useState("Calgary, CA");
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const newData = {
+      name: nameValue,
+      email: emailValue,
+      residence: residenceValue,
+    };
+    setIsExpanded(false);
+    console.log(newData);
+  };
 
   return (
     <div className={styles.container}>
-      <Accordion className={styles.accordionUnit}>
+      <Accordion
+        className={styles.accordionUnit}
+        expanded={isExpanded}
+        onChange={(_, expanded) => setIsExpanded(expanded)}
+      >
         <AccordionSummary
           expandIcon={<KeyboardArrowDownIcon htmlColor="#4a9a64" />}
         >
@@ -32,6 +50,7 @@ const SettingsInfo = () => {
             component="form"
             autoComplete="off"
             sx={{ color: "white" }}
+            onSubmit={handleFormSubmit}
           >
             <TextField
               id="name"
@@ -57,6 +76,9 @@ const SettingsInfo = () => {
               value={residenceValue}
               onChange={(e) => setResidenceValue(e.target.value)}
             />
+            <Button variant="outlined" className={styles.submitButton} type="submit">
+              Submit Changes
+            </Button>
           </Box>
         </AccordionDetails>
       </Accordion>
