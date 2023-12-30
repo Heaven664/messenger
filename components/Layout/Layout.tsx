@@ -6,7 +6,7 @@ const Layout = ({ children }: ComponentProps) => {
   return (
     <div className={styles.layoutContainer}>
       <NavbarDesktop />
-      <div>{children}</div>
+      {children}
     </div>
   );
 };

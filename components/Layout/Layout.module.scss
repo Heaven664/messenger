@@ -1,5 +1,12 @@
+@import "@/styles/variables.scss";
+
 .layoutContainer {
   position: relative;
   width: 100%;
   height: 100vh;
+  background-color: $dark-background-color;
+  margin-bottom: $mobile-navbar-height;
+  @media (min-width: 999px) {
+    margin-bottom: 0;
+  }
 }
