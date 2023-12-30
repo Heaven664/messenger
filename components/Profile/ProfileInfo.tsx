@@ -1,4 +1,6 @@
-import { Person, SmsOutlined, LocationOnOutlined } from "@mui/icons-material/";
+import LocationOnOutlined from "@mui/icons-material/LocationOnOutlined";
+import SmsOutlined from "@mui/icons-material/SmsOutlined";
+import Person from "@mui/icons-material/Person";
 import styles from "@/components/Profile/ProfileInfo.module.scss";
 
 const ProfileInfo = () => {
@@ -7,19 +9,19 @@ const ProfileInfo = () => {
       <ul>
         <li>
           <div className={styles.profileInfoElement}>
-            <Person fontSize="inherit"/>
+            <Person fontSize="inherit" />
             <h3>Omar Hamid</h3>
           </div>
         </li>
         <li>
           <div className={styles.profileInfoElement}>
-            <SmsOutlined  fontSize="inherit"/>
+            <SmsOutlined fontSize="inherit" />
             <h3>omarhamid@example.com</h3>
           </div>
         </li>
         <li>
           <div className={styles.profileInfoElement}>
-            <LocationOnOutlined fontSize="inherit"/>
+            <LocationOnOutlined fontSize="inherit" />
             <h3>Calgary, CA</h3>
           </div>
         </li>

@@ -1,9 +1,7 @@
-import {
-  AccountCircleRounded,
-  Group,
-  QuestionAnswerOutlined,
-  Settings,
-} from "@mui/icons-material";
+import Settings from "@mui/icons-material/Settings";
+import AccountCircleRounded from "@mui/icons-material/AccountCircleRounded";
+import Group from "@mui/icons-material/Group";
+import QuestionAnswerOutlined from "@mui/icons-material/QuestionAnswerOutlined";
 
 export const topNavItems = [
   {

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "@/components/Settings/SettingsBackground.module.scss";
-import { EditRounded } from "@mui/icons-material/";
+import EditRounded from "@mui/icons-material/EditRounded";
 
 const SettingsBackground = () => {
   return (

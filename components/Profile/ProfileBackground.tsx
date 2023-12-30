@@ -1,7 +1,9 @@
 import Image from "next/image";
 import styles from "@/components/Profile/ProfileBackground.module.scss";
-import { MoreVert, Logout } from "@mui/icons-material/";
-import { Menu, MenuItem } from "@mui/material";
+import MoreVert from "@mui/icons-material/MoreVert";
+import Logout from "@mui/icons-material/Logout";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 import { BackgroundProps } from "@/types/Profile/types";
 
 const ProfileBackground = ({

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "@/components/Settings/SettingsHero.module.scss";
-import { CameraAltRounded } from "@mui/icons-material/";
+import CameraAltRounded from "@mui/icons-material/CameraAltRounded";
 
 const SettingsHero = () => {
   return (

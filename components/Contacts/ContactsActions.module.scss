@@ -1,4 +1,21 @@
 @import "@/styles/_variables.scss";
 
 .container {
+  display: flex;
+  flex-direction: column;
+  .topSection {
+    display: flex;
+    justify-content: space-between;
+    h3 {
+      margin-top: 10px;
+      margin-left: 10px;
+      font-size: 18.5px;
+      font-weight: 400;
+      color: $light-background-text-color-secondary;
+    }
+    button {
+      margin-top: 10px;
+      margin-right: 10px;
+    }
+  }
 }

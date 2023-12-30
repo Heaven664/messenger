@@ -1,5 +1,6 @@
-import { Box } from "@mui/material/";
-import { TextField } from "@mui/material/";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 import {
   Accordion,
@@ -10,7 +11,6 @@ import {
   Typography,
 } from "@mui/material";
 
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 import styles from "@/components/Settings/SettingsInfo.module.scss";
 import { useState } from "react";

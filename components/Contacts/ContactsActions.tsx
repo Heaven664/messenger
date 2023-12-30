@@ -5,6 +5,7 @@ const ContactsActions = () => {
     <div className={styles.container}>
       <div className={styles.topSection}>
         <h3>Contacts</h3>
+        <button>Add</button>
       </div>
       <div className={styles.bottomSection}>
         <h3>Search Contacts</h3>
