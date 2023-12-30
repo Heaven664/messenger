@@ -1,14 +1,29 @@
-import {
-  QuestionAnswerOutlined,
-  Group,
-  Settings,
-  AccountCircleRounded,
-} from "@mui/icons-material/";
-import styles from "./NavbarDesktop.module.scss";
-import { PageStatesType } from "@/types/Navbar/types";
-import { useContext } from "react";
 import PageContext from "@/context/PageContext";
 import { PageContextType } from "@/types/Context/types";
+import { PageStatesType } from "@/types/Navbar/types";
+import {
+  AccountCircleRounded,
+  Group,
+  QuestionAnswerOutlined,
+  Settings,
+} from "@mui/icons-material/";
+import { useContext } from "react";
+import styles from "./NavbarDesktop.module.scss";
+
+const navItems = [
+  {
+    pageName: "profile",
+    component: <AccountCircleRounded fontSize="inherit"/>,
+  },
+  {
+    pageName: "friends",
+    component: <Group fontSize="inherit"/>,
+  },
+  {
+    pageName: "chats",
+    component: <QuestionAnswerOutlined fontSize="inherit"/>,
+  },
+];
 
 const NavbarDesktop = () => {
   const pageContext = useContext<PageContextType | null>(PageContext);
@@ -21,24 +36,16 @@ const NavbarDesktop = () => {
   return (
     <div className={styles.container}>
       <ul>
-        <li
-          onClick={() => handleNavClick("profile")}
-          className={curPage === "profile" ? styles.selected : undefined}
-        >
-          <AccountCircleRounded fontSize="inherit" />
-        </li>
-        <li
-          onClick={() => handleNavClick("friends")}
-          className={curPage === "friends" ? styles.selected : undefined}
-        >
-          <Group fontSize="inherit" />
-        </li>
-        <li
-          onClick={() => handleNavClick("chats")}
-          className={curPage === "chats" ? styles.selected : undefined}
-        >
-          <QuestionAnswerOutlined fontSize="inherit" />
-        </li>
+        {navItems.map((navItem) => {
+          return (
+            <li key={navItem.pageName}
+              onClick={() => handleNavClick(navItem.pageName as PageStatesType)}
+              className={curPage === navItem.pageName ? styles.selected : undefined}
+            >
+              {navItem.component}
+            </li>
+          );
+        })}
       </ul>
       <ul>
         <li
