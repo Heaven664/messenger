@@ -1,9 +1,10 @@
 import styles from "@/components/Friends/Friends.module.scss";
+import FriendsActions from "./FriendsActions";
 
 export const Friends = () => {
   return (
     <div className={styles.container}>
-      <h1>Friends</h1>
+      <FriendsActions />
     </div>
   );
 };
