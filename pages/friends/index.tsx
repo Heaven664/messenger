@@ -1,9 +1,7 @@
-const Friends = () => {
-  return (
-    <div>
-      <h1>Friends</h1>
-    </div>
-  );
+import Friends from "@/components/Friends/Friends";
+
+const FriendsPage = () => {
+  return <Friends />;
 };
 
-export default Friends;
+export default FriendsPage;
