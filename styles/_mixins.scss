@@ -1,0 +1,6 @@
+@mixin default-button($button-color, $font-size, $background-color) {
+  color: $button-color;
+  font-size: $font-size;
+  background-color: $background-color;
+  border: none;
+}
