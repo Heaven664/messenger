@@ -45,4 +45,29 @@
       }
     }
   }
+  .bottomSection {
+    position: relative;
+    margin: 0 10px;
+    margin-top: 20px;
+    .inputField {
+      width: 100%;
+      input {
+        color: $light-background-text-color-primary;
+        padding-right: 40px;
+      }
+      label {
+        color: $light-background-text-color-primary;
+      }
+      fieldset {
+        border-color: $light-background-text-color-primary;
+      }
+    }
+    .searchIcon {
+      position: absolute;
+      font-size: 22px;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+    }
+  }
 }
