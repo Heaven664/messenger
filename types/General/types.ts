@@ -5,5 +5,11 @@ export type SearchActionsProps = {
 };
 
 export interface DividerPropsInterface {
-    letter: string;
+  letter: string;
+}
+
+export interface ListItemContactPropsInterface {
+  imageSrc: string;
+  name: string;
+  contactId: string;
 }

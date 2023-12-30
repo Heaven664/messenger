@@ -1,18 +1,23 @@
-import React, { useState } from "react"; // Import React and useState
+import React, { useState } from "react";
 import Image from "next/image";
-import styles from "./ListItemContact.module.scss";
-import MoreVertIcon from "@mui/icons-material/MoreVert"; // Change to MoreVertIcon
+import styles from "./ContactListItem.module.scss";
+import MoreVertIcon from "@mui/icons-material/MoreVert"; 
 import { Menu } from "@mui/material";
+import { ListItemContactPropsInterface } from "@/types/General/types";
 
-const ListItemContact = () => {
+const ListItemContact = ({
+  imageSrc,
+  name,
+  contactId,
+}: ListItemContactPropsInterface) => {
   const [anchorEl, setAnchorEl] = useState<null | SVGSVGElement>(null);
 
   const handleClick = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleRemoveContact = () => {
-    console.log("Remove Contact");
+  const handleRemoveContact = (contactId: string) => {
+    console.log(`Remove Contact with id: ${contactId}`);
     setAnchorEl(null);
   };
 
@@ -21,18 +26,13 @@ const ListItemContact = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <li key={contactId} className={styles.container}>
       <div className={styles.infoContainer}>
         <div className={styles.imageContainer}>
-          <Image
-            src="/general/IMG_2537.HEIC"
-            width={35}
-            height={35}
-            alt="avatar-name"
-          />
+          <Image src={imageSrc} width={35} height={35} alt={name} />
         </div>
         <div className={styles.nameContainer}>
-          <h3>Omar Hamid</h3>
+          <h3>{name}</h3>
         </div>
       </div>
       <div className={styles.optionsContainer}>
@@ -53,11 +53,13 @@ const ListItemContact = () => {
           className={styles.menuContainer}
         >
           <div className={styles.popupContainer}>
-            <button onClick={handleRemoveContact}>Remove Contact</button>
+            <button onClick={() => handleRemoveContact(contactId)}>
+              Remove Contact
+            </button>
           </div>
         </Menu>
       </div>
-    </div>
+    </li>
   );
 };
 

@@ -1,7 +1,7 @@
 import styles from "@/components/Contacts/Contacts.module.scss";
 import SearchActions from "../General/SearchActions";
 import ListItemDivider from "../General/ListItemDivider";
-import ListItemContact from "../General/ListItemContact";
+import ContactListItem from "./ContactListItem";
 
 export const Contacts = () => {
   return (
@@ -12,10 +12,13 @@ export const Contacts = () => {
         id="search-contacts-input"
       />
       <ListItemDivider letter="A" />
-      <ListItemContact />
-      <ListItemContact />
-      <ListItemContact />
-      <ListItemContact />
+      <ul>
+        <ContactListItem
+          imageSrc="/general/IMG_2537.HEIC"
+          name="Omar Hamid"
+          contactId="1"
+        />
+      </ul>
     </div>
   );
 };
