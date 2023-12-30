@@ -1,1 +1,1 @@
-export type PageStatesType = "chats" | "friends" | "settings" | "profile" | null;
+export type PageStatesType = "chats" | "contacts" | "settings" | "profile" | null;

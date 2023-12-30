@@ -11,7 +11,7 @@ export const topNavItems = [
     component: <AccountCircleRounded fontSize="inherit" />,
   },
   {
-    pageName: "friends",
+    pageName: "contacts",
     component: <Group fontSize="inherit" />,
   },
   {
