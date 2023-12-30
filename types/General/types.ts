@@ -3,3 +3,7 @@ export type SearchActionsProps = {
   label: string;
   id: string;
 };
+
+export interface DividerPropsInterface {
+    letter: string;
+}
