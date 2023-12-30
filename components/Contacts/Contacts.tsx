@@ -1,10 +1,10 @@
 import styles from "@/components/Contacts/Contacts.module.scss";
-import ContactsActions from "./ContactsActions";
+import SearchActions from "../General/SearchActions";
 
 export const Contacts = () => {
   return (
     <div className={styles.container}>
-      <ContactsActions />
+      <SearchActions title="Contacts" label="Search Contacts" id="search-contacts-input"/>
     </div>
   );
 };
