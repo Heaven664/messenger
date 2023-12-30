@@ -2,10 +2,10 @@
 
 .container {
   background-color: $dark-background-color;
-  height: 100vh;
+  height: 100%;
+  overflow: scroll;
 
   @media (min-width: 999px) {
-    position: fixed;
     margin-left: $desktop-navbar-width;
     width: 300px;
   }
