@@ -1,0 +1,28 @@
+import { ContactListType } from "@/types/Contacts/types";
+import ListItemDivider from "../General/ListItemDivider";
+import ContactListItem from "./ContactListItem";
+
+interface P {
+  groupedContacts: ContactListType;
+}
+
+const GroupedContactList = ({ groupedContacts: contacts }: P) => {
+  const groupedContactsList = contacts.contacts.map((contact) => {
+    return (
+      <ContactListItem
+        key={contact.contactId}
+        imageSrc={contact.imageSrc}
+        name={contact.name}
+        contactId={contact.contactId}
+      />
+    );
+  });
+  return (
+    <ul>
+      <ListItemDivider letter={contacts.letter} />
+      {groupedContactsList}
+    </ul>
+  );
+};
+
+export default GroupedContactList;

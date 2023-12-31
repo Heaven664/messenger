@@ -1,9 +1,17 @@
 import styles from "@/components/Contacts/Contacts.module.scss";
 import SearchActions from "../General/SearchActions";
-import ListItemDivider from "../General/ListItemDivider";
-import ContactListItem from "./ContactListItem";
+import { rawContacts } from "@/dummyData";
+import { ContactListType } from "@/types/Contacts/types";
+import { contactsDataToContactsList } from "@/helpers/Contacts";
+import GroupedContactList from "./GroupedContactList";
 
 export const Contacts = () => {
+  const contacts = contactsDataToContactsList(rawContacts);
+
+  const contactsList = contacts.map((contact: ContactListType) => (
+    <GroupedContactList key={contact.letter} groupedContacts={contact} />
+  ));
+
   return (
     <div className={styles.container}>
       <SearchActions
@@ -11,14 +19,7 @@ export const Contacts = () => {
         label="Search Contacts"
         id="search-contacts-input"
       />
-      <ListItemDivider letter="A" />
-      <ul>
-        <ContactListItem
-          imageSrc="/general/IMG_2537.HEIC"
-          name="Omar Hamid"
-          contactId="1"
-        />
-      </ul>
+      <ul>{contactsList}</ul>
     </div>
   );
 };
