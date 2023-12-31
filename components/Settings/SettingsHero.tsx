@@ -9,7 +9,7 @@ const SettingsHero = () => {
         <div className={styles.imageContainer}>
           <div className={styles.imageBackground}>
             <Image
-              src={"/general/IMG_2537.HEIC"}
+              src={"/general/main.HEIC"}
               width={150}
               height={150}
               alt="hero-image"
