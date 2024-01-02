@@ -1,6 +1,6 @@
-import { ListItemContactPropsInterface } from "./types/General/types";
+import { ContactType } from "./types/Contacts/types";
 
-export const rawContacts: ListItemContactPropsInterface[] = [
+export const rawContacts: ContactType[] = [
   {
     imageSrc: "/general/omar-kek.JPG",
     name: "Omar Hamid",

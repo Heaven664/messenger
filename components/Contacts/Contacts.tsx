@@ -4,12 +4,12 @@ import { rawContacts } from "@/dummyData";
 import { ContactListType } from "@/types/Contacts/types";
 import { contactsDataToContactsList } from "@/helpers/Contacts";
 import GroupedContactList from "./GroupedContactList";
-import { useState } from "react";
+import { useMemo, useState } from "react";``
 import { filterUsersByName } from "@/helpers/General/filter";
 
 export const Contacts = () => {
   // Converts raw contacts into an ordered list of contacts
-  const contacts = contactsDataToContactsList(rawContacts);
+  const contacts = useMemo(() => contactsDataToContactsList(rawContacts), []) ;
 
   const [currentContacts, setCurrentContacts] = useState(contacts);
 
@@ -20,6 +20,7 @@ export const Contacts = () => {
     setCurrentContacts(filteredContacts);
   };
 
+  // Creates a list of GroupedContactList components based on currentContacts
   const contactsList = currentContacts.map((contact: ContactListType) => (
     <GroupedContactList key={contact.letter} groupedContacts={contact} />
   ));
