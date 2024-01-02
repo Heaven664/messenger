@@ -5,7 +5,7 @@ import { ContactListType } from "@/types/Contacts/types";
 import { contactsDataToContactsList } from "@/helpers/Contacts";
 import GroupedContactList from "./GroupedContactList";
 import { useMemo, useState } from "react";``
-import { filterUsersByName } from "@/helpers/General/filter";
+import { filterUsersByName } from "@/helpers/General";
 
 export const Contacts = () => {
   // Converts raw contacts into an ordered list of contacts

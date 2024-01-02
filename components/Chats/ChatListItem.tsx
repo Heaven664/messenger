@@ -1,7 +1,11 @@
 import Image from "next/image";
 import styles from "./ChatListItem.module.scss";
+import { useState } from "react";
+import { badgeNumberTransform } from "@/helpers/General";
 
 const ChatListItem = () => {
+  const [unreadMessages, setUnreadMessages] = useState(9);
+
   return (
     <li className={styles.container}>
       <div className={styles.imageSection}>
@@ -18,7 +22,7 @@ const ChatListItem = () => {
         <h3>Omar Hamid</h3>
       </div>
       <div className={styles.badge}>
-        <p>9</p>
+        <p>{badgeNumberTransform(unreadMessages)}</p>
       </div>
     </li>
   );
