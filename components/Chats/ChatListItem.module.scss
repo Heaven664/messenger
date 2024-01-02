@@ -1,0 +1,43 @@
+@import "@/styles/variables.scss";
+@import "@/styles/_mixins.scss";
+
+.container {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 8px 10px 10px 20px;
+  .imageContainer {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    border-radius: 16px;
+    overflow: hidden;
+    img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+    .badge {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      color: red;
+    }
+  }
+  .nameContainer {
+    h3 {
+      font-size: 14px;
+      font-weight: 400;
+      color: $light-background-text-color-primary;
+      margin-left: 10px;
+    }
+  }
+  .badge {
+    @include badge-mixin($button-color, white);
+  }
+
+  @media (min-width: 999px) {
+    cursor: pointer;
+  }
+}

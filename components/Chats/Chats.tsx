@@ -1,4 +1,5 @@
 import SearchActions from "../General/SearchActions";
+import ChatListItem from "./ChatListItem";
 import styles from "./Chats.module.scss";
 
 const Chats = () => {
@@ -11,6 +12,8 @@ const Chats = () => {
         id="search-chats-input"
         onChange={handleInputChange}
       />
+      <ChatListItem />
+      <ChatListItem />
     </div>
   );
 };
