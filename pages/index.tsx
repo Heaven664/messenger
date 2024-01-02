@@ -1,8 +1,13 @@
 import Head from "next/head";
-import Layout from "@/components/Layout/Layout";
-import { PageContextProvider } from "@/context/PageContext";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 export default function Home() {
+  const router = useRouter();
+  useEffect(() => {
+    router.push("/chats");
+  }, [router]);
+
   return (
     <>
       <Head>
