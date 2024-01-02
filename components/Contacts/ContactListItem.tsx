@@ -3,13 +3,13 @@ import Image from "next/image";
 import styles from "./ContactListItem.module.scss";
 import MoreVertIcon from "@mui/icons-material/MoreVert"; 
 import { Menu } from "@mui/material";
-import { ListItemContactPropsInterface } from "@/types/General/types";
+import { ContactType } from "@/types/Contacts/types";
 
 const ListItemContact = ({
   imageSrc,
   name,
   contactId,
-}: ListItemContactPropsInterface) => {
+}: ContactType) => {
   const [anchorEl, setAnchorEl] = useState<null | SVGSVGElement>(null);
 
   const handleClick = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
