@@ -1,5 +1,5 @@
 import { ContactListType } from "@/types/Contacts/types";
-import { ListItemContactPropsInterface } from "@/types/General/types";
+import { ContactType } from "@/types/Contacts/types";
 
 /**
  * Coverts raw contacts into an ordered list of contacts
@@ -7,10 +7,10 @@ import { ListItemContactPropsInterface } from "@/types/General/types";
  * @returns An array of contacts grouped by first letter and sorted alphabetically
  */
 export const contactsDataToContactsList = (
-  contacts: ListItemContactPropsInterface[]
+  contacts: ContactType[]
 ) => {
   // Create a Hash Map
-  const contactsMap = new Map<string, ListItemContactPropsInterface[]>();
+  const contactsMap = new Map<string, ContactType[]>();
 
   // Create Hash Map entry for each contact data entity by first letter
   contacts.map((contact) => {

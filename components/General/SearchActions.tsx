@@ -4,9 +4,7 @@ import styles from "./SearchActions.module.scss";
 import { TextField } from "@mui/material";
 import { SearchActionsProps } from "@/types/General/types";
 
-
-
-const SearchActions = ({ title, label, id }: SearchActionsProps) => {
+const SearchActions = ({ title, label, id, onChange }: SearchActionsProps) => {
   return (
     <div className={styles.container}>
       <div className={styles.topSection}>
@@ -21,6 +19,7 @@ const SearchActions = ({ title, label, id }: SearchActionsProps) => {
           variant="outlined"
           label={label}
           className={styles.inputField}
+          onChange={onChange}
         />
         <SearchIcon className={styles.searchIcon} fontSize="inherit" />
       </div>
