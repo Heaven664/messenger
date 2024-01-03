@@ -7,6 +7,7 @@ export const dummyChats: ChatType[] = [
     imageUrl: "/general/maksim-kek.jpg",
     chatId: "1",
     lastMessage: new Date("2024-01-02T15:30:45Z").getTime(),
+    isOnline: true,
   },
   {
     name: "Ihor Chupaha",
@@ -14,6 +15,7 @@ export const dummyChats: ChatType[] = [
     imageUrl: "/general/ihor-kek.jpg",
     chatId: "2",
     lastMessage: new Date("2024-01-02T15:30:43Z").getTime(),
+    isOnline: true,
   },
   {
     name: "Nikita Syrotenko",
@@ -21,6 +23,7 @@ export const dummyChats: ChatType[] = [
     imageUrl: "/general/nikita-kek.jpg",
     chatId: "3",
     lastMessage: new Date("2024-01-02T15:31:41Z").getTime(),
+    isOnline: false,
   },
   {
     name: "Omar Hamid",
@@ -28,5 +31,6 @@ export const dummyChats: ChatType[] = [
     imageUrl: "/general/omar-kek.JPG",
     chatId: "4",
     lastMessage: new Date("2023-01-02T15:30:45Z").getTime(),
+    isOnline: false,
   },
 ];

@@ -4,4 +4,5 @@ export type ChatType = {
   imageUrl: string;
   chatId: string;
   lastMessage: number;
+  isOnline: boolean;
 };

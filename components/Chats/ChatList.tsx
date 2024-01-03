@@ -12,7 +12,7 @@ const ChatList = ({ chatsData }: P) => {
   });
 
   const chatsList = chatsData.map(
-    ({ chatId, name, imageUrl, unreadMessages, lastMessage }: ChatType) => (
+    ({ chatId, name, imageUrl, unreadMessages, lastMessage, isOnline }: ChatType) => (
       <ChatListItem
         key={chatId}
         name={name}
@@ -20,6 +20,7 @@ const ChatList = ({ chatsData }: P) => {
         imageUrl={imageUrl}
         unreadMessages={unreadMessages}
         lastMessage={lastMessage}
+        isOnline={isOnline}
       />
     )
   );

@@ -3,13 +3,20 @@ import styles from "./ChatListItem.module.scss";
 import { badgeNumberTransform } from "@/helpers/General";
 import { ChatType } from "@/types/Chats/types";
 
-const ChatListItem = ({ name, unreadMessages, chatId, imageUrl }: ChatType) => {
+const ChatListItem = ({
+  name,
+  unreadMessages,
+  chatId,
+  imageUrl,
+  isOnline,
+}: ChatType) => {
   return (
     <li className={styles.container}>
       <div className={styles.imageSection}>
         <div className={styles.imageContainer}>
           <Image src={imageUrl} alt={chatId} width={40} height={40} />
         </div>
+        {isOnline && <div className={styles.onlineBadge}></div>}
       </div>
       <div className={styles.nameContainer}>
         <h3 className={unreadMessages > 0 ? styles.highlighted : undefined}>
