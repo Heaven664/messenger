@@ -3,4 +3,5 @@ export type ChatType = {
   unreadMessages: number;
   imageUrl: string;
   chatId: string;
+  lastMessage: number;
 };
