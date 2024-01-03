@@ -6,7 +6,10 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin: 8px 10px 10px 20px;
+  margin: 3px 10px 5px 15px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  padding: 5px;
   .imageContainer {
     position: relative;
     width: 32px;
@@ -32,6 +35,10 @@
       color: $light-background-text-color-primary;
       margin-left: 10px;
     }
+    .highlighted {
+      color: rgb(255, 255, 255);
+      font-weight: 500;
+    }
   }
   .badge {
     @include badge-mixin($button-color, white);
@@ -39,5 +46,8 @@
 
   @media (min-width: 999px) {
     cursor: pointer;
+    &:hover {
+      border: 1px solid rgba(173, 181, 189, 0.5);
+    }
   }
 }

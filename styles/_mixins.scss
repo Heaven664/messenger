@@ -22,3 +22,34 @@
     color: $content-color;
   }
 }
+
+@mixin plus-button() {
+  button {
+    font-size: 15px;
+    background-color: rgb(78, 172, 109, 0.1);
+    border: none;
+    margin-top: 10px;
+    margin-right: 10px;
+    width: 16px;
+    height: 16px;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    svg {
+      path {
+        color: $button-color;
+      }
+    }
+    &:hover {
+      background-color: $button-color;
+      cursor: pointer;
+      svg {
+        path {
+          color: white;
+        }
+      }
+    }
+  }
+}

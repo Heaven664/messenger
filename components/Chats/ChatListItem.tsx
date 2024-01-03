@@ -1,29 +1,26 @@
 import Image from "next/image";
 import styles from "./ChatListItem.module.scss";
-import { useState } from "react";
 import { badgeNumberTransform } from "@/helpers/General";
+import { ChatType } from "@/types/Chats/types";
 
-const ChatListItem = () => {
-  const [unreadMessages, setUnreadMessages] = useState(9);
-
+const ChatListItem = ({ name, unreadMessages, chatId, imageUrl }: ChatType) => {
   return (
     <li className={styles.container}>
       <div className={styles.imageSection}>
         <div className={styles.imageContainer}>
-          <Image
-            src={"/general/main.HEIC"}
-            alt="chat-image"
-            width={40}
-            height={40}
-          />
+          <Image src={imageUrl} alt={chatId} width={40} height={40} />
         </div>
       </div>
       <div className={styles.nameContainer}>
-        <h3>Omar Hamid</h3>
+        <h3 className={unreadMessages > 0 ? styles.highlighted : undefined}>
+          {name}
+        </h3>
       </div>
-      <div className={styles.badge}>
-        <p>{badgeNumberTransform(unreadMessages)}</p>
-      </div>
+      {unreadMessages > 0 && (
+        <div className={styles.badge}>
+          <p>{badgeNumberTransform(unreadMessages)}</p>
+        </div>
+      )}
     </li>
   );
 };

@@ -1,6 +1,7 @@
 import SearchActions from "../General/SearchActions";
-import ChatListItem from "./ChatListItem";
+import ChatList from "./ChatList";
 import styles from "./Chats.module.scss";
+import { dummyChats } from "@/dummyChats";
 
 const Chats = () => {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {};
@@ -12,8 +13,7 @@ const Chats = () => {
         id="search-chats-input"
         onChange={handleInputChange}
       />
-      <ChatListItem />
-      <ChatListItem />
+      <ChatList chatsData={dummyChats} />
     </div>
   );
 };

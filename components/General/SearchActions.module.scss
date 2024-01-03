@@ -4,6 +4,7 @@
 .container {
   display: flex;
   flex-direction: column;
+  margin-bottom: 10px;
   .topSection {
     display: flex;
     justify-content: space-between;
@@ -14,36 +15,7 @@
       font-size: 18.5px;
       font-weight: 400;
     }
-    button {
-      @include default-button(
-        $button-color,
-        15px,
-        $dark-button-background-color
-      );
-      margin-top: 10px;
-      margin-right: 10px;
-      width: 16px;
-      height: 16px;
-      padding: 15px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 5px;
-      svg {
-        path {
-          color: $button-color;
-        }
-      }
-      &:hover {
-        background-color: $button-color;
-        cursor: pointer;
-        svg {
-          path {
-            color: white;
-          }
-        }
-      }
-    }
+    @include plus-button();
   }
   .bottomSection {
     position: relative;
