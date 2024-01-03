@@ -1,3 +1,4 @@
+import { ChatType } from "@/types/Chats/types";
 import { ContactListType, ContactType } from "@/types/Contacts/types";
 
 /**
@@ -29,3 +30,15 @@ export const badgeNumberTransform = (number: number) => {
     return "9+";
   }
 };
+
+/**
+ * Sort chats by last message timestamp
+ * @param chats - Array of ChatType objects
+ * @returns Array of sorted ChatType objects
+ */
+export const findChatByName = (chats: ChatType[], inputValue: string) => {
+  const filteredChats = chats.filter((chat: ChatType) =>
+    chat.name.toLowerCase().includes(inputValue.toLowerCase())
+  );
+  return filteredChats;
+}

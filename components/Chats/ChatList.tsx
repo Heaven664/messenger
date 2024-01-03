@@ -6,10 +6,6 @@ type P = {
 };
 
 const ChatList = ({ chatsData }: P) => {
-  // Sort Chats based on last message timestamp
-  chatsData.sort((a: ChatType, b: ChatType) => {
-    return b.lastMessage - a.lastMessage;
-  });
 
   const chatsList = chatsData.map(
     ({ chatId, name, imageUrl, unreadMessages, lastMessage, isOnline }: ChatType) => (
