@@ -1,4 +1,5 @@
 import styles from "./ChatWindowDesktop.module.scss";
+import Footer from "./Footer";
 import ChatWindowDesktopHeader from "./Header";
 
 const chatWindowDesktop = () => {
@@ -10,6 +11,7 @@ const chatWindowDesktop = () => {
         userId="1"
         isOnline={true}
       />
+      <Footer />
     </div>
   );
 };
