@@ -8,11 +8,11 @@ type P = {
 const ChatList = ({ chatsData }: P) => {
 
   const chatsList = chatsData.map(
-    ({ chatId, name, imageUrl, unreadMessages, lastMessage, isOnline }: ChatType) => (
+    ({ userId, name, imageUrl, unreadMessages, lastMessage, isOnline }: ChatType) => (
       <ChatListItem
-        key={chatId}
+        key={userId}
         name={name}
-        chatId={chatId}
+        userId={userId}
         imageUrl={imageUrl}
         unreadMessages={unreadMessages}
         lastMessage={lastMessage}

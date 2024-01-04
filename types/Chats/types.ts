@@ -2,7 +2,7 @@ export type ChatType = {
   name: string;
   unreadMessages: number;
   imageUrl: string;
-  chatId: string;
+  userId: string;
   lastMessage: number;
   isOnline: boolean;
 };
