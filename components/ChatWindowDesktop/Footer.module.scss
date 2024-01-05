@@ -13,14 +13,15 @@
   align-items: center;
   .optionsSection {
     color: $light-background-text-color-primary;
-    .emojiButton {
-      display: none;
-    }
     .emojiIcon {
       cursor: pointer;
       &:hover {
         color: $button-color;
       }
+    }
+    .emojiPickerContainer {
+      position: absolute;
+      bottom: 85px;
     }
   }
 }
