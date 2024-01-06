@@ -23,7 +23,6 @@
         width: 100%;
         height: auto;
         @media (min-width: 999px) {
-          cursor: pointer;
         }
       }
     }
@@ -35,10 +34,16 @@
         margin-left: 15px;
       }
     }
+    @media (min-width: 999px) {
+      cursor: pointer;
+    }
   }
   .optionsContainer {
     font-size: 17px;
     color: $button-color;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     @media (min-width: 999px) {
       cursor: pointer;
       ul {

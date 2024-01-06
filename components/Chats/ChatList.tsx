@@ -6,9 +6,17 @@ type P = {
 };
 
 const ChatList = ({ chatsData }: P) => {
-
   const chatsList = chatsData.map(
-    ({ userId, name, imageUrl, unreadMessages, lastMessage, isOnline }: ChatType) => (
+    ({
+      userId,
+      name,
+      imageUrl,
+      unreadMessages,
+      lastMessage,
+      isOnline,
+      lastSeenPermission,
+      lastSeenTime,
+    }: ChatType) => (
       <ChatListItem
         key={userId}
         name={name}
@@ -17,6 +25,8 @@ const ChatList = ({ chatsData }: P) => {
         unreadMessages={unreadMessages}
         lastMessage={lastMessage}
         isOnline={isOnline}
+        lastSeenPermission={lastSeenPermission}
+        lastSeenTime={lastSeenTime}
       />
     )
   );

@@ -3,4 +3,6 @@ export type HeaderInfoType = {
   userId: string;
   imageUrl: string;
   isOnline: boolean;
+  lastSeenPermission: boolean;
+  lastSeenTime: number;
 };

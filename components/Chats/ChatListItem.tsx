@@ -13,23 +13,27 @@ const ChatListItem = ({
   userId,
   imageUrl,
   isOnline,
+  lastSeenPermission,
+  lastSeenTime,
 }: ChatType) => {
   // Get ChatWindowContext and destructure function for changing header info
   const headerContext = useContext<HeaderContextType | null>(ChatWindowContext);
   const { changeChatWindowHeaderInfo } = headerContext as HeaderContextType;
-  
+
   // Create object of HeaderInfoType to change header info
   const chatDetails: HeaderInfoType = {
     name,
     userId,
     imageUrl,
     isOnline,
+    lastSeenPermission,
+    lastSeenTime,
   };
 
   // Change header info when user clicks on chat list item
   const handleChatWindowChange = () => {
     changeChatWindowHeaderInfo(chatDetails);
-  }
+  };
 
   return (
     <li className={styles.container} onClick={handleChatWindowChange}>

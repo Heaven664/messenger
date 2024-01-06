@@ -5,4 +5,6 @@ export type ChatType = {
   userId: string;
   lastMessage: number;
   isOnline: boolean;
+  lastSeenPermission: boolean;
+  lastSeenTime: number
 };

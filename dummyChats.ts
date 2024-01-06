@@ -8,6 +8,8 @@ export const dummyChats: ChatType[] = [
     userId: "1",
     lastMessage: new Date("2024-01-02T15:30:45Z").getTime(),
     isOnline: true,
+    lastSeenPermission: true,
+    lastSeenTime: new Date("2024-01-04T15:30:45Z").getTime(),
   },
   {
     name: "Ihor Chupaha",
@@ -16,6 +18,8 @@ export const dummyChats: ChatType[] = [
     userId: "2",
     lastMessage: new Date("2024-01-02T15:30:43Z").getTime(),
     isOnline: true,
+    lastSeenPermission: true,
+    lastSeenTime: new Date("2024-01-04T15:30:45Z").getTime(),
   },
   {
     name: "Nikita Syrotenko",
@@ -24,6 +28,8 @@ export const dummyChats: ChatType[] = [
     userId: "3",
     lastMessage: new Date("2024-01-02T15:31:41Z").getTime(),
     isOnline: false,
+    lastSeenPermission: false,
+    lastSeenTime: new Date("2024-01-04T15:30:45Z").getTime(),
   },
   {
     name: "Omar Hamid",
@@ -32,5 +38,7 @@ export const dummyChats: ChatType[] = [
     userId: "4",
     lastMessage: new Date("2023-01-02T15:30:45Z").getTime(),
     isOnline: false,
+    lastSeenPermission: true,
+    lastSeenTime: new Date("2024-01-02T15:30:45Z").getTime(),
   },
 ];
