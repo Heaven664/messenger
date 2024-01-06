@@ -1,14 +1,29 @@
 import Image from "next/image";
 import styles from "./Header.module.scss";
 import { HeaderContextType } from "@/types/Context/types";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import ChatWindowContext from "@/context/ChatWindowContext";
+import { timestampToElapsedTime } from "@/helpers/ChatWindow";
 
 const ChatWindowDesktopHeader = () => {
   // Get ChatWindowContext and destructure for current header info
   const headerContext = useContext<HeaderContextType | null>(ChatWindowContext);
   const { headerInfo } = headerContext as HeaderContextType;
-  const { name, imageUrl, isOnline, userId } = headerInfo;
+  const { name, imageUrl, isOnline, userId, lastSeenPermission, lastSeenTime } =
+    headerInfo;
+
+  const [lastSeen, setLastSeen] = useState<string>("");
+
+  // Generate last seen time message and update it every minute
+  useEffect(() => {
+    setLastSeen(timestampToElapsedTime(lastSeenTime));
+    const intervalId = setInterval(() => {
+      const newLastSeen = timestampToElapsedTime(lastSeenTime);
+      setLastSeen(newLastSeen);
+    }, 60000);
+
+    return () => clearInterval(intervalId);
+  }, [lastSeenTime]);
 
   return (
     <header className={styles.container}>
@@ -23,6 +38,7 @@ const ChatWindowDesktopHeader = () => {
       <div className={styles.infoContainer}>
         <h3>{name}</h3>
         {isOnline && <h5>Active</h5>}
+        {!isOnline && lastSeenPermission && <h5>{lastSeen}</h5>}
       </div>
     </header>
   );

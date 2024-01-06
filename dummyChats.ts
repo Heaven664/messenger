@@ -8,7 +8,7 @@ export const dummyChats: ChatType[] = [
     userId: "1",
     lastMessage: new Date("2024-01-02T15:30:45Z").getTime(),
     isOnline: true,
-    lastSeenPermission: true,
+    lastSeenPermission: false,
     lastSeenTime: new Date("2024-01-04T15:30:45Z").getTime(),
   },
   {
@@ -28,8 +28,8 @@ export const dummyChats: ChatType[] = [
     userId: "3",
     lastMessage: new Date("2024-01-02T15:31:41Z").getTime(),
     isOnline: false,
-    lastSeenPermission: false,
-    lastSeenTime: new Date("2024-01-04T15:30:45Z").getTime(),
+    lastSeenPermission: true,
+    lastSeenTime: new Date("2024-01-06T20:30:45Z").getTime(),
   },
   {
     name: "Omar Hamid",
