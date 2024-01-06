@@ -38,45 +38,47 @@ const ChatWindowDesktopFooter = () => {
   };
 
   return (
-    <form className={styles.container} onSubmit={handleMessageSend}>
-      <div className={styles.optionsSection}>
-        <div
-          className={styles.emojiIconContainer}
-          onClick={() => setEmojiPicker((prev) => !prev)}
-        >
-          <SentimentSatisfiedOutlinedIcon
-            className={styles.emojiIcon}
-            id="emojiIcon"
-            fontSize="inherit"
-          />
-        </div>
-        {emojiPicker && (
-          <div className={styles.emojiPickerContainer}>
-            <Picker
-              data={data}
-              onEmojiSelect={handleEmojiSelect}
-              emojiSize={"22"}
-              previewPosition={"none"}
-              onClickOutside={handleClickOutside}
-              theme={"dark"}
+    <footer>
+      <form className={styles.container} onSubmit={handleMessageSend}>
+        <div className={styles.optionsSection}>
+          <div
+            className={styles.emojiIconContainer}
+            onClick={() => setEmojiPicker((prev) => !prev)}
+          >
+            <SentimentSatisfiedOutlinedIcon
+              className={styles.emojiIcon}
+              id="emojiIcon"
+              fontSize="inherit"
             />
           </div>
-        )}
-      </div>
-      <div className={styles.inputSection}>
-        <input
-          type="text"
-          placeholder="Type your message..."
-          onChange={handleMessageChange}
-          value={message}
-        />
-      </div>
-      <div className={styles.buttonSection}>
-        <button>
-          <SendIcon fontSize="inherit" />
-        </button>
-      </div>
-    </form>
+          {emojiPicker && (
+            <div className={styles.emojiPickerContainer}>
+              <Picker
+                data={data}
+                onEmojiSelect={handleEmojiSelect}
+                emojiSize={"22"}
+                previewPosition={"none"}
+                onClickOutside={handleClickOutside}
+                theme={"dark"}
+              />
+            </div>
+          )}
+        </div>
+        <div className={styles.inputSection}>
+          <input
+            type="text"
+            placeholder="Type your message..."
+            onChange={handleMessageChange}
+            value={message}
+          />
+        </div>
+        <div className={styles.buttonSection}>
+          <button>
+            <SendIcon fontSize="inherit" />
+          </button>
+        </div>
+      </form>
+    </footer>
   );
 };
 
