@@ -13,8 +13,12 @@
   align-items: center;
   .optionsSection {
     color: $light-background-text-color-primary;
+    opacity: 0.8;
     .emojiIcon {
+      opacity: 0.5;
+      font-size: 24px;
       cursor: pointer;
+      margin-left: 20px;
       &:hover {
         color: $button-color;
       }
@@ -22,6 +26,35 @@
     .emojiPickerContainer {
       position: absolute;
       bottom: 85px;
+    }
+  }
+  .inputSection {
+    flex-grow: 1;
+    padding: 0 20px;
+    input {
+      width: 100%;
+      padding: 10px 14px;
+      background-color: $input-background-color;
+      border: 1px solid $input-background-color;
+      border-radius: 4px;
+      color: $light-background-text-color-primary;
+      font-size: 16.5px;
+      outline: none;
+    }
+  }
+  .buttonSection {
+    margin-right: 20px;
+    button {
+      font-size: 24px;
+      border: none;
+      padding: 5px;
+      border-radius: 3px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: $button-color;
+      color: $light-background-text-color-secondary;
+      cursor: pointer;
     }
   }
 }

@@ -1,4 +1,5 @@
 import SentimentSatisfiedOutlinedIcon from "@mui/icons-material/SentimentSatisfiedOutlined";
+import SendIcon from "@mui/icons-material/Send";
 import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 
@@ -7,6 +8,7 @@ import { useState } from "react";
 
 const ChatWindowDesktopFooter = () => {
   const [emojiPicker, setEmojiPicker] = useState<Boolean>(true);
+  const [message, setMessage] = useState("");
 
   // Close emoji picker when user clicks outside of it
   const handleClickOutside = (e: any) => {
@@ -15,9 +17,22 @@ const ChatWindowDesktopFooter = () => {
     }
   };
 
+  // Add emoji to message input state
   const handleEmojiSelect = (e: any) => {
-    console.log(e.native);
+    const newMessage = message + e.native;
+    setMessage(newMessage);
   };
+
+  // Update message input state
+  const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMessage(e.target.value);
+  };
+
+  // Send message
+  const handleMessageSend = () => {
+    console.log(message);
+    setMessage("");
+  }
 
   return (
     <footer className={styles.container}>
@@ -26,6 +41,7 @@ const ChatWindowDesktopFooter = () => {
           className={styles.emojiIcon}
           id="emojiIcon"
           onClick={() => setEmojiPicker((prev) => !prev)}
+          fontSize="inherit"
         />
         {emojiPicker && (
           <div className={styles.emojiPickerContainer}>
@@ -40,8 +56,19 @@ const ChatWindowDesktopFooter = () => {
           </div>
         )}
       </div>
-      <div className={styles.inputSection}>input</div>
-      <div className={styles.buttonSection}>button</div>
+      <div className={styles.inputSection}>
+        <input
+          type="text"
+          placeholder="Type your message..."
+          onChange={handleMessageChange}
+          value={message}
+        />
+      </div>
+      <div className={styles.buttonSection}>
+        <button onClick={handleMessageSend}>
+          <SendIcon fontSize="inherit" />
+        </button>
+      </div>
     </footer>
   );
 };
