@@ -7,8 +7,8 @@ const SettingsBackground = () => {
     <div className={styles.backgroundContainer}>
       <Image
         src={"/general/background-image.jpg"}
-        width={1000}
-        height={1000}
+        width={500}
+        height={500}
         priority={true}
         alt="Settings Background Image"
       />

@@ -10,7 +10,6 @@
     background-color: $dark-background-color;
     width: 100%;
     padding: 33px 0 12px 0;
-
     .imageContainer {
       position: absolute;
       width: 88px;
@@ -21,42 +20,39 @@
       display: flex;
       justify-content: center;
       align-items: center;
-
       .imageBackground {
+        position: relative;
         border-radius: 40px;
         width: 80px;
         height: 80px;
-        position: relative;
         overflow: hidden;
-        
+
         img {
           position: absolute;
           object-fit: cover;
           width: 100%;
           height: auto;
         }
+      }
+    }
+    .changeIconContainer {
+      position: absolute;
+      bottom: 5px;
+      right: 2px;
+      width: 26px;
+      height: 26px;
+      border-radius: 13px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: $dark-background-color;
 
-        .changeIconContainer {
-          position: absolute;
-          bottom: 5px;
-          right: 2px;
-          width: 26px;
-          height: 26px;
-          border-radius: 13px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          background-color: $dark-background-color;
-  
-          .changeIcon {
-            font-size: 15px;
-            color: $light-background-text-color-primary;
-          }
-  
-          @media (min-width: 999px) {
-            cursor: pointer;
-          }
-        }
+      .changeIcon {
+        font-size: 15px;
+        color: $light-background-text-color-primary;
+      }
+      @media (min-width: 999px) {
+        cursor: pointer;
       }
     }
     p {
@@ -73,5 +69,4 @@
     opacity: 0.2;
     background-color: $light-background-text-color-primary;
   }
-
 }
