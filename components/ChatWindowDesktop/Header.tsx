@@ -1,11 +1,11 @@
 import Image from "next/image";
 import styles from "./Header.module.scss";
-import { HeaderInfoType } from "@/types/ChatWindow/types";
 import { HeaderContextType } from "@/types/Context/types";
 import { useContext } from "react";
 import ChatWindowContext from "@/context/ChatWindowContext";
 
 const ChatWindowDesktopHeader = () => {
+  // Get ChatWindowContext and destructure for current header info
   const headerContext = useContext<HeaderContextType | null>(ChatWindowContext);
   const { headerInfo } = headerContext as HeaderContextType;
   const { name, imageUrl, isOnline, userId } = headerInfo;
