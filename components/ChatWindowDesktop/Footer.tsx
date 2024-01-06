@@ -7,7 +7,7 @@ import styles from "@/components/ChatWindowDesktop/Footer.module.scss";
 import { useState } from "react";
 
 const ChatWindowDesktopFooter = () => {
-  const [emojiPicker, setEmojiPicker] = useState<Boolean>(true);
+  const [emojiPicker, setEmojiPicker] = useState<Boolean>(false);
   const [message, setMessage] = useState("");
 
   // Close emoji picker when user clicks outside of it
@@ -29,13 +29,14 @@ const ChatWindowDesktopFooter = () => {
   };
 
   // Send message
-  const handleMessageSend = () => {
+  const handleMessageSend = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     console.log(message);
     setMessage("");
-  }
+  };
 
   return (
-    <footer className={styles.container}>
+    <form className={styles.container} onSubmit={handleMessageSend}>
       <div className={styles.optionsSection}>
         <SentimentSatisfiedOutlinedIcon
           className={styles.emojiIcon}
@@ -65,11 +66,11 @@ const ChatWindowDesktopFooter = () => {
         />
       </div>
       <div className={styles.buttonSection}>
-        <button onClick={handleMessageSend}>
+        <button>
           <SendIcon fontSize="inherit" />
         </button>
       </div>
-    </footer>
+    </form>
   );
 };
 
