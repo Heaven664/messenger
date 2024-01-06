@@ -12,7 +12,9 @@ const ChatWindowDesktopFooter = () => {
 
   // Close emoji picker when user clicks outside of it
   const handleClickOutside = (e: any) => {
-    if (e.target.id !== "emojiIcon") {
+    // Check if user clicked on emoji icon or its child
+    const isEmojiIconOrChild = e.target.closest("#emojiIcon");
+    if (!isEmojiIconOrChild) {
       setEmojiPicker(false);
     }
   };
@@ -38,12 +40,16 @@ const ChatWindowDesktopFooter = () => {
   return (
     <form className={styles.container} onSubmit={handleMessageSend}>
       <div className={styles.optionsSection}>
-        <SentimentSatisfiedOutlinedIcon
-          className={styles.emojiIcon}
-          id="emojiIcon"
+        <div
+          className={styles.emojiIconContainer}
           onClick={() => setEmojiPicker((prev) => !prev)}
-          fontSize="inherit"
-        />
+        >
+          <SentimentSatisfiedOutlinedIcon
+            className={styles.emojiIcon}
+            id="emojiIcon"
+            fontSize="inherit"
+          />
+        </div>
         {emojiPicker && (
           <div className={styles.emojiPickerContainer}>
             <Picker
