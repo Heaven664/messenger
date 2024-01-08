@@ -1,7 +1,10 @@
 @import "@/styles/_variables.scss";
 .container {
+  overflow-y: scroll;
+  display: flex;
   color: $light-background-text-color-primary;
   height: 100%;
+  flex-direction: column-reverse;
   .listContainer {
     list-style: none;
   }
