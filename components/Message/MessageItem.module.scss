@@ -5,15 +5,15 @@
 
   .messageContainer {
     display: flex;
-    margin-top: 20px;
+    margin-top: 7px;
     max-width: 75%;
 
     .senderPictureContainer {
-      min-width: 36px;
+      min-width: 32px;
       align-self: flex-end;
-      width: 36px;
-      height: 36px;
-      border-radius: 18px;
+      width: 32px;
+      height: 32px;
+      border-radius: 16px;
       overflow: hidden;
       margin-left: 15px;
       object-fit: contain;
@@ -25,28 +25,36 @@
     }
 
     .messageContainer {
-      margin-left: 15px;
+      margin-left: 10px;
       display: flex;
       flex-direction: column;
       opacity: 1;
-      
+      margin-bottom: 5px;
+
       .messageBody {
-        padding: 17px;
+        display: inline-block;
+        width: auto;
+        padding: 12px;
         padding-right: 0;
         background-color: $dark-message-background-color;
-        border-radius: 3px;
+        border-radius: 4px;
         p {
+          display: inline-block;
+          max-width: 100%;
+          word-wrap: break-word;
+          padding-right: 12px;
           color: $light-background-text-color-secondary;
           opacity: 0.85;
-          line-height: 1.35;
+          line-height: 1.25;
+          font-size: 14.5px;
         }
       }
 
       .messageInfo {
         p {
-          padding-top: 7px;
+          padding-top: 5px;
           padding-left: 2px;
-          font-size: 13px;
+          font-size: 10.5px;
           color: $light-background-text-color-primary;
           opacity: 0.8;
           font-weight: 400;

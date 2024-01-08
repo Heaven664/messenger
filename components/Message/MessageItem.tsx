@@ -15,7 +15,7 @@ const MessageItem = () => {
         </div>
         <div className={styles.messageContainer}>
           <div className={styles.messageBody}>
-            <p>Sender Message example Sender Message example Sender Message example Sender Message example Sender Message example Sender Message example Sender Message example </p>
+            <p>Sender Message example Sender Message example Sender Message example Sender Message example </p>
           </div>
           <div className={styles.messageInfo}>
             <p>15:24</p>
