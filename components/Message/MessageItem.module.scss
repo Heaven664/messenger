@@ -1,0 +1,57 @@
+@import "@/styles/variables.scss";
+
+.container {
+  display: flex;
+
+  .messageContainer {
+    display: flex;
+    margin-top: 20px;
+    max-width: 75%;
+
+    .senderPictureContainer {
+      min-width: 36px;
+      align-self: flex-end;
+      width: 36px;
+      height: 36px;
+      border-radius: 18px;
+      overflow: hidden;
+      margin-left: 15px;
+      object-fit: contain;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    .messageContainer {
+      margin-left: 15px;
+      display: flex;
+      flex-direction: column;
+      opacity: 1;
+      
+      .messageBody {
+        padding: 17px;
+        padding-right: 0;
+        background-color: $dark-message-background-color;
+        border-radius: 3px;
+        p {
+          color: $light-background-text-color-secondary;
+          opacity: 0.85;
+          line-height: 1.35;
+        }
+      }
+
+      .messageInfo {
+        p {
+          padding-top: 7px;
+          padding-left: 2px;
+          font-size: 13px;
+          color: $light-background-text-color-primary;
+          opacity: 0.8;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+}

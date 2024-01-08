@@ -1,6 +1,8 @@
 @import "@/styles/_variables.scss";
 .container {
   color: $light-background-text-color-primary;
-  background-color: coral;
   height: 100%;
+  .listContainer {
+    list-style: none;
+  }
 }
