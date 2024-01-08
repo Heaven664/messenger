@@ -8,7 +8,7 @@ import { useState } from "react";
 
 const ChatWindowDesktopFooter = () => {
   const [emojiPicker, setEmojiPicker] = useState<Boolean>(false);
-  const [message, setMessage] = useState("");
+  const [inputVal, setInputVal] = useState("");
 
   // Close emoji picker when user clicks outside of it
   const handleClickOutside = (e: any) => {
@@ -21,20 +21,36 @@ const ChatWindowDesktopFooter = () => {
 
   // Add emoji to message input state
   const handleEmojiSelect = (e: any) => {
-    const newMessage = message + e.native;
-    setMessage(newMessage);
+    const newMessage = inputVal + e.native;
+    setInputVal(newMessage);
   };
 
   // Update message input state
   const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMessage(e.target.value);
+    setInputVal(e.target.value);
   };
 
   // Send message
   const handleMessageSend = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const messageBody = inputVal.trim();
+    const senderId = "1";
+    const receiverId = "2";
+    const sentTime = new Date().getTime();
+    const senderImageUrl = "/public/general/main.HEIC";
+    const viewed = false;
+
+    const message = {
+      messageBody,
+      senderId,
+      receiverId,
+      sentTime,
+      senderImageUrl,
+      viewed
+    }
     console.log(message);
-    setMessage("");
+    setInputVal("");
   };
 
   return (
@@ -69,7 +85,7 @@ const ChatWindowDesktopFooter = () => {
             type="text"
             placeholder="Type your message..."
             onChange={handleMessageChange}
-            value={message}
+            value={inputVal}
           />
         </div>
         <div className={styles.buttonSection}>
