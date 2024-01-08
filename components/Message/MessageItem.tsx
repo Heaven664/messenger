@@ -4,17 +4,19 @@ import styles from "./MessageItem.module.scss";
 import ownerStyles from "./MessageOwner.module.scss";
 import { MessageType } from "@/types/ChatWindow/types";
 import { timestampToLocalTime } from "@/helpers/ChatWindow";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import UserContext from "@/context/UserContext";
+import { User } from "@/types/User";
 
 type P = {
   message: MessageType;
   lastMessage: boolean;
 };
 
-const userId = "1";
-
 const MessageItem = ({ message, lastMessage }: P) => {
-  const isMessageOwner = message.senderId === userId;
+  const currentUserContext = useContext<User>(UserContext);
+  const { id: currentUserId } = currentUserContext;
+  const isMessageOwner = message.senderId === currentUserId;
   const [isMessageRead, setIsMessageRead] = useState(message.viewed);
 
   return (

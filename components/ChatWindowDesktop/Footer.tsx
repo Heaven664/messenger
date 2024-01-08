@@ -4,11 +4,29 @@ import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 
 import styles from "@/components/ChatWindowDesktop/Footer.module.scss";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { User } from "@/types/User";
+import UserContext from "@/context/UserContext";
+import { ChatType } from "@/types/Chats/types";
+import ChatWindowContext from "@/context/ChatWindowContext";
+import { HeaderContextType } from "@/types/Context/types";
+import { HeaderInfoType } from "@/types/ChatWindow/types";
 
 const ChatWindowDesktopFooter = () => {
   const [emojiPicker, setEmojiPicker] = useState<Boolean>(false);
   const [inputVal, setInputVal] = useState("");
+
+  // Get current user data from context and destructure it
+  const currentUserContext = useContext<User>(UserContext);
+  const { id: currentUserId, profileImage: currentUserProfileImage } =
+    currentUserContext;
+
+  //
+  const chatWindowContext = useContext<HeaderContextType | null>(
+    ChatWindowContext
+  );
+  const { userId: currentReceiverId } =
+    chatWindowContext?.headerInfo as HeaderInfoType;
 
   // Close emoji picker when user clicks outside of it
   const handleClickOutside = (e: any) => {
@@ -35,10 +53,10 @@ const ChatWindowDesktopFooter = () => {
     e.preventDefault();
 
     const messageBody = inputVal.trim();
-    const senderId = "1";
-    const receiverId = "2";
+    const senderId = currentUserId;
+    const receiverId = currentReceiverId;
     const sentTime = new Date().getTime();
-    const senderImageUrl = "/public/general/main.HEIC";
+    const senderImageUrl = currentUserProfileImage;
     const viewed = false;
 
     const message = {
@@ -47,8 +65,8 @@ const ChatWindowDesktopFooter = () => {
       receiverId,
       sentTime,
       senderImageUrl,
-      viewed
-    }
+      viewed,
+    };
     console.log(message);
     setInputVal("");
   };
