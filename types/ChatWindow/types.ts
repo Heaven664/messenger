@@ -10,7 +10,6 @@ export type HeaderInfoType = {
 export type MessageType = {
   messageId: string;
   senderId: string;
-  senderName: string;
   senderImageUrl: string;
   messageBody: string;
   sentTime: number;
