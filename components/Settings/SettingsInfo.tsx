@@ -11,9 +11,10 @@ import {
   Typography,
 } from "@mui/material";
 
-
 import styles from "@/components/Settings/SettingsInfo.module.scss";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { User } from "@/types/User";
+import UserContext from "@/context/UserContext";
 
 const SettingsInfo = () => {
   const [nameValue, setNameValue] = useState("Omar Hamid");

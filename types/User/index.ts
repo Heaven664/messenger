@@ -7,3 +7,7 @@ export type User = {
   lastSeenPermission: boolean;
   lastSeenTime: number;
 };
+
+export interface UserContextInterface {
+  user: User;
+}

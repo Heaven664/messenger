@@ -1,6 +1,6 @@
 import { User } from "./types/User";
 
-export const user: User = {
+export const dummyCurrentUser: User = {
   id: "1",
   name: "Omar Hamid",
   residency: "Calgary, AB",
