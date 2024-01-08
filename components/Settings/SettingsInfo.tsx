@@ -17,11 +17,14 @@ import { User } from "@/types/User";
 import UserContext from "@/context/UserContext";
 
 const SettingsInfo = () => {
-  const [nameValue, setNameValue] = useState("Omar Hamid");
-  const [emailValue, setEmailValue] = useState("omarhamid@example.com");
-  const [residenceValue, setResidenceValue] = useState("Calgary, CA");
+  const currentUserContext = useContext<User>(UserContext);
+  const {email, name, residency, lastSeenPermission} = currentUserContext;
+
+  const [nameValue, setNameValue] = useState(name);
+  const [emailValue, setEmailValue] = useState(email);
+  const [residenceValue, setResidenceValue] = useState(residency);
   const [isExpanded, setIsExpanded] = useState(false);
-  const [lastSeenStatus, setLastSeenStatus] = useState(true);
+  const [lastSeenStatus, setLastSeenStatus] = useState(lastSeenPermission);
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
