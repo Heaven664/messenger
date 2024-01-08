@@ -1,7 +1,13 @@
 import Image from "next/image";
 import styles from "./MessageItem.module.scss";
+import { MessageType } from "@/types/ChatWindow/types";
+import { timestampToLocalTime } from "@/helpers/ChatWindow";
 
-const MessageItem = () => {
+type P = {
+  message: MessageType;
+};
+
+const MessageItem = ({ message }: P) => {
   return (
     <li className={styles.container}>
       <div className={styles.messageContainer}>
@@ -15,10 +21,10 @@ const MessageItem = () => {
         </div>
         <div className={styles.messageContainer}>
           <div className={styles.messageBody}>
-            <p>Sender Message example Sender Message example Sender Message example Sender Message example </p>
+            <p>{message.messageBody}</p>
           </div>
           <div className={styles.messageInfo}>
-            <p>15:24</p>
+            <p>{timestampToLocalTime(message.sentTime)}</p>
           </div>
         </div>
       </div>

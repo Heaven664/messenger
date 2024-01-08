@@ -19,3 +19,26 @@ export const timestampToElapsedTime = (timestamp: number) => {
     return "Last seen recently";
   }
 };
+
+/**
+ * @param timestamp of the message
+ * @returns A string with the local time of the message
+ */
+export const timestampToLocalTime = (timestamp: number) => {
+  // Convert Unix timestamp to milliseconds
+  const timestampInMilliseconds = timestamp * 1000;
+
+  // Create a new Date object
+  const date = new Date(timestampInMilliseconds);
+
+  // Get local time components
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+
+  // Format the time in 24-hour format
+  const formattedTime = `${hours.toString().padStart(2, "0")}:${minutes
+    .toString()
+    .padStart(2, "0")}`;
+
+  return formattedTime;
+};
