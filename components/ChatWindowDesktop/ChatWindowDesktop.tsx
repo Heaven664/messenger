@@ -4,6 +4,7 @@ import styles from "./ChatWindowDesktop.module.scss";
 import Footer from "./Footer";
 import ChatWindowDesktopHeader from "./Header";
 import ChatWindowContext from "@/context/ChatWindowContext";
+import EmptyChat from "./EmptyChatWindow";
 
 const ChatWindowDesktop = () => {
   const chatWindowDesktopContext = useContext(ChatWindowContext);
@@ -17,7 +18,7 @@ const ChatWindowDesktop = () => {
           <Footer />
         </>
       ) : (
-        <div className={styles.emptyContainer}></div>
+        <EmptyChat />
       )}
     </div>
   );
