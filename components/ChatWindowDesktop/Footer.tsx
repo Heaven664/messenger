@@ -7,7 +7,6 @@ import styles from "@/components/ChatWindowDesktop/Footer.module.scss";
 import { useContext, useRef, useState } from "react";
 import { User } from "@/types/User";
 import UserContext from "@/context/UserContext";
-import { ChatType } from "@/types/Chats/types";
 import ChatWindowContext from "@/context/ChatWindowContext";
 import { HeaderContextType } from "@/types/Context/types";
 import { HeaderInfoType, MessageType } from "@/types/ChatWindow/types";
@@ -26,7 +25,7 @@ const ChatWindowDesktopFooter = ({ addMessage }: P) => {
   const { id: currentUserId, profileImage: currentUserProfileImage } =
     currentUserContext;
 
-  //
+  // Get current receiver id from context
   const chatWindowContext = useContext<HeaderContextType | null>(
     ChatWindowContext
   );
@@ -66,6 +65,9 @@ const ChatWindowDesktopFooter = ({ addMessage }: P) => {
     const viewed = false;
     // Mock message id
     const messageId = Math.random().toString(36);
+
+    // Check if message is empty
+    if (!messageBody) return;
 
     const message: MessageType = {
       messageId,
