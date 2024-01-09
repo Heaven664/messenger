@@ -31,7 +31,9 @@
       margin-bottom: 5px;
 
       .messageBody {
-        display: inline-block;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: auto;
         padding: 12px;
         background-color: $dark-message-background-color;

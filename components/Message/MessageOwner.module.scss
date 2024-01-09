@@ -34,7 +34,8 @@
 
       .messageBody {
         display: flex;
-        justify-content: flex-end;
+        justify-content: center;
+        align-items: center;
         width: auto;
         padding: 12px;
         background-color: $message-owner-background-color;

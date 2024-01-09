@@ -4,7 +4,7 @@ import data from "@emoji-mart/data";
 import Picker from "@emoji-mart/react";
 
 import styles from "@/components/ChatWindowDesktop/Footer.module.scss";
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { User } from "@/types/User";
 import UserContext from "@/context/UserContext";
 import { ChatType } from "@/types/Chats/types";
@@ -14,11 +14,12 @@ import { HeaderInfoType, MessageType } from "@/types/ChatWindow/types";
 
 type P = {
   addMessage: (message: MessageType) => void;
-}
+};
 
 const ChatWindowDesktopFooter = ({ addMessage }: P) => {
   const [emojiPicker, setEmojiPicker] = useState<Boolean>(false);
   const [inputVal, setInputVal] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   // Get current user data from context and destructure it
   const currentUserContext = useContext<User>(UserContext);
@@ -45,6 +46,7 @@ const ChatWindowDesktopFooter = ({ addMessage }: P) => {
   const handleEmojiSelect = (e: any) => {
     const newMessage = inputVal + e.native;
     setInputVal(newMessage);
+    inputRef.current?.focus();
   };
 
   // Update message input state
@@ -108,6 +110,7 @@ const ChatWindowDesktopFooter = ({ addMessage }: P) => {
         </div>
         <div className={styles.inputSection}>
           <input
+            ref={inputRef}
             type="text"
             placeholder="Type your message..."
             onChange={handleMessageChange}
