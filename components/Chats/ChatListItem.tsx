@@ -3,7 +3,7 @@ import styles from "./ChatListItem.module.scss";
 import { badgeNumberTransform } from "@/helpers/General";
 import { ChatType } from "@/types/Chats/types";
 import { HeaderInfoType } from "@/types/ChatWindow/types";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { HeaderContextType } from "@/types/Context/types";
 import ChatWindowContext from "@/context/ChatWindowContext";
 
@@ -20,6 +20,8 @@ const ChatListItem = ({
   const headerContext = useContext<HeaderContextType | null>(ChatWindowContext);
   const { changeChatWindowHeaderInfo } = headerContext as HeaderContextType;
 
+  const [newMessages, setNewMessages] = useState<number>(unreadMessages);
+
   // Create object of HeaderInfoType to change header info
   const chatDetails: HeaderInfoType = {
     name,
@@ -32,6 +34,7 @@ const ChatListItem = ({
 
   // Change header info when user clicks on chat list item
   const handleChatWindowChange = () => {
+    setNewMessages(0);
     changeChatWindowHeaderInfo(chatDetails);
   };
 
@@ -44,13 +47,13 @@ const ChatListItem = ({
         {isOnline && <div className={styles.onlineBadge}></div>}
       </div>
       <div className={styles.nameContainer}>
-        <h3 className={unreadMessages > 0 ? styles.highlighted : undefined}>
+        <h3 className={newMessages > 0 ? styles.highlighted : undefined}>
           {name}
         </h3>
       </div>
-      {unreadMessages > 0 && (
+      {newMessages > 0 && (
         <div className={styles.badge}>
-          <p>{badgeNumberTransform(unreadMessages)}</p>
+          <p>{badgeNumberTransform(newMessages)}</p>
         </div>
       )}
     </li>
