@@ -6,5 +6,10 @@ export type ChatType = {
   lastMessage: number;
   isOnline: boolean;
   lastSeenPermission: boolean;
-  lastSeenTime: number
+  lastSeenTime: number;
+};
+
+export type ChatsContextType = {
+  curChats: ChatType[];
+  handleChatsChange: (chats: ChatType[]) => void;
 };
