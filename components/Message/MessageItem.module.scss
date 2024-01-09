@@ -34,14 +34,12 @@
         display: inline-block;
         width: auto;
         padding: 12px;
-        padding-right: 0;
         background-color: $dark-message-background-color;
         border-radius: 4px;
         p {
           display: inline-block;
           max-width: 100%;
           word-wrap: break-word;
-          padding-right: 12px;
           color: $light-background-text-color-secondary;
           opacity: 0.85;
           line-height: 1.25;
