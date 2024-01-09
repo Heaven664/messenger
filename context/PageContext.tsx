@@ -7,9 +7,9 @@ import { useRouter } from "next/router";
 const PageContext = createContext<PageContextType | null>(null);
 
 const PageContextProvider = ({ children }: ComponentProps) => {
-  const [curPage, setCurPage] = useState<PageStatesType>("chats");
-
   const router = useRouter();
+  const firstPage = router.pathname.slice(1);
+  const [curPage, setCurPage] = useState<PageStatesType>(firstPage as PageStatesType);
 
   const changePage = (value: PageStatesType) => {
     router.push(`/${value}`);
