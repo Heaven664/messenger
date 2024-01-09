@@ -9,6 +9,7 @@
   align-items: center;
   color: $light-background-text-color-primary;
   border: rgba($color: $light-background-text-color-primary, $alpha: 0.1) solid 1px;
+  border-left: none;
   z-index: 99;
   .imageSection {
     position: relative;

@@ -8,6 +8,9 @@
 
   @media (min-width: 999px) {
     margin-left: $desktop-navbar-width;
-    width: 300px;
+    width: 250px;
+    min-width: 250px;
+    border-right: 1px solid
+      rgba($color: $light-background-text-color-primary, $alpha: 0.1);
   }
 }
