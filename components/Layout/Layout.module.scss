@@ -6,6 +6,7 @@
   height: 100vh;
   background-color: $dark-background-color;
   margin-bottom: $mobile-navbar-height;
+  position: fixed;
   .chatWindow {
     display: none;
   }

@@ -27,7 +27,6 @@ export const timestampToElapsedTime = (timestamp: number) => {
 export const timestampToLocalTime = (timestamp: number) => {
   // Create a new Date object
   const date = new Date(timestamp);
-  console.log(date);
 
   // Get local time components
   const hours = date.getHours();
