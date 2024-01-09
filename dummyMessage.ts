@@ -3,7 +3,7 @@ import { MessageType } from "./types/ChatWindow/types";
 export const dummyMessages: MessageType[] = [
   {
     messageId: "1",
-    messageBody: "Example message",
+    messageBody: "Example message first",
     senderId: "2",
     receiverId: "1",
     senderImageUrl: "/general/nikita-kek.jpg",
@@ -84,7 +84,7 @@ export const dummyMessages: MessageType[] = [
   },
   {
     messageId: "110",
-    messageBody: "Example message",
+    messageBody: "Example message last",
     senderId: "1",
     receiverId: "2",
     senderImageUrl: "/general/main.HEIC",

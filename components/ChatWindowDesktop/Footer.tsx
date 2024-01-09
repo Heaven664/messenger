@@ -10,9 +10,13 @@ import UserContext from "@/context/UserContext";
 import { ChatType } from "@/types/Chats/types";
 import ChatWindowContext from "@/context/ChatWindowContext";
 import { HeaderContextType } from "@/types/Context/types";
-import { HeaderInfoType } from "@/types/ChatWindow/types";
+import { HeaderInfoType, MessageType } from "@/types/ChatWindow/types";
 
-const ChatWindowDesktopFooter = () => {
+type P = {
+  addMessage: (message: MessageType) => void;
+}
+
+const ChatWindowDesktopFooter = ({ addMessage }: P) => {
   const [emojiPicker, setEmojiPicker] = useState<Boolean>(false);
   const [inputVal, setInputVal] = useState("");
 
@@ -58,8 +62,11 @@ const ChatWindowDesktopFooter = () => {
     const sentTime = new Date().getTime();
     const senderImageUrl = currentUserProfileImage;
     const viewed = false;
+    // Mock message id
+    const messageId = Math.random().toString(36);
 
-    const message = {
+    const message: MessageType = {
+      messageId,
       messageBody,
       senderId,
       receiverId,
@@ -68,6 +75,7 @@ const ChatWindowDesktopFooter = () => {
       viewed,
     };
     console.log(message);
+    addMessage(message);
     setInputVal("");
   };
 

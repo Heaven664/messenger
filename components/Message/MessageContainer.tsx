@@ -1,12 +1,17 @@
+import { MessageType } from "@/types/ChatWindow/types";
 import styles from "./MessageContainer.module.scss";
 import MessageItem from "./MessageItem";
 import { dummyMessages } from "@/dummyMessage";
 
-const MessageContainer = () => {
-  const messages = dummyMessages.map((message, index) => {
+type P = {
+  messages: MessageType[];
+};
+
+const MessageContainer = ({ messages }: P) => {
+  const allMessages = messages.map((message, index) => {
     let lastMessage = true;
-    if (index !== dummyMessages.length - 1) {
-      lastMessage = dummyMessages[index + 1].senderId !== message.senderId;
+    if (index !== messages.length - 1) {
+      lastMessage = messages[index + 1].senderId !== message.senderId;
     }
     return (
       <MessageItem
@@ -19,7 +24,7 @@ const MessageContainer = () => {
 
   return (
     <div className={styles.container}>
-      <ul className={styles.listContainer}>{messages}</ul>
+      <ul className={styles.listContainer}>{allMessages}</ul>
     </div>
   );
 };
