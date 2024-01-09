@@ -4,13 +4,14 @@ import { HeaderContextType } from "@/types/Context/types";
 import { useContext, useEffect, useState } from "react";
 import ChatWindowContext from "@/context/ChatWindowContext";
 import { timestampToElapsedTime } from "@/helpers/ChatWindow";
+import { HeaderInfoType } from "@/types/ChatWindow/types";
 
 const ChatWindowDesktopHeader = () => {
   // Get ChatWindowContext and destructure for current header info
   const headerContext = useContext<HeaderContextType | null>(ChatWindowContext);
   const { headerInfo } = headerContext as HeaderContextType;
   const { name, imageUrl, isOnline, userId, lastSeenPermission, lastSeenTime } =
-    headerInfo;
+    headerInfo as HeaderInfoType;
 
   const [lastSeen, setLastSeen] = useState<string>("");
 

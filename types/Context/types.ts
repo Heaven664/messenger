@@ -7,6 +7,6 @@ export type PageContextType = {
 };
 
 export type HeaderContextType = {
-  headerInfo: HeaderInfoType;
+  headerInfo: HeaderInfoType | null;
   changeChatWindowHeaderInfo: (value: HeaderInfoType) => void;
 }

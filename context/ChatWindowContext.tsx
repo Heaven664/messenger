@@ -6,14 +6,7 @@ import { HeaderContextType } from "@/types/Context/types";
 const ChatWindowContext = createContext<HeaderContextType | null>(null);
 
 const ChatWindowContextProvider = ({ children }: ComponentProps) => {
-  const [headerInfo, setHeaderInfo] = useState<HeaderInfoType>({
-    name: "Omar Hamid",
-    userId: "1",
-    imageUrl: "/general/main.HEIC",
-    isOnline: true,
-    lastSeenPermission: true,
-    lastSeenTime: new Date("2024-01-04T15:30:45Z").getTime(),
-  });
+  const [headerInfo, setHeaderInfo] = useState<HeaderInfoType | null>(null);
 
   const changeChatWindowHeaderInfo = (value: HeaderInfoType) => {
     setHeaderInfo(value);
