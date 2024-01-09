@@ -1,15 +1,24 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Image from "next/image";
 import styles from "./ContactListItem.module.scss";
-import MoreVertIcon from "@mui/icons-material/MoreVert"; 
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Menu } from "@mui/material";
 import { ContactType } from "@/types/Contacts/types";
+import ChatWindowContext from "@/context/ChatWindowContext";
+import { HeaderContextType } from "@/types/Context/types";
 
 const ListItemContact = ({
   imageSrc,
   name,
   contactId,
+  isOnline,
+  lastSeenPermission,
+  lastSeenTime,
 }: ContactType) => {
+  const chatWindowDesktopContext = useContext(ChatWindowContext);
+  const { changeChatWindowHeaderInfo } =
+    chatWindowDesktopContext as HeaderContextType;
+
   const [anchorEl, setAnchorEl] = useState<null | SVGSVGElement>(null);
 
   const handleClick = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
@@ -25,8 +34,20 @@ const ListItemContact = ({
     setAnchorEl(null);
   };
 
+  const handleStartChat = () => {
+    const newHeaderInfo = {
+      name,
+      isOnline,
+      lastSeenPermission,
+      lastSeenTime,
+      userId: contactId,
+      imageUrl: imageSrc,
+    };
+    changeChatWindowHeaderInfo(newHeaderInfo);
+  };
+
   return (
-    <li key={contactId} className={styles.container}>
+    <li key={contactId} className={styles.container} onClick={handleStartChat}>
       <div className={styles.infoContainer}>
         <div className={styles.imageContainer}>
           <Image src={imageSrc} width={35} height={35} alt={name} />

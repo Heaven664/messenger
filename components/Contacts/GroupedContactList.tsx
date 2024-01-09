@@ -14,6 +14,9 @@ const GroupedContactList = ({ groupedContacts: contacts }: P) => {
         imageSrc={contact.imageSrc}
         name={contact.name}
         contactId={contact.contactId}
+        isOnline={contact.isOnline}
+        lastSeenPermission={contact.lastSeenPermission}
+        lastSeenTime={contact.lastSeenTime}
       />
     );
   });
