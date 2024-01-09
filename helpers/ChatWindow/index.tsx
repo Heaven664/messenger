@@ -25,9 +25,6 @@ export const timestampToElapsedTime = (timestamp: number) => {
  * @returns A string with the local time of the message
  */
 export const timestampToLocalTime = (timestamp: number) => {
-  // Convert Unix timestamp to milliseconds
-  // const timestampInMilliseconds = timestamp * 1000;
-
   // Create a new Date object
   const date = new Date(timestamp);
   console.log(date);
