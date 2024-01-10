@@ -1,16 +1,20 @@
 import { ChatType } from "@/types/Chats/types";
 
 /**
- * Move a chat to the first position in the array
- * @param arr array of chats
- * @param userId unique id of the chat to move to the front
- * @returns copy of the array with the chat moved to the front
+ * Updates last message timestamp for a chat with id of receiver user
+ * @param chats list of chats
+ * @param receiverId id of receiver user
+ * @returns shallow copy of chats with updated last message
  */
-export const moveChatToFront = (arr: ChatType[], userId: string) => {
-  // Find the index of the chat with the given userId in a chat object
-  const index = arr.findIndex((chat) => chat.userId === userId);
-
-  // Move a chat to the first position in the array
-  arr.unshift(arr.splice(index, 1)[0]);
-  return [...arr];
+export const updateLatsMessage = (chats: ChatType[], receiverId: string) => {
+  const newChats = chats.map((chat) => {
+    if (chat.userId === receiverId) {
+      return {
+        ...chat,
+        lastMessage: new Date().getTime(),
+      };
+    }
+    return chat;
+  });
+  return newChats;
 };

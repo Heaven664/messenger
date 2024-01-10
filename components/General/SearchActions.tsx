@@ -20,6 +20,7 @@ const SearchActions = ({ title, label, id, onChange }: SearchActionsProps) => {
           label={label}
           className={styles.inputField}
           onChange={onChange}
+          autoComplete="off"
         />
         <SearchIcon className={styles.searchIcon} fontSize="inherit" />
       </div>

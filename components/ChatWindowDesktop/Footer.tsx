@@ -10,6 +10,9 @@ import UserContext from "@/context/UserContext";
 import ChatWindowContext from "@/context/ChatWindowContext";
 import { HeaderContextType } from "@/types/Context/types";
 import { HeaderInfoType, MessageType } from "@/types/ChatWindow/types";
+import { ChatType, ChatsContextType } from "@/types/Chats/types";
+import ChatsContext from "@/context/ChatsContext";
+import { updateLatsMessage } from "@/helpers/Chats";
 
 type P = {
   addMessage: (message: MessageType) => void;
@@ -32,6 +35,10 @@ const ChatWindowDesktopFooter = ({ addMessage }: P) => {
   const { userId: currentReceiverId } =
     chatWindowContext?.headerInfo as HeaderInfoType;
 
+  // Get current chats from context
+  const currentChatsContext = useContext<ChatsContextType>(ChatsContext);
+  const { curChats, handleChatsChange } = currentChatsContext;
+
   // Close emoji picker when user clicks outside of it
   const handleClickOutside = (e: any) => {
     // Check if user clicked on emoji icon or its child
@@ -48,39 +55,29 @@ const ChatWindowDesktopFooter = ({ addMessage }: P) => {
     inputRef.current?.focus();
   };
 
-  // Update message input state
-  const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputVal(e.target.value);
-  };
-
-  // Send message
+  // Handle message send
   const handleMessageSend = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const messageBody = inputVal.trim();
-    const senderId = currentUserId;
-    const receiverId = currentReceiverId;
-    const sentTime = new Date().getTime();
-    const senderImageUrl = currentUserProfileImage;
-    const viewed = false;
-    // Mock message id
-    const messageId = Math.random().toString(36);
 
     // Check if message is empty
     if (!messageBody) return;
 
     const message: MessageType = {
-      messageId,
+      messageId: Math.random().toString(36),
       messageBody,
-      senderId,
-      receiverId,
-      sentTime,
-      senderImageUrl,
-      viewed,
+      senderId: currentUserId,
+      receiverId: currentReceiverId,
+      sentTime: new Date().getTime(),
+      senderImageUrl: currentUserProfileImage,
+      viewed: false,
     };
-    console.log(message);
+
     addMessage(message);
     setInputVal("");
+    const newChats = updateLatsMessage(curChats, currentReceiverId);
+    handleChatsChange(newChats);
   };
 
   return (
@@ -115,7 +112,7 @@ const ChatWindowDesktopFooter = ({ addMessage }: P) => {
             ref={inputRef}
             type="text"
             placeholder="Type your message..."
-            onChange={handleMessageChange}
+            onChange={(e) => setInputVal(e.target.value)}
             value={inputVal}
           />
         </div>

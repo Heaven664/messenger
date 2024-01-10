@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import SearchActions from "../General/SearchActions";
 import ChatList from "./ChatList";
 import styles from "./Chats.module.scss";
@@ -12,12 +12,16 @@ const Chats = () => {
   const { curChats } = chatsContext;
   const allChats = curChats;
 
-  // Sort Chats based on last message timestamp
-  allChats.sort((a: ChatType, b: ChatType) => {
-    return b.lastMessage - a.lastMessage;
-  });
-
   const [currentChats, setCurrentChats] = useState(allChats);
+
+  // Sort chats based on last message timestamp when chats change
+  useEffect(() => {
+    const newChats = [...curChats];
+    newChats.sort((a: ChatType, b: ChatType) => {
+      return b.lastMessage - a.lastMessage;
+    });
+    setCurrentChats(newChats);
+  }, [curChats]);
 
   // Change chats based on input value
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
