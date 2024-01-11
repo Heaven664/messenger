@@ -7,6 +7,7 @@ export const topNavItems = [
   {
     pageName: "profile",
     component: <AccountCircleRounded fontSize="inherit" />,
+    resetProfile: true,
   },
   {
     pageName: "contacts",

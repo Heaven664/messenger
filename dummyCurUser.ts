@@ -1,7 +1,7 @@
 import { User } from "./types/User";
 
 export const dummyCurrentUser: User = {
-  id: "5",
+  id: "1",
   name: "Omar Hamid",
   residency: "Calgary, AB",
   profileImage: "/general/main.HEIC",

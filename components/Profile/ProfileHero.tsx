@@ -7,7 +7,6 @@ type P = {
 }
 
 const ProfileHero = ({imageSrc, name}: P) => {
-  console.log(imageSrc)
   return (
     <div className={styles.layout}>
       <div className={styles.container}>

@@ -5,8 +5,8 @@ import ProfileHero from "./ProfileHero";
 import ProfileInfo from "./ProfileInfo";
 import ProfileContext from "@/context/ProfileContext";
 import { ProfileContextType } from "@/types/Profile/types";
-import { rawContacts } from "@/dummyData";
 import { ContactType } from "@/types/Contacts/types";
+import { dummyAllUsers } from "@/dummyAllUsers";
 
 const Profile = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -14,14 +14,13 @@ const Profile = () => {
   const profileContext = useContext(ProfileContext);
   const { profileId } = profileContext as ProfileContextType;
   const [profileInfo, setProfileInfo] = useState<ContactType | undefined>(
-    rawContacts.find((contact) => contact.contactId === profileId)
+    dummyAllUsers.find((contact) => contact.contactId === profileId)
   );
 
   useEffect(() => {
-    const profile = rawContacts.find(
+    const profile = dummyAllUsers.find(
       (contact) => contact.contactId === profileId
     );
-    console.log(profile);
     setProfileInfo(profile as ContactType);
   }, [profileId]);
 

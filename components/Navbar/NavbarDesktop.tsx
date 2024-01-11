@@ -4,12 +4,24 @@ import { PageStatesType } from "@/types/Navbar/types";
 import { useContext } from "react";
 import styles from "./NavbarDesktop.module.scss";
 import { bottomNavItems, topNavItems } from "@/elements/NavbarElements";
+import ProfileContext from "@/context/ProfileContext";
+import { ProfileContextType } from "@/types/Profile/types";
+import UserContext from "@/context/UserContext";
 
 const NavbarDesktop = () => {
   const pageContext = useContext<PageContextType | null>(PageContext);
   const { curPage, changePage } = pageContext as PageContextType;
 
-  const handleNavClick = (value: PageStatesType) => {
+  const currentUserContext = useContext(UserContext)
+  const currentUserId = currentUserContext?.id
+
+  const profileContext = useContext(ProfileContext)
+  const { handleProfileInfoChange } = profileContext as ProfileContextType;
+
+  const handleNavClick = (value: PageStatesType, resetProfile?: boolean) => {
+    if (resetProfile) {
+      handleProfileInfoChange(currentUserId!)
+    }
     changePage(value);
   };
 
@@ -18,7 +30,7 @@ const NavbarDesktop = () => {
     return (
       <li
         key={navItem.pageName}
-        onClick={() => handleNavClick(navItem.pageName as PageStatesType)}
+        onClick={() => handleNavClick(navItem.pageName as PageStatesType, navItem.resetProfile)}
         className={curPage === navItem.pageName ? styles.selected : undefined}
       >
         {navItem.component}
