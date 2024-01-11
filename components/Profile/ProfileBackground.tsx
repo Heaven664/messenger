@@ -4,7 +4,10 @@ import MoreVert from "@mui/icons-material/MoreVert";
 import Logout from "@mui/icons-material/Logout";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { BackgroundProps } from "@/types/Profile/types";
+import { BackgroundProps, ProfileContextType } from "@/types/Profile/types";
+import { useContext } from "react";
+import UserContext from "@/context/UserContext";
+import ProfileContext from "@/context/ProfileContext";
 
 const ProfileBackground = ({
   handleClick,
@@ -12,6 +15,13 @@ const ProfileBackground = ({
   handleClose,
   handleLogOut,
 }: BackgroundProps) => {
+  const currentUserContext = useContext(UserContext);
+  const currentUserId = currentUserContext?.id;
+
+  const profileContext = useContext(ProfileContext);
+  const { handleProfileInfoChange } = profileContext as ProfileContextType;
+
+  const mainProfile = currentUserId === profileContext?.profileId;
   return (
     <div className={styles.backgroundContainer}>
       <Image
@@ -21,10 +31,14 @@ const ProfileBackground = ({
         priority={true}
         alt="Profile Background Image"
       />
-      <h5>My Profile</h5>
-      <div className={styles.moreVertContainer} onClick={handleClick}>
-        <MoreVert />
-      </div>
+      {mainProfile && (
+        <div>
+          <h5>My Profile</h5>
+          <div className={styles.moreVertContainer} onClick={handleClick}>
+            <MoreVert />
+          </div>
+        </div>
+      )}
       {anchorEl && (
         <div className={styles.optionsContainer}>
           <Menu

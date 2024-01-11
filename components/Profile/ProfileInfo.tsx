@@ -13,11 +13,6 @@ type P = {
 }
 
 const ProfileInfo = ({name, residency, email} : P) => {
-  // Import current user data from context and destruct it
-  // const currentUserContext = useContext<User>(UserContext);
-  // const currentUserData = currentUserContext;
-  // const { name, residency, email } = currentUserData as User;
-
   return (
     <div className={styles.container}>
       <ul>
