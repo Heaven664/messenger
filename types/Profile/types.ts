@@ -1,4 +1,4 @@
-import { User } from "../User";
+import { ContactType } from "../Contacts/types";
 
 export type BackgroundProps = {
   handleClick: (event: React.MouseEvent<HTMLDivElement>) => void;
@@ -15,7 +15,7 @@ export type ProfileType = {
   residency: string;
 }
 export type ProfileContextType = {
-  profileInfo: User;
-  handleProfileInfoChange: (profileInfo: User) => void;
+  profileInfo: ContactType;
+  handleProfileInfoChange: (profileInfo: ContactType) => void;
 };
 

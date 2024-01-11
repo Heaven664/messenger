@@ -1,13 +1,13 @@
 import { ComponentProps } from "@/types/Layout/types";
-import { User, UserContextInterface } from "@/types/User";
 import { createContext } from "react";
 import { dummyCurrentUser } from "@/dummyCurUser";
+import { ContactType } from "@/types/Contacts/types";
 
-const UserContext = createContext<User>(dummyCurrentUser);
+const UserContext = createContext<ContactType>(dummyCurrentUser);
 
 const UserContextProvider = ({ children }: ComponentProps) => {
   // Mock current user data
-  const context: User = dummyCurrentUser;
+  const context: ContactType = dummyCurrentUser;
 
   return (
     <UserContext.Provider value={context}>{children}</UserContext.Provider>

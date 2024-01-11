@@ -1,8 +1,9 @@
 export type ContactType = {
-  imageSrc: string;
+  contactId: string;
   name: string;
   email: string;
-  contactId: string;
+  residency: string;
+  imageSrc: string;
   isOnline: boolean;
   lastSeenPermission: boolean;
   lastSeenTime: number;

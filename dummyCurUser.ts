@@ -1,11 +1,12 @@
-import { User } from "./types/User";
+import { ContactType } from "./types/Contacts/types";
 
-export const dummyCurrentUser: User = {
-  id: "1",
+export const dummyCurrentUser: ContactType = {
+  contactId: "1",
   name: "Omar Hamid",
   residency: "Calgary, AB",
-  profileImage: "/general/main.HEIC",
+  imageSrc: "/general/main.HEIC",
   email: "omarhamid@example.com",
+  isOnline: true,
   lastSeenPermission: true,
   lastSeenTime: new Date().getTime(),
 };

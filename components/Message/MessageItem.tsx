@@ -7,6 +7,7 @@ import { timestampToLocalTime } from "@/helpers/ChatWindow";
 import { useContext, useState } from "react";
 import UserContext from "@/context/UserContext";
 import { User } from "@/types/User";
+import { ContactType } from "@/types/Contacts/types";
 
 type P = {
   message: MessageType;
@@ -14,8 +15,8 @@ type P = {
 };
 
 const MessageItem = ({ message, lastMessage }: P) => {
-  const currentUserContext = useContext<User>(UserContext);
-  const { id: currentUserId } = currentUserContext;
+  const currentUserContext = useContext<ContactType>(UserContext);
+  const { contactId: currentUserId } = currentUserContext;
   const isMessageOwner = message.senderId === currentUserId;
   const [isMessageRead, setIsMessageRead] = useState(message.viewed);
 

@@ -13,6 +13,7 @@ import { HeaderInfoType, MessageType } from "@/types/ChatWindow/types";
 import { ChatType, ChatsContextType } from "@/types/Chats/types";
 import ChatsContext from "@/context/ChatsContext";
 import { updateLatsMessage } from "@/helpers/Chats";
+import { ContactType } from "@/types/Contacts/types";
 
 type P = {
   addMessage: (message: MessageType) => void;
@@ -24,8 +25,8 @@ const ChatWindowDesktopFooter = ({ addMessage }: P) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   // Get current user data from context and destructure it
-  const currentUserContext = useContext<User>(UserContext);
-  const { id: currentUserId, profileImage: currentUserProfileImage } =
+  const currentUserContext = useContext<ContactType>(UserContext);
+  const { contactId: currentUserId, imageSrc: currentUserProfileImage } =
     currentUserContext;
 
   // Get current receiver id from context

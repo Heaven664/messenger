@@ -13,11 +13,11 @@ import {
 
 import styles from "@/components/Settings/SettingsInfo.module.scss";
 import { useContext, useState } from "react";
-import { User } from "@/types/User";
 import UserContext from "@/context/UserContext";
+import { ContactType } from "@/types/Contacts/types";
 
 const SettingsInfo = () => {
-  const currentUserContext = useContext<User>(UserContext);
+  const currentUserContext = useContext<ContactType>(UserContext);
   const {email, name, residency, lastSeenPermission} = currentUserContext;
 
   const [nameValue, setNameValue] = useState(name);

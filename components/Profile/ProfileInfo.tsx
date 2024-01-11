@@ -5,12 +5,13 @@ import styles from "@/components/Profile/ProfileInfo.module.scss";
 import { User } from "@/types/User";
 import { useContext } from "react";
 import UserContext from "@/context/UserContext";
+import { ContactType } from "@/types/Contacts/types";
 
 const ProfileInfo = () => {
   // Import current user data from context and destruct it
-  const currentUserContext = useContext<User>(UserContext);
+  const currentUserContext = useContext<ContactType>(UserContext);
   const currentUserData = currentUserContext;
-  const { name, residency, email } = currentUserData as User;
+  const { name, residency, email } = currentUserData as ContactType;
 
   return (
     <div className={styles.container}>
