@@ -6,11 +6,17 @@ import { User } from "@/types/User";
 import { useContext } from "react";
 import UserContext from "@/context/UserContext";
 
-const ProfileInfo = () => {
+type P = {
+  name: string;
+  residency: string;
+  email: string;
+}
+
+const ProfileInfo = ({name, residency, email} : P) => {
   // Import current user data from context and destruct it
-  const currentUserContext = useContext<User>(UserContext);
-  const currentUserData = currentUserContext;
-  const { name, residency, email } = currentUserData as User;
+  // const currentUserContext = useContext<User>(UserContext);
+  // const currentUserData = currentUserContext;
+  // const { name, residency, email } = currentUserData as User;
 
   return (
     <div className={styles.container}>

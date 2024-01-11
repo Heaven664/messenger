@@ -1,21 +1,27 @@
 import Image from "next/image";
 import styles from "./ProfileHero.module.scss";
 
-const ProfileHero = () => {
+type P = {
+  imageSrc: string;
+  name: string;
+}
+
+const ProfileHero = ({imageSrc, name}: P) => {
+  console.log(imageSrc)
   return (
     <div className={styles.layout}>
       <div className={styles.container}>
         <div className={styles.imageContainer}>
           <div className={styles.imageBackground}>
             <Image
-              src={"/general/main.HEIC"}
+              src={imageSrc}
               width={150}
               height={150}
               alt="hero-image"
             />
           </div>
         </div>
-        <p>Omar Hamid</p>
+        <p>{name}</p>
       </div>
       <hr />
     </div>

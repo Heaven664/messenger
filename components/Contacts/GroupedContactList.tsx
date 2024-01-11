@@ -11,6 +11,8 @@ const GroupedContactList = ({ groupedContacts: contacts }: P) => {
     return (
       <ContactListItem
         key={contact.contactId}
+        email={contact.email}
+        residency={contact.residency}
         imageSrc={contact.imageSrc}
         name={contact.name}
         contactId={contact.contactId}

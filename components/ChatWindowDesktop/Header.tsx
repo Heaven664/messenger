@@ -1,13 +1,14 @@
 import Image from "next/image";
 import styles from "./Header.module.scss";
-import { HeaderContextType } from "@/types/Context/types";
+import { HeaderContextType, PageContextType } from "@/types/Context/types";
 import { useContext, useEffect, useState } from "react";
 import ChatWindowContext from "@/context/ChatWindowContext";
 import { timestampToElapsedTime } from "@/helpers/ChatWindow";
 import { HeaderInfoType } from "@/types/ChatWindow/types";
-import Profile from "../Profile/Profile";
 import ProfileContext from "@/context/ProfileContext";
 import { ProfileContextType } from "@/types/Profile/types";
+import { useRouter } from "next/router";
+import PageContext from "@/context/PageContext";
 
 const ChatWindowDesktopHeader = () => {
   // Get ChatWindowContext and destructure for current header info
@@ -17,6 +18,11 @@ const ChatWindowDesktopHeader = () => {
     headerInfo as HeaderInfoType;
 
   const [lastSeen, setLastSeen] = useState<string>("");
+
+  const router = useRouter();
+
+  const pageContext = useContext(PageContext)
+  const { changePage } = pageContext as PageContextType;
 
   const profileContext = useContext(ProfileContext);
   const { handleProfileInfoChange } = profileContext as ProfileContextType;
@@ -32,18 +38,24 @@ const ChatWindowDesktopHeader = () => {
     return () => clearInterval(intervalId);
   }, [lastSeenTime]);
 
+  const handleProfileOpen = () => {
+    handleProfileInfoChange(userId)
+    router.push("/profile");
+    changePage(null)
+  }
+
   return (
     <header className={styles.container}>
       <div className={styles.imageSection}>
         <div className={styles.imageContainer}>
-          <div className={styles.image} onClick={() => handleProfileInfoChange(userId)}>
+          <div className={styles.image} onClick={handleProfileOpen}>
             <Image src={imageUrl} alt={userId} width={40} height={40} />
           </div>
           {isOnline && <div className={styles.onlineBadge}></div>}
         </div>
       </div>
       <div className={styles.infoContainer}>
-        <h3 onClick={() =>handleProfileInfoChange(userId)}>{name}</h3>
+        <h3 onClick={handleProfileOpen}>{name}</h3>
         {isOnline && <h5>Active</h5>}
         {!isOnline && lastSeenPermission && <h5>{lastSeen}</h5>}
       </div>

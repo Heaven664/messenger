@@ -13,12 +13,15 @@ const Profile = () => {
 
   const profileContext = useContext(ProfileContext);
   const { profileId } = profileContext as ProfileContextType;
-  const [profileInfo, setProfileInfo] = useState<ContactType | null>(null);
+  const [profileInfo, setProfileInfo] = useState<ContactType | undefined>(
+    rawContacts.find((contact) => contact.contactId === profileId)
+  );
 
   useEffect(() => {
     const profile = rawContacts.find(
       (contact) => contact.contactId === profileId
     );
+    console.log(profile);
     setProfileInfo(profile as ContactType);
   }, [profileId]);
 
@@ -43,8 +46,8 @@ const Profile = () => {
         handleClose={handleClose}
         anchorEl={anchorEl}
       />
-      <ProfileHero />
-      <ProfileInfo />
+      <ProfileHero imageSrc={profileInfo!.imageSrc} name={profileInfo!.name} />
+      <ProfileInfo name={profileInfo!.name} residency={profileInfo!.residency} email={profileInfo!.email}/>
     </div>
   );
 };
