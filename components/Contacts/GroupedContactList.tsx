@@ -13,6 +13,7 @@ const GroupedContactList = ({ groupedContacts: contacts }: P) => {
         key={contact.contactId}
         imageSrc={contact.imageSrc}
         name={contact.name}
+        email={contact.email}
         contactId={contact.contactId}
         isOnline={contact.isOnline}
         lastSeenPermission={contact.lastSeenPermission}

@@ -7,7 +7,15 @@ export type BackgroundProps = {
   handleLogOut: () => void;
 };
 
+export type ProfileType = {
+  id: string;
+  name: string;
+  profileImage: string;
+  email: string;
+  residency: string;
+}
 export type ProfileContextType = {
   profileInfo: User;
   handleProfileInfoChange: (profileInfo: User) => void;
 };
+

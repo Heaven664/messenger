@@ -5,6 +5,7 @@ import { ChatWindowContextProvider } from "@/context/ChatWindowContext";
 import { UserContextProvider } from "@/context/UserContext";
 import "@/styles/global.css";
 import { ChatsContextProvider } from "@/context/ChatsContext";
+import { ProfileContextProvider } from "@/context/ProfileContext";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -12,9 +13,11 @@ export default function App({ Component, pageProps }: AppProps) {
       <ChatWindowContextProvider>
         <PageContextProvider>
           <ChatsContextProvider>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
+            <ProfileContextProvider>
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </ProfileContextProvider>
           </ChatsContextProvider>
         </PageContextProvider>
       </ChatWindowContextProvider>
