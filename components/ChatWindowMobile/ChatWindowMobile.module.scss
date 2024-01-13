@@ -1,3 +1,10 @@
+@import "@/styles/_variables.scss";
 .container {
-  
+  background-color: $navbar-color;
+  background-image: url("/general/background-pattern.svg");
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
 }
