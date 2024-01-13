@@ -22,6 +22,9 @@
       position: absolute;
       bottom: 85px;
     }
+    @media (max-width: 999px) {
+      display: none;
+    }
   }
   .inputSection {
     flex-grow: 1;
