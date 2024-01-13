@@ -9,11 +9,12 @@ import ProfileContext from "@/context/ProfileContext";
 import { ProfileContextType } from "@/types/Profile/types";
 import { useRouter } from "next/router";
 import PageContext from "@/context/PageContext";
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 const ChatWindowDesktopHeader = () => {
   // Get ChatWindowContext and destructure for current header info
   const headerContext = useContext<HeaderContextType | null>(ChatWindowContext);
-  const { headerInfo } = headerContext as HeaderContextType;
+  const { headerInfo, changeChatWindowHeaderInfo } = headerContext as HeaderContextType;
   const { name, imageUrl, isOnline, userId, lastSeenPermission, lastSeenTime } =
     headerInfo as HeaderInfoType;
 
@@ -21,7 +22,7 @@ const ChatWindowDesktopHeader = () => {
 
   const router = useRouter();
 
-  const pageContext = useContext(PageContext)
+  const pageContext = useContext(PageContext);
   const { changePage } = pageContext as PageContextType;
 
   const profileContext = useContext(ProfileContext);
@@ -39,13 +40,20 @@ const ChatWindowDesktopHeader = () => {
   }, [lastSeenTime]);
 
   const handleProfileOpen = () => {
-    handleProfileInfoChange(userId)
+    handleProfileInfoChange(userId);
     router.push("/profile");
-    changePage(null)
-  }
+    changePage(null);
+  };
 
   return (
     <header className={styles.container}>
+      <div className={styles.hideMobileChatSection}>
+        <div className={styles.hideButtonContainer}>
+          <button onClick={() => changeChatWindowHeaderInfo(null)}>
+            <KeyboardArrowDownIcon fontSize="inherit" />
+          </button>
+        </div>
+      </div>
       <div className={styles.imageSection}>
         <div className={styles.imageContainer}>
           <div className={styles.image} onClick={handleProfileOpen}>

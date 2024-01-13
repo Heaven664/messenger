@@ -1,4 +1,5 @@
 @import "@/styles/variables.scss";
+@import "@/styles/_mixins.scss";
 
 .container {
   width: 100%;
@@ -8,9 +9,24 @@
   justify-content: flex-start;
   align-items: center;
   color: $light-background-text-color-primary;
-  border: rgba($color: $light-background-text-color-primary, $alpha: 0.1) solid 1px;
+  border: rgba($color: $light-background-text-color-primary, $alpha: 0.1) solid
+    1px;
   border-left: none;
   z-index: 99;
+  .hideMobileChatSection {
+    display: none;
+    @media (max-width: 999px) {
+      display: block;
+      .hideButtonContainer {
+        @include plus-button();
+        button {
+          margin: 0;
+          margin-left: 15px;
+          font-size: 20px;
+        }
+      }
+    }
+  }
   .imageSection {
     position: relative;
     .imageContainer {
