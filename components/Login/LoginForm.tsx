@@ -1,18 +1,32 @@
 import { TextField } from "@mui/material";
 import styles from "./Login.module.scss";
+import { useRef } from "react";
 
-type P  = {
+type P = {
   changeToRegister: () => void;
-}
+};
 
-const LoginForm = ({changeToRegister} : P) => {
+const LoginForm = ({ changeToRegister }: P) => {
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const data = {
+      email: emailRef.current?.value,
+      password: passwordRef.current?.value,
+    };
+
+    console.log(data)
+  };
+
   return (
     <div className={styles.loginWindow}>
       <div className={styles.formHeaderSection}>
         <h2>Welcome Back </h2>
         <p>Sign in to continue to Messenger</p>
       </div>
-      <form className={styles.formInputsSection}>
+      <form className={styles.formInputsSection} onSubmit={handleSubmit}>
         <div className={styles.inputContainer}>
           <TextField
             id={"email"}
@@ -20,6 +34,7 @@ const LoginForm = ({changeToRegister} : P) => {
             label={"Email"}
             className={styles.inputField}
             autoComplete="off"
+            inputRef={emailRef}
           />
         </div>
         <div className={styles.inputContainer}>
@@ -30,6 +45,7 @@ const LoginForm = ({changeToRegister} : P) => {
             label={"Password"}
             className={styles.inputField}
             autoComplete="off"
+            inputRef={passwordRef}
           />
         </div>
         <div className={styles.formSubmitContainer}>
@@ -38,7 +54,9 @@ const LoginForm = ({changeToRegister} : P) => {
       </form>
       <div className={styles.RegisterOptionSection}>
         <p>Don&#39;t have an account? </p>{" "}
-        <span className={styles.otherOption} onClick={changeToRegister}>Register</span>
+        <span className={styles.otherOption} onClick={changeToRegister}>
+          Register
+        </span>
       </div>
     </div>
   );
