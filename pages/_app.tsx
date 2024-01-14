@@ -17,10 +17,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <PageContextProvider>
           <ChatsContextProvider>
             <ProfileContextProvider>
-              {/* <Layout>
+              <Layout>
                 <Component {...pageProps} />
-              </Layout> */}
-              <Login />
+              </Layout>
             </ProfileContextProvider>
           </ChatsContextProvider>
         </PageContextProvider>
