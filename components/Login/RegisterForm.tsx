@@ -1,18 +1,34 @@
 import { TextField } from "@mui/material";
 import styles from "./Login.module.scss";
+import { useRef } from "react";
 
 type P = {
   changeToLogIn: () => void;
 };
 
 const RegisterForm = ({ changeToLogIn }: P) => {
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
+  const residencyRef = useRef<HTMLInputElement>(null);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const data = {
+      email: emailRef.current?.value,
+      password: passwordRef.current?.value,
+      residency: residencyRef.current?.value,
+    };
+
+    console.log(data);
+  }
+
   return (
     <div className={styles.loginWindow}>
       <div className={styles.formHeaderSection}>
         <h2>Register Account </h2>
         <p>Get your Messenger account now!</p>
       </div>
-      <form className={styles.formInputsSection}>
+      <form className={styles.formInputsSection} onSubmit={handleSubmit}>
         <div className={styles.inputContainer}>
           <TextField
             id={"email"}
@@ -20,6 +36,7 @@ const RegisterForm = ({ changeToLogIn }: P) => {
             label={"Email"}
             className={styles.inputField}
             autoComplete="off"
+            inputRef={emailRef}
           />
         </div>
         <div className={styles.inputContainer}>
@@ -30,6 +47,7 @@ const RegisterForm = ({ changeToLogIn }: P) => {
             label={"Password"}
             className={styles.inputField}
             autoComplete="off"
+            inputRef={passwordRef}
           />
         </div>
         <div className={styles.inputContainer}>
@@ -39,6 +57,7 @@ const RegisterForm = ({ changeToLogIn }: P) => {
             label={"Residency"}
             className={styles.inputField}
             autoComplete="off"
+            inputRef={residencyRef}
           />
         </div>
         <div className={styles.formSubmitContainer}>
