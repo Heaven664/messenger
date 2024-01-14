@@ -1,0 +1,40 @@
+@import "../../styles/variables.scss";
+
+.layout {
+  width: 100%;
+  height: 100vh;
+  background-color: $login-background-color;
+  .container {
+    background-color: $login-background-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .loginWindow {
+      width: 100%;
+      background-color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 25px;
+      border-radius: 10px;
+      .formHeaderSection {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px;
+        margin-bottom: 30px;
+        h2 {
+          font-weight: 400;
+          font-size: 22px;
+          margin-bottom: 10px;
+        }
+        p {
+          color: $navbar-action-color;
+          font-weight: 400;
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}
