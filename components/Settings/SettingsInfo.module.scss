@@ -46,4 +46,7 @@
     opacity: 0.2;
     background-color: $light-background-text-color-primary;
   }
+  @media (max-width: 999px) {
+    padding-bottom: $mobile-navbar-height;
+  }
 }
