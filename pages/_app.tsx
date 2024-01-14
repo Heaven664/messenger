@@ -8,6 +8,7 @@ import { ChatsContextProvider } from "@/context/ChatsContext";
 import ProfileContext, {
   ProfileContextProvider,
 } from "@/context/ProfileContext";
+import Login from "@/components/Login/Login";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -16,9 +17,10 @@ export default function App({ Component, pageProps }: AppProps) {
         <PageContextProvider>
           <ChatsContextProvider>
             <ProfileContextProvider>
-              <Layout>
+              {/* <Layout>
                 <Component {...pageProps} />
-              </Layout>
+              </Layout> */}
+              <Login />
             </ProfileContextProvider>
           </ChatsContextProvider>
         </PageContextProvider>
