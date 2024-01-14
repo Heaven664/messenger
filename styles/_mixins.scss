@@ -53,3 +53,19 @@
     }
   }
 }
+
+@mixin input() {
+  .inputField {
+    width: 100%;
+    input {
+      color: $light-background-text-color-primary;
+      padding-right: 40px;
+    }
+    label {
+      color: $light-background-text-color-primary;
+    }
+    fieldset {
+      border-color: $light-background-text-color-primary;
+    }
+  }
+}
