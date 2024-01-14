@@ -17,7 +17,7 @@ const LoginForm = ({ changeToRegister }: P) => {
       password: passwordRef.current?.value,
     };
 
-    console.log(data)
+    console.log(data);
   };
 
   return (
@@ -29,6 +29,7 @@ const LoginForm = ({ changeToRegister }: P) => {
       <form className={styles.formInputsSection} onSubmit={handleSubmit}>
         <div className={styles.inputContainer}>
           <TextField
+            type="email"
             id={"email"}
             variant="outlined"
             label={"Email"}

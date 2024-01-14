@@ -20,7 +20,7 @@ const RegisterForm = ({ changeToLogIn }: P) => {
     };
 
     console.log(data);
-  }
+  };
 
   return (
     <div className={styles.loginWindow}>
@@ -31,6 +31,7 @@ const RegisterForm = ({ changeToLogIn }: P) => {
       <form className={styles.formInputsSection} onSubmit={handleSubmit}>
         <div className={styles.inputContainer}>
           <TextField
+            type="email"
             id={"email"}
             variant="outlined"
             label={"Email"}
