@@ -1,0 +1,51 @@
+@import '../../styles/variables.scss';
+
+.modalBackground {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 150;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba($color: $navbar-color, $alpha: 0.7);
+  .modalContainer {
+    display: flex;
+    flex-direction: column;
+    background-color: $navbar-color;
+    width: 100%;
+    height: 100%;
+    max-width: 500px;
+    max-height: 500px;
+    margin: 0 20px;
+    border: 1px solid
+      rgba($color: $light-background-text-color-primary, $alpha: 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    .modalHeader {
+      height: 10%;
+      background-color: $button-color;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: $light-background-text-color-secondary;
+      p {
+        margin-left: 8px;
+      }
+      .modalCloseContainer {
+        font-size: 25px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 8px;
+        @media (min-width: 999px) {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

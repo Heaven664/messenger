@@ -4,12 +4,17 @@ import { rawContacts } from "@/dummyData";
 import { ContactListType } from "@/types/Contacts/types";
 import { contactsDataToContactsList } from "@/helpers/Contacts";
 import GroupedContactList from "./GroupedContactList";
-import { useMemo, useState } from "react";``
+import { useMemo, useState } from "react";
+``;
 import { filterUsersByName } from "@/helpers/General";
+import { Modal } from "@mui/material";
+import ModalCustom from "../General/Modal";
 
 export const Contacts = () => {
+  const [modalState, setModalState] = useState(true);
+
   // Converts raw contacts into an ordered list of contacts
-  const contacts = useMemo(() => contactsDataToContactsList(rawContacts), []) ;
+  const contacts = useMemo(() => contactsDataToContactsList(rawContacts), []);
 
   const [currentContacts, setCurrentContacts] = useState(contacts);
 
@@ -32,7 +37,13 @@ export const Contacts = () => {
         label="Search Contacts"
         id="search-contacts-input"
         onChange={handleInputChange}
+        addAction={() => setModalState(true)}
       />
+      <ModalCustom
+        header={"Add Contact"}
+        isOpen={modalState}
+        onClose={() => setModalState(false)}
+      ></ModalCustom>
       <ul>{contactsList}</ul>
     </div>
   );
