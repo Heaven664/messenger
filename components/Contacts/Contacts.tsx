@@ -7,8 +7,8 @@ import GroupedContactList from "./GroupedContactList";
 import { useMemo, useState } from "react";
 ``;
 import { filterUsersByName } from "@/helpers/General";
-import { Modal } from "@mui/material";
 import ModalCustom from "../General/Modal";
+import AddContactForm from "../General/AddContactForm";
 
 export const Contacts = () => {
   const [modalState, setModalState] = useState(false);
@@ -44,7 +44,9 @@ export const Contacts = () => {
         header={"Add Contact"}
         isOpen={modalState}
         onClose={() => setModalState(false)}
-      ></ModalCustom>
+      >
+        <AddContactForm />
+      </ModalCustom>
       <ul>{contactsList}</ul>
     </div>
   );

@@ -40,7 +40,7 @@ const ModalCustom: React.FC<ModalProps> = ({ header, children, onClose, isOpen }
                 <CloseIcon fontSize="inherit" />
               </div>
             </div>
-            <div>{children}</div>
+            <div className={styles.modalContent}>{children}</div>
           </div>
         </div>
       )}
