@@ -11,7 +11,7 @@ import { Modal } from "@mui/material";
 import ModalCustom from "../General/Modal";
 
 export const Contacts = () => {
-  const [modalState, setModalState] = useState(true);
+  const [modalState, setModalState] = useState(false);
 
   // Converts raw contacts into an ordered list of contacts
   const contacts = useMemo(() => contactsDataToContactsList(rawContacts), []);
@@ -38,6 +38,7 @@ export const Contacts = () => {
         id="search-contacts-input"
         onChange={handleInputChange}
         addAction={() => setModalState(true)}
+        hasAddAction={true}
       />
       <ModalCustom
         header={"Add Contact"}

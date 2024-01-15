@@ -4,15 +4,24 @@ import styles from "./SearchActions.module.scss";
 import { TextField } from "@mui/material";
 import { SearchActionsProps } from "@/types/General/types";
 
-const SearchActions = ({ title, label, id, onChange, addAction }: SearchActionsProps) => {
+const SearchActions = ({
+  title,
+  label,
+  id,
+  onChange,
+  addAction,
+  hasAddAction,
+}: SearchActionsProps) => {
   return (
     <div className={styles.container}>
-      <div className={styles.topSection}>
-        <h3>{title}</h3>
-        <button onClick={addAction}>
-          <AddIcon fontSize="inherit" />
-        </button>
-      </div>
+      {hasAddAction && (
+        <div className={styles.topSection}>
+          <h3>{title}</h3>
+          <button onClick={addAction}>
+            <AddIcon fontSize="inherit" />
+          </button>
+        </div>
+      )}
       <div className={styles.bottomSection}>
         <TextField
           id={id}

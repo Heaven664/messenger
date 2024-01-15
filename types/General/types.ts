@@ -4,6 +4,7 @@ export type SearchActionsProps = {
   id: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   addAction: () => void;
+  hasAddAction: boolean;
 };
 
 export interface DividerPropsInterface {
