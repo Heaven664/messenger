@@ -1,3 +1,39 @@
+@import "@/styles/variables.scss";
+@import "@/styles/mixins.scss";
+
 .container {
-  
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  .inputSection {
+    width: 100%;
+    .inputField {
+      width: 100%;
+    }
+    input {
+      color: $light-background-text-color-primary;
+    }
+    label {
+      color: $light-background-text-color-primary;
+    }
+    fieldset {
+      border-color: $light-background-text-color-primary;
+    }
+  }
+  .buttonSection {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    button {
+      @include default-button(
+        $light-background-text-color-secondary,
+        15px,
+        $button-color
+      );
+      padding: 10px 10px;
+      border-radius: 4px;
+      @media (min-width: 999px) {
+        cursor: pointer;
+      }
+    }
+  }
 }

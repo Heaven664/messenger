@@ -14,9 +14,9 @@ const RegisterForm = ({ changeToLogIn }: P) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = {
-      email: emailRef.current?.value,
-      password: passwordRef.current?.value,
-      residency: residencyRef.current?.value,
+      email: emailRef.current?.value.trim(),
+      password: passwordRef.current?.value.trim(),
+      residency: residencyRef.current?.value.trim(),
     };
 
     console.log(data);
