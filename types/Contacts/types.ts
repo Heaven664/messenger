@@ -1,15 +1,6 @@
-export type ContactType = {
-  imageSrc: string;
-  name: string;
-  email: string;
-  residency: string;
-  contactId: string;
-  isOnline: boolean;
-  lastSeenPermission: boolean;
-  lastSeenTime: number;
-}
+import { User } from "../User";
 
 export type ContactListType = {
   letter: string;
-  contacts: ContactType[];
+  contacts: User[];
 };

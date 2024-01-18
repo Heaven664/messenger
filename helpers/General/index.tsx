@@ -1,5 +1,6 @@
 import { ChatType } from "@/types/Chats/types";
-import { ContactListType, ContactType } from "@/types/Contacts/types";
+import { ContactListType } from "@/types/Contacts/types";
+import { User } from "@/types/User";
 
 /**
  * Filter contacts by input value
@@ -12,7 +13,7 @@ export const filterUsersByName = (
   inputValue: string
 ) => {
   const filteredContacts = contacts.filter((person: any) =>
-    person.contacts.some((contact: ContactType) =>
+    person.contacts.some((contact: User) =>
       contact.name.toLowerCase().includes(inputValue.toLowerCase())
     )
   );
@@ -41,4 +42,4 @@ export const findChatByName = (chats: ChatType[], inputValue: string) => {
     chat.name.toLowerCase().includes(inputValue.toLowerCase())
   );
   return filteredChats;
-}
+};

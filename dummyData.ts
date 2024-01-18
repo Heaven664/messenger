@@ -1,10 +1,10 @@
-import { ContactType } from "./types/Contacts/types";
+import { User } from "./types/User";
 
-export const rawContacts: ContactType[] = [
+export const rawContacts: User[] = [
   {
     imageSrc: "/general/maksim-kek.jpg",
     name: "Maksim Sapun",
-    contactId: "2",
+    id: "2",
     email: "maksimsapun@example.com",
     residency: "Calgary, AB",
     isOnline: false,
@@ -14,7 +14,7 @@ export const rawContacts: ContactType[] = [
   {
     imageSrc: "/general/nikita-kek.jpg",
     name: "Nikita Syrotenko",
-    contactId: "3",
+    id: "3",
     email: "nikitasirotenko@example.com",
     residency: "Calgary, AB",
     isOnline: false,
@@ -24,7 +24,7 @@ export const rawContacts: ContactType[] = [
   {
     imageSrc: "/general/ihor-kek.jpg",
     name: "Ihor Chupaha",
-    contactId: "4",
+    id: "4",
     email: "ihorchupaha@example.com",
     residency: "Calgary, AB",
     isOnline: true,
@@ -34,7 +34,7 @@ export const rawContacts: ContactType[] = [
   {
     imageSrc: "/general/omar-kek.JPG",
     name: "Omar Hamid",
-    contactId: "5",
+    id: "5",
     email: "omarhamid@example.com",
     residency: "Calgary, AB",
     isOnline: false,

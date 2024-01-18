@@ -4,8 +4,9 @@ export const dummyCurrentUser: User = {
   id: "1",
   name: "Omar Hamid",
   residency: "Calgary, AB",
-  profileImage: "/general/main.HEIC",
+  imageSrc: "/general/main.HEIC",
   email: "omarhamid@example.com",
   lastSeenPermission: true,
+  isOnline: true,
   lastSeenTime: new Date().getTime(),
 };

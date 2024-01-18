@@ -3,18 +3,18 @@ import Image from "next/image";
 import styles from "./ContactListItem.module.scss";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { Menu } from "@mui/material";
-import { ContactType } from "@/types/Contacts/types";
 import ChatWindowContext from "@/context/ChatWindowContext";
 import { HeaderContextType } from "@/types/Context/types";
+import { User } from "@/types/User";
 
 const ListItemContact = ({
   imageSrc,
   name,
-  contactId,
+  id,
   isOnline,
   lastSeenPermission,
   lastSeenTime,
-}: ContactType) => {
+}: User) => {
   const chatWindowDesktopContext = useContext(ChatWindowContext);
   const { changeChatWindowHeaderInfo } =
     chatWindowDesktopContext as HeaderContextType;
@@ -40,14 +40,14 @@ const ListItemContact = ({
       isOnline,
       lastSeenPermission,
       lastSeenTime,
-      userId: contactId,
+      userId: id,
       imageUrl: imageSrc,
     };
     changeChatWindowHeaderInfo(newHeaderInfo);
   };
 
   return (
-    <li key={contactId} className={styles.container} >
+    <li key={id} className={styles.container} >
       <div className={styles.infoContainer}>
         <div className={styles.imageContainer} onClick={handleStartChat}>
           <Image src={imageSrc} width={35} height={35} alt={name} />
@@ -74,7 +74,7 @@ const ListItemContact = ({
           className={styles.menuContainer}
         >
           <div className={styles.popupContainer}>
-            <button onClick={() => handleRemoveContact(contactId)}>
+            <button onClick={() => handleRemoveContact(id)}>
               Remove Contact
             </button>
           </div>

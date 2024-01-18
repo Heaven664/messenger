@@ -10,7 +10,7 @@ import UserContext from "@/context/UserContext";
 import ChatWindowContext from "@/context/ChatWindowContext";
 import { HeaderContextType } from "@/types/Context/types";
 import { HeaderInfoType, MessageType } from "@/types/ChatWindow/types";
-import { ChatType, ChatsContextType } from "@/types/Chats/types";
+import { ChatsContextType } from "@/types/Chats/types";
 import ChatsContext from "@/context/ChatsContext";
 import { updateLatsMessage } from "@/helpers/Chats";
 
@@ -25,7 +25,7 @@ const ChatWindowDesktopFooter = ({ addMessage }: P) => {
 
   // Get current user data from context and destructure it
   const currentUserContext = useContext<User>(UserContext);
-  const { id: currentUserId, profileImage: currentUserProfileImage } =
+  const { id: currentUserId, imageSrc: currentUserProfileImage } =
     currentUserContext;
 
   // Get current receiver id from context

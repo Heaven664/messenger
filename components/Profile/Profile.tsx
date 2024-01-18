@@ -5,9 +5,9 @@ import ProfileHero from "./ProfileHero";
 import ProfileInfo from "./ProfileInfo";
 import ProfileContext from "@/context/ProfileContext";
 import { ProfileContextType } from "@/types/Profile/types";
-import { ContactType } from "@/types/Contacts/types";
 import { dummyAllUsers } from "@/dummyAllUsers";
 import AuthContext from "@/context/AuthContext";
+import { User } from "@/types/User";
 
 const Profile = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -18,15 +18,15 @@ const Profile = () => {
 
   const profileContext = useContext(ProfileContext);
   const { profileId } = profileContext as ProfileContextType;
-  const [profileInfo, setProfileInfo] = useState<ContactType | undefined>(
-    dummyAllUsers.find((contact) => contact.contactId === profileId)
+  const [profileInfo, setProfileInfo] = useState<User | undefined>(
+    dummyAllUsers.find((contact) => contact.id === profileId)
   );
 
   useEffect(() => {
     const profile = dummyAllUsers.find(
-      (contact) => contact.contactId === profileId
+      (contact) => contact.id === profileId
     );
-    setProfileInfo(profile as ContactType);
+    setProfileInfo(profile as User);
   }, [profileId]);
 
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {

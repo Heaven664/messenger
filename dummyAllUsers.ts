@@ -1,8 +1,8 @@
-import { ContactType } from "./types/Contacts/types";
+import { User } from "./types/User";
 
-export const dummyAllUsers: ContactType[] = [
+export const dummyAllUsers: User[] = [
   {
-    contactId: "1",
+    id: "1",
     name: "Omar Hamid",
     residency: "Calgary, AB",
     email: "omarhamid@example.com",
@@ -14,7 +14,7 @@ export const dummyAllUsers: ContactType[] = [
   {
     imageSrc: "/general/maksim-kek.jpg",
     name: "Maksim Sapun",
-    contactId: "2",
+    id: "2",
     email: "maksimsapun@example.com",
     residency: "Calgary, AB",
     isOnline: false,
@@ -24,7 +24,7 @@ export const dummyAllUsers: ContactType[] = [
   {
     imageSrc: "/general/nikita-kek.jpg",
     name: "Nikita Syrotenko",
-    contactId: "3",
+    id: "3",
     email: "nikitasirotenko@example.com",
     residency: "Calgary, AB",
     isOnline: false,
@@ -34,7 +34,7 @@ export const dummyAllUsers: ContactType[] = [
   {
     imageSrc: "/general/ihor-kek.jpg",
     name: "Ihor Chupaha",
-    contactId: "4",
+    id: "4",
     email: "ihorchupaha@example.com",
     residency: "Calgary, AB",
     isOnline: true,
@@ -44,7 +44,7 @@ export const dummyAllUsers: ContactType[] = [
   {
     imageSrc: "/general/omar-kek.JPG",
     name: "Omar Hamid",
-    contactId: "5",
+    id: "5",
     email: "omarhamid@example.com",
     residency: "Calgary, AB",
     isOnline: false,

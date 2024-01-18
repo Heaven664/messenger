@@ -10,12 +10,12 @@ const GroupedContactList = ({ groupedContacts: contacts }: P) => {
   const groupedContactsList = contacts.contacts.map((contact) => {
     return (
       <ContactListItem
-        key={contact.contactId}
+        key={contact.id}
         email={contact.email}
         residency={contact.residency}
         imageSrc={contact.imageSrc}
         name={contact.name}
-        contactId={contact.contactId}
+        id={contact.id}
         isOnline={contact.isOnline}
         lastSeenPermission={contact.lastSeenPermission}
         lastSeenTime={contact.lastSeenTime}
