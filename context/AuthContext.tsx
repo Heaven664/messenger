@@ -1,8 +1,9 @@
+import { AuthContextType } from "@/types/Context/types";
 import { ComponentProps } from "@/types/Layout/types";
 import { User } from "@/types/User";
 import { createContext, useContext, useState } from "react";
 
-const AuthContext = createContext<User | null>(null);
+const AuthContext = createContext<AuthContextType | null>(null);
 
 const AuthProvider = ({ children }: ComponentProps) => {
   const [user, setUser] = useState<User | null>(null);
@@ -15,7 +16,7 @@ const AuthProvider = ({ children }: ComponentProps) => {
     setUser(null);
   };
 
-  const context: any = {
+  const context: AuthContextType = {
     user,
     login,
     logout,

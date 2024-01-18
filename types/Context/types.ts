@@ -1,5 +1,7 @@
+import { User } from "./../User/index";
 import { HeaderInfoType } from "../ChatWindow/types";
 import { PageStatesType } from "../Navbar/types";
+import { log } from "console";
 
 export type PageContextType = {
   curPage: PageStatesType;
@@ -9,4 +11,10 @@ export type PageContextType = {
 export type HeaderContextType = {
   headerInfo: HeaderInfoType | null;
   changeChatWindowHeaderInfo: (value: HeaderInfoType | null) => void;
-}
+};
+
+export type AuthContextType = {
+  user: User | null;
+  login: (userData: User) => void;
+  logout: () => void;
+};
