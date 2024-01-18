@@ -1,3 +1,4 @@
+import { dummyCurrentUser } from "@/dummyCurUser";
 import { AuthContextType } from "@/types/Context/types";
 import { ComponentProps } from "@/types/Layout/types";
 import { User } from "@/types/User";
@@ -9,7 +10,7 @@ const authContextTemplate: AuthContextType = {
   logout: () => {},
 };
 
-const AuthContext = createContext<AuthContextType | null>(authContextTemplate);
+const AuthContext = createContext<AuthContextType>(authContextTemplate);
 
 const AuthProvider = ({ children }: ComponentProps) => {
   const [user, setUser] = useState<User | null>(null);
