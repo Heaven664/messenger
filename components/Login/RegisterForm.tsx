@@ -1,6 +1,8 @@
 import { TextField } from "@mui/material";
 import styles from "./Login.module.scss";
 import { useRef } from "react";
+import { RegisterRequest } from "@/types/Api";
+import registerRequest from "@/helpers/Api/registerRequest";
 
 type P = {
   changeToLogIn: () => void;
@@ -13,11 +15,13 @@ const RegisterForm = ({ changeToLogIn }: P) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = {
-      email: emailRef.current?.value.trim(),
-      password: passwordRef.current?.value.trim(),
-      residency: residencyRef.current?.value.trim(),
+    const data: RegisterRequest = {
+      email: emailRef.current!.value.trim(),
+      password: passwordRef.current!.value.trim(),
+      residency: residencyRef.current!.value.trim(),
     };
+
+    registerRequest(data);
 
     console.log(data);
   };

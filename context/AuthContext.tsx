@@ -1,4 +1,3 @@
-import { dummyCurrentUser } from "@/dummyCurUser";
 import { AuthContextType } from "@/types/Context/types";
 import { ComponentProps } from "@/types/Layout/types";
 import { User } from "@/types/User";

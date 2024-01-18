@@ -1,6 +1,7 @@
 import { TextField } from "@mui/material";
 import styles from "./Login.module.scss";
 import { useRef } from "react";
+import { RegisterRequest } from "@/types/Api";
 
 type P = {
   changeToRegister: () => void;
