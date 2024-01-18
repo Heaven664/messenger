@@ -11,12 +11,14 @@ type P = {
 const RegisterForm = ({ changeToLogIn }: P) => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data: RegisterRequest = {
       email: emailRef.current!.value.trim(),
       password: passwordRef.current!.value.trim(),
+      name: nameRef.current!.value.trim(),
     };
 
     registerRequest(data);
@@ -31,6 +33,17 @@ const RegisterForm = ({ changeToLogIn }: P) => {
         <p>Get your Messenger account now!</p>
       </div>
       <form className={styles.formInputsSection} onSubmit={handleSubmit}>
+        <div className={styles.inputContainer}>
+          <TextField
+            type="name"
+            id={"name"}
+            variant="outlined"
+            label={"Name"}
+            className={styles.inputField}
+            autoComplete="off"
+            inputRef={nameRef}
+          />
+        </div>
         <div className={styles.inputContainer}>
           <TextField
             type="email"
