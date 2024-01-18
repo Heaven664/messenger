@@ -3,11 +3,35 @@ import axios from "axios";
 
 const registerRequest = async (data: RegisterRequest) => {
   const url = `${process.env.NEXT_PUBLIC_API_URL!}/auth/register`;
+  let error: string | null = null;
+  let response: any = null;
+
   try {
-    const response = await axios.post(url, data);
-    return response.data;
-  } catch (error) {
-    console.log(error);
+    response = await axios.post(url, data);
+  } catch (AxiosError: any) {
+    // Get error message
+    const errorMessage = AxiosError.response.data.message.trim();
+
+    // Handle error messages
+    switch (errorMessage) {
+      case "Missing required fields":
+        error = "Missing required fields";
+        console.log("gotcha");
+        break;
+      case "User already exists":
+        error = "User already exists";
+        break;
+      case "Invalid email":
+        error = "Invalid email";
+        break;
+      case "Password must be at least 6 symbols long":
+        error = "Password must be at least 6 symbols long";
+        break;
+      default:
+        error = "Something went wrong";
+    }
+  } finally {
+    return { response, error };
   }
 };
 

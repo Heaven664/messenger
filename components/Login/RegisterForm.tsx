@@ -13,7 +13,7 @@ const RegisterForm = ({ changeToLogIn }: P) => {
   const passwordRef = useRef<HTMLInputElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data: RegisterRequest = {
       email: emailRef.current!.value.trim(),
@@ -21,9 +21,8 @@ const RegisterForm = ({ changeToLogIn }: P) => {
       name: nameRef.current!.value.trim(),
     };
 
-    registerRequest(data);
-
-    console.log(data);
+    const result = await registerRequest(data);
+    console.log(result);
   };
 
   return (
