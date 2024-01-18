@@ -5,25 +5,25 @@ import { ChatWindowContextProvider } from "@/context/ChatWindowContext";
 import { UserContextProvider } from "@/context/UserContext";
 import "@/styles/global.css";
 import { ChatsContextProvider } from "@/context/ChatsContext";
-import ProfileContext, {
-  ProfileContextProvider,
-} from "@/context/ProfileContext";
-import Login from "@/components/Login/Login";
+import { ProfileContextProvider } from "@/context/ProfileContext";
+import { AuthProvider } from "@/context/AuthContext";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <UserContextProvider>
-      <ChatWindowContextProvider>
-        <PageContextProvider>
-          <ChatsContextProvider>
-            <ProfileContextProvider>
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
-            </ProfileContextProvider>
-          </ChatsContextProvider>
-        </PageContextProvider>
-      </ChatWindowContextProvider>
-    </UserContextProvider>
+    <AuthProvider>
+      <UserContextProvider>
+        <ChatWindowContextProvider>
+          <PageContextProvider>
+            <ChatsContextProvider>
+              <ProfileContextProvider>
+                <Layout>
+                  <Component {...pageProps} />
+                </Layout>
+              </ProfileContextProvider>
+            </ChatsContextProvider>
+          </PageContextProvider>
+        </ChatWindowContextProvider>
+      </UserContextProvider>
+    </AuthProvider>
   );
 }

@@ -1,9 +1,15 @@
 import { AuthContextType } from "@/types/Context/types";
 import { ComponentProps } from "@/types/Layout/types";
 import { User } from "@/types/User";
-import { createContext, useContext, useState } from "react";
+import { createContext, useState } from "react";
 
-const AuthContext = createContext<AuthContextType | null>(null);
+const authContextTemplate: AuthContextType = {
+  user: null,
+  login: (userData: User) => {},
+  logout: () => {},
+};
+
+const AuthContext = createContext<AuthContextType | null>(authContextTemplate);
 
 const AuthProvider = ({ children }: ComponentProps) => {
   const [user, setUser] = useState<User | null>(null);
@@ -27,6 +33,6 @@ const AuthProvider = ({ children }: ComponentProps) => {
   );
 };
 
-const useAuth = () => useContext(AuthContext);
+export default AuthContext;
 
-export { AuthProvider, useAuth };
+export { AuthProvider };
