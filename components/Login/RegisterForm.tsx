@@ -1,19 +1,23 @@
 import { TextField } from "@mui/material";
 import styles from "./Login.module.scss";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { RegisterRequest } from "@/types/Api";
 import registerRequest from "@/helpers/Api/registerRequest";
+import AuthContext from "@/context/AuthContext";
 
 type P = {
   changeToLogIn: () => void;
 };
 
 const RegisterForm = ({ changeToLogIn }: P) => {
+  const [errorMessage, setErrorMessage] = useState<string>("");
+
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
 
-  const [errorMessage, setErrorMessage] = useState<string>("");
+  const authContext = useContext(AuthContext);
+  const { login } = authContext;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     setErrorMessage("");
@@ -27,6 +31,8 @@ const RegisterForm = ({ changeToLogIn }: P) => {
     const { response, error } = await registerRequest(data);
     if (error) {
       setErrorMessage(error);
+    } else {
+      login(response);
     }
   };
 
@@ -51,6 +57,7 @@ const RegisterForm = ({ changeToLogIn }: P) => {
             className={styles.inputField}
             autoComplete="off"
             inputRef={nameRef}
+            required={true}
           />
         </div>
         <div className={styles.inputContainer}>
@@ -62,6 +69,7 @@ const RegisterForm = ({ changeToLogIn }: P) => {
             className={styles.inputField}
             autoComplete="off"
             inputRef={emailRef}
+            required={true}
           />
         </div>
         <div className={styles.inputContainer}>
@@ -73,6 +81,7 @@ const RegisterForm = ({ changeToLogIn }: P) => {
             className={styles.inputField}
             autoComplete="off"
             inputRef={passwordRef}
+            required={true}
           />
         </div>
         <div className={styles.formSubmitContainer}>
