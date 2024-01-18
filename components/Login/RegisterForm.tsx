@@ -11,14 +11,12 @@ type P = {
 const RegisterForm = ({ changeToLogIn }: P) => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
-  const residencyRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data: RegisterRequest = {
       email: emailRef.current!.value.trim(),
       password: passwordRef.current!.value.trim(),
-      residency: residencyRef.current!.value.trim(),
     };
 
     registerRequest(data);
@@ -53,16 +51,6 @@ const RegisterForm = ({ changeToLogIn }: P) => {
             className={styles.inputField}
             autoComplete="off"
             inputRef={passwordRef}
-          />
-        </div>
-        <div className={styles.inputContainer}>
-          <TextField
-            id={"residency"}
-            variant="outlined"
-            label={"Residency"}
-            className={styles.inputField}
-            autoComplete="off"
-            inputRef={residencyRef}
           />
         </div>
         <div className={styles.formSubmitContainer}>
