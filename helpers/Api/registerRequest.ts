@@ -7,7 +7,7 @@ const registerRequest = async (data: RegisterRequest) => {
   let response: any = null;
 
   try {
-    response = await axios.post(url, data);
+    response = (await axios.post(url, data)).data;
   } catch (AxiosError: any) {
     // Get error message
     const errorMessage = AxiosError.response.data.message.trim();

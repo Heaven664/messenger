@@ -60,6 +60,7 @@
         justify-content: center;
         margin-top: 20px;
         margin-bottom: 30px;
+
         h2 {
           font-weight: 500;
           font-size: 22px;
@@ -70,6 +71,22 @@
           color: $navbar-action-color;
           font-weight: 400;
           font-size: 15px;
+        }
+      }
+      .errorMessageContainer {
+        background-color: rgb(236, 81, 81);
+        margin: 0 10px;
+        margin-top: -20px;
+        border-radius: 10px;
+        margin-bottom: 5px;
+        width: 90%;
+        text-align: center;
+        @media (min-width: 999px) {
+          max-width: 360px;
+        }
+        p {
+          color: white;
+          padding: 10px;
         }
       }
       .formInputsSection {

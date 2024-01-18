@@ -1,6 +1,6 @@
 import { TextField } from "@mui/material";
 import styles from "./Login.module.scss";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { RegisterRequest } from "@/types/Api";
 import registerRequest from "@/helpers/Api/registerRequest";
 
@@ -13,7 +13,10 @@ const RegisterForm = ({ changeToLogIn }: P) => {
   const passwordRef = useRef<HTMLInputElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
 
+  const [errorMessage, setErrorMessage] = useState<string>("");
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    setErrorMessage("");
     e.preventDefault();
     const data: RegisterRequest = {
       email: emailRef.current!.value.trim(),
@@ -21,8 +24,10 @@ const RegisterForm = ({ changeToLogIn }: P) => {
       name: nameRef.current!.value.trim(),
     };
 
-    const result = await registerRequest(data);
-    console.log(result);
+    const { response, error } = await registerRequest(data);
+    if (error) {
+      setErrorMessage(error);
+    }
   };
 
   return (
@@ -31,6 +36,11 @@ const RegisterForm = ({ changeToLogIn }: P) => {
         <h2>Register Account </h2>
         <p>Get your Messenger account now!</p>
       </div>
+      {errorMessage && (
+        <div className={styles.errorMessageContainer}>
+          <p>{errorMessage}</p>
+        </div>
+      )}
       <form className={styles.formInputsSection} onSubmit={handleSubmit}>
         <div className={styles.inputContainer}>
           <TextField
