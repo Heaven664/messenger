@@ -1,7 +1,9 @@
 import { TextField } from "@mui/material";
 import styles from "./Login.module.scss";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { RegisterRequest } from "@/types/Api";
+import AuthContext from "@/context/AuthContext";
+import loginRequest from "@/helpers/Api/loginRequest";
 
 type P = {
   changeToRegister: () => void;
@@ -12,14 +14,23 @@ const LoginForm = ({ changeToRegister }: P) => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const authContext = useContext(AuthContext);
+  const { login } = authContext;
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    setErrorMessage("");
     e.preventDefault();
     const data = {
-      email: emailRef.current?.value.trim(),
-      password: passwordRef.current?.value.trim(),
+      email: emailRef.current!.value.trim(),
+      password: passwordRef.current!.value.trim(),
     };
 
-    console.log(data);
+    const { response, error } = await loginRequest(data);
+    if (error) {
+      setErrorMessage(error);
+    } else {
+      login(response);
+    }
   };
 
   return (
