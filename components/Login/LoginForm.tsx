@@ -1,6 +1,6 @@
 import { TextField } from "@mui/material";
 import styles from "./Login.module.scss";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { RegisterRequest } from "@/types/Api";
 
 type P = {
@@ -8,6 +8,7 @@ type P = {
 };
 
 const LoginForm = ({ changeToRegister }: P) => {
+  const [errorMessage, setErrorMessage] = useState<string>("");
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
@@ -27,6 +28,11 @@ const LoginForm = ({ changeToRegister }: P) => {
         <h2>Welcome Back </h2>
         <p>Sign in to continue to Messenger</p>
       </div>
+      {errorMessage && (
+        <div className={styles.errorMessageContainer}>
+          <p>{errorMessage}</p>
+        </div>
+      )}
       <form className={styles.formInputsSection} onSubmit={handleSubmit}>
         <div className={styles.inputContainer}>
           <TextField

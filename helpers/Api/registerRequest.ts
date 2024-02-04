@@ -16,7 +16,6 @@ const registerRequest = async (data: RegisterRequest) => {
     switch (errorMessage) {
       case "Missing required fields":
         error = "Missing required fields";
-        console.log("gotcha");
         break;
       case "User already exists":
         error = "User already exists";
