@@ -2,7 +2,7 @@ import { User } from "./types/User";
 
 export const dummyAllUsers: User[] = [
   {
-    id: "1",
+    id: "65bffe74854dc4cfb58c5250",
     name: "Omar Hamid",
     residency: "Calgary, AB",
     email: "omarhamid@example.com",
@@ -14,7 +14,7 @@ export const dummyAllUsers: User[] = [
   {
     imageSrc: "/general/maksim-kek.jpg",
     name: "Maksim Sapun",
-    id: "2",
+    id: "65c1c34a64a8464ceeee1af2",
     email: "maksimsapun@example.com",
     residency: "Calgary, AB",
     isOnline: false,
@@ -24,7 +24,7 @@ export const dummyAllUsers: User[] = [
   {
     imageSrc: "/general/nikita-kek.jpg",
     name: "Nikita Syrotenko",
-    id: "3",
+    id: "65c1c42164a8464ceeee1af3",
     email: "nikitasirotenko@example.com",
     residency: "Calgary, AB",
     isOnline: false,
@@ -34,21 +34,21 @@ export const dummyAllUsers: User[] = [
   {
     imageSrc: "/general/ihor-kek.jpg",
     name: "Ihor Chupaha",
-    id: "4",
+    id: "65c1c4bc64a8464ceeee1af4",
     email: "ihorchupaha@example.com",
     residency: "Calgary, AB",
     isOnline: true,
     lastSeenPermission: true,
     lastSeenTime: new Date("2024-01-04T15:30:45Z").getTime(),
   },
-  {
-    imageSrc: "/general/omar-kek.JPG",
-    name: "Omar Hamid",
-    id: "5",
-    email: "omarhamid@example.com",
-    residency: "Calgary, AB",
-    isOnline: false,
-    lastSeenPermission: true,
-    lastSeenTime: new Date().getTime() - 10000000,
-  },
+  // {
+  //   imageSrc: "/general/omar-kek.JPG",
+  //   name: "Omar Hamid",
+  //   id: "5",
+  //   email: "omarhamid@example.com",
+  //   residency: "Calgary, AB",
+  //   isOnline: false,
+  //   lastSeenPermission: true,
+  //   lastSeenTime: new Date().getTime() - 10000000,
+  // },
 ];

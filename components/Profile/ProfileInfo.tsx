@@ -2,13 +2,10 @@ import LocationOnOutlined from "@mui/icons-material/LocationOnOutlined";
 import SmsOutlined from "@mui/icons-material/SmsOutlined";
 import Person from "@mui/icons-material/Person";
 import styles from "@/components/Profile/ProfileInfo.module.scss";
-import { User } from "@/types/User";
-import { useContext } from "react";
-import UserContext from "@/context/UserContext";
 
 type P = {
   name: string;
-  residency: string;
+  residency: string | null;
   email: string;
 }
 
@@ -31,7 +28,7 @@ const ProfileInfo = ({name, residency, email} : P) => {
         <li>
           <div className={styles.profileInfoElement}>
             <LocationOnOutlined fontSize="inherit" />
-            <h3>{residency}</h3>
+            <h3>{residency || "Not specified"}</h3>
           </div>
         </li>
       </ul>
