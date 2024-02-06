@@ -27,16 +27,18 @@ const Profile = () => {
     }
   }, [profileId]);
 
+  // Open logout option popup
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
+  // Logout user
   const handleLogOut = () => {
-    console.log("Log out");
     logout();
     setAnchorEl(null);
   };
 
+  // Close logout option popup
   const handleClose = () => {
     setAnchorEl(null);
   };

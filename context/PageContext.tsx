@@ -11,6 +11,7 @@ const PageContextProvider = ({ children }: ComponentProps) => {
   const firstPage = router.pathname.slice(1);
   const [curPage, setCurPage] = useState<PageStatesType>(firstPage as PageStatesType);
 
+  // Change current page
   const changePage = (value: PageStatesType) => {
     if (value === null) {
       return setCurPage(null)

@@ -13,6 +13,7 @@ const Layout = ({ children }: ComponentProps) => {
   const chatWindowDesktopContext = useContext(ChatWindowContext);
   const chatWindowSelected = chatWindowDesktopContext?.headerInfo !== null;
 
+  // Get authenticated user data from context
   const authContext = useContext(AuthContext);
   const { user } = authContext as AuthContextType;
 

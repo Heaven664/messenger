@@ -14,16 +14,14 @@ const authContextTemplate: AuthContextType = {
 const AuthContext = createContext<AuthContextType>(authContextTemplate);
 
 const AuthProvider = ({ children }: ComponentProps) => {
-  const profileIdContext = useContext(ProfileContext);
-  const { handleProfileInfoChange } = profileIdContext as ProfileContextType;
   const [user, setUser] = useState<User | null>(null);
 
+  // Set logged in user data
   const login = (userData: User) => {
-    console.log(userData.id);
     setUser(userData);
-    handleProfileInfoChange(userData.id);
   };
 
+  // Logout user
   const logout = () => {
     setUser(null);
   };

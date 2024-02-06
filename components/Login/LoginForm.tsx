@@ -17,6 +17,7 @@ const LoginForm = ({ changeToRegister }: P) => {
   const authContext = useContext(AuthContext);
   const { login } = authContext;
 
+  // Send login request to server and handle response
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     setErrorMessage("");
     e.preventDefault();
@@ -27,8 +28,10 @@ const LoginForm = ({ changeToRegister }: P) => {
 
     const { response, error } = await loginRequest(data);
     if (error) {
+      // Display error message
       setErrorMessage(error);
     } else {
+      // Log in user
       login(response);
     }
   };

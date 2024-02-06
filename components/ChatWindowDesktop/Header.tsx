@@ -22,9 +22,11 @@ const ChatWindowDesktopHeader = () => {
 
   const router = useRouter();
 
+  // Destructure the function for changing page
   const pageContext = useContext(PageContext);
   const { changePage } = pageContext as PageContextType;
 
+  // Destructure the function for changing profile page info
   const profileContext = useContext(ProfileContext);
   const { handleProfileInfoChange } = profileContext as ProfileContextType;
 
@@ -39,6 +41,7 @@ const ChatWindowDesktopHeader = () => {
     return () => clearInterval(intervalId);
   }, [lastSeenTime]);
 
+  // Changes profileContext and navigates to profile page
   const handleProfileOpen = () => {
     handleProfileInfoChange(userId);
     router.push("/profile");

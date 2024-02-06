@@ -8,6 +8,7 @@ const ChatWindowContext = createContext<HeaderContextType | null>(null);
 const ChatWindowContextProvider = ({ children }: ComponentProps) => {
   const [headerInfo, setHeaderInfo] = useState<HeaderInfoType | null>(null);
 
+  // Update chat window header info
   const changeChatWindowHeaderInfo = (value: HeaderInfoType | null) => {
     setHeaderInfo(value);
   };

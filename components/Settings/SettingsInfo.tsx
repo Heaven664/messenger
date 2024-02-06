@@ -13,7 +13,6 @@ import {
 
 import styles from "@/components/Settings/SettingsInfo.module.scss";
 import { useContext, useState } from "react";
-import { User } from "@/types/User";
 import infoUpdateRequest from "@/helpers/Api/infoUpdateRequest";
 import AuthContext from "@/context/AuthContext";
 import { AuthContextType } from "@/types/Context/types";

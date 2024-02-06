@@ -16,11 +16,14 @@ const ListItemContact = ({
   lastSeenTime,
 }: User) => {
   const chatWindowDesktopContext = useContext(ChatWindowContext);
+
+  // Get function for changing chat window header info
   const { changeChatWindowHeaderInfo } =
     chatWindowDesktopContext as HeaderContextType;
 
   const [anchorEl, setAnchorEl] = useState<null | SVGSVGElement>(null);
 
+  // Trigger remove contact popup
   const handleClick = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -30,10 +33,12 @@ const ListItemContact = ({
     setAnchorEl(null);
   };
 
+  // Close popup
   const handleClose = () => {
     setAnchorEl(null);
   };
 
+  // Updates chat window header info with contact info
   const handleStartChat = () => {
     const newHeaderInfo = {
       name,

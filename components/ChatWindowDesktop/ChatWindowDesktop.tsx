@@ -10,7 +10,10 @@ import { MessageType } from "@/types/ChatWindow/types";
 
 const ChatWindowDesktop = () => {
   const chatWindowDesktopContext = useContext(ChatWindowContext);
+
+  // Checks if there is a currently open chat window
   const chatWindowSelected = chatWindowDesktopContext?.headerInfo !== null;
+
   const [messages, setMessages] = useState<MessageType[]>(dummyMessages);
   const addMessage = (message: MessageType) => {
     setMessages([...messages, message]);

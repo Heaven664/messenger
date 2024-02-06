@@ -18,6 +18,7 @@ const NavbarDesktop = () => {
   const profileContext = useContext(ProfileContext);
   const { handleProfileInfoChange } = profileContext as ProfileContextType;
 
+  // Handles the navigation click event and resets the profile page if one is clicked
   const handleNavClick = (value: PageStatesType, resetProfile?: boolean) => {
     if (resetProfile) {
       handleProfileInfoChange(user!.id);

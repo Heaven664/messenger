@@ -11,6 +11,7 @@ const ChatsContext = createContext<ChatsContextType>({
 const ChatsContextProvider = ({ children }: ComponentProps) => {
   const [curChats, setCurChats] = useState<ChatType[]>(dummyChats);
 
+  // Update displayed chats list
   const handleChatsChange = (value: ChatType[]) => {
     setCurChats(value);
   };

@@ -19,6 +19,7 @@ const RegisterForm = ({ changeToLogIn }: P) => {
   const authContext = useContext(AuthContext);
   const { login } = authContext;
 
+  // Send register request to server and handle response
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     setErrorMessage("");
     e.preventDefault();
@@ -30,8 +31,10 @@ const RegisterForm = ({ changeToLogIn }: P) => {
 
     const { response, error } = await registerRequest(data);
     if (error) {
+      // Display error message
       setErrorMessage(error);
     } else {
+      // Login user
       login(response);
     }
   };

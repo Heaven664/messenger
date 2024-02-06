@@ -10,6 +10,7 @@ const ProfileContext = createContext<ProfileContextType>({
 const ProfileContextProvider = ({ children }: ComponentProps) => {
   const [profileId, setProfileId] = useState<string | null>(null);
 
+  // Change profile data to be displayed
   const handleProfileInfoChange = (value: string) => {
     setProfileId(value);
   };

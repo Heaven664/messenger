@@ -1,6 +1,11 @@
 import { RegisterRequest } from "@/types/Api";
 import axios from "axios";
 
+/**
+ * Sends register request to server
+ * @param data user registration data
+ * @returns and object with either user data or error message
+ */
 const registerRequest = async (data: RegisterRequest) => {
   const url = `${process.env.NEXT_PUBLIC_API_URL!}/auth/register`;
   let error: string | null = null;

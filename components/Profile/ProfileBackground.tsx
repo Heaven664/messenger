@@ -20,9 +20,10 @@ const ProfileBackground = ({
   const { user } = currentUserContext;
 
   const profileContext = useContext(ProfileContext);
-  const { handleProfileInfoChange } = profileContext as ProfileContextType;
+  const { profileId } = profileContext as ProfileContextType;
 
-  const mainProfile = user!.id === profileContext?.profileId;
+  // Check if the profile is the current user's profile to show additional options
+  const mainProfile = user!.id === profileId;
   return (
     <div className={styles.backgroundContainer}>
       <Image

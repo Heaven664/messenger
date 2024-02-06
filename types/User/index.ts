@@ -6,7 +6,7 @@ export type User = {
   imageSrc: string;
   lastSeenPermission: boolean;
   lastSeenTime: number;
-  isOnline: boolean;
+  isOnline?: boolean;
 };
 
 export interface UserContextInterface {
