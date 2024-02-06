@@ -6,13 +6,13 @@ import Picker from "@emoji-mart/react";
 import styles from "@/components/ChatWindowDesktop/Footer.module.scss";
 import { useContext, useRef, useState } from "react";
 import { User } from "@/types/User";
-import UserContext from "@/context/UserContext";
 import ChatWindowContext from "@/context/ChatWindowContext";
-import { HeaderContextType } from "@/types/Context/types";
+import { AuthContextType, HeaderContextType } from "@/types/Context/types";
 import { HeaderInfoType, MessageType } from "@/types/ChatWindow/types";
 import { ChatsContextType } from "@/types/Chats/types";
 import ChatsContext from "@/context/ChatsContext";
 import { updateLatsMessage } from "@/helpers/Chats";
+import AuthContext from "@/context/AuthContext";
 
 type P = {
   addMessage: (message: MessageType) => void;
@@ -24,9 +24,8 @@ const ChatWindowDesktopFooter = ({ addMessage }: P) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   // Get current user data from context and destructure it
-  const currentUserContext = useContext<User>(UserContext);
-  const { id: currentUserId, imageSrc: currentUserProfileImage } =
-    currentUserContext;
+  const currentUserContext = useContext<AuthContextType>(AuthContext);
+  const { user } = currentUserContext;
 
   // Get current receiver id from context
   const chatWindowContext = useContext<HeaderContextType | null>(
@@ -67,10 +66,10 @@ const ChatWindowDesktopFooter = ({ addMessage }: P) => {
     const message: MessageType = {
       messageId: Math.random().toString(36),
       messageBody,
-      senderId: currentUserId,
+      senderId: user!.id,
       receiverId: currentReceiverId,
       sentTime: new Date().getTime(),
-      senderImageUrl: currentUserProfileImage,
+      senderImageUrl: user!.imageSrc,
       viewed: false,
     };
 

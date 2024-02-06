@@ -6,8 +6,9 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import { BackgroundProps, ProfileContextType } from "@/types/Profile/types";
 import { useContext } from "react";
-import UserContext from "@/context/UserContext";
 import ProfileContext from "@/context/ProfileContext";
+import AuthContext from "@/context/AuthContext";
+import { AuthContextType } from "@/types/Context/types";
 
 const ProfileBackground = ({
   handleClick,
@@ -15,13 +16,13 @@ const ProfileBackground = ({
   handleClose,
   handleLogOut,
 }: BackgroundProps) => {
-  const currentUserContext = useContext(UserContext);
-  const currentUserId = currentUserContext?.id;
+  const currentUserContext = useContext<AuthContextType>(AuthContext);
+  const { user } = currentUserContext;
 
   const profileContext = useContext(ProfileContext);
   const { handleProfileInfoChange } = profileContext as ProfileContextType;
 
-  const mainProfile = currentUserId === profileContext?.profileId;
+  const mainProfile = user!.id === profileContext?.profileId;
   return (
     <div className={styles.backgroundContainer}>
       <Image

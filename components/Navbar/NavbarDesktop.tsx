@@ -6,21 +6,21 @@ import styles from "./NavbarDesktop.module.scss";
 import { bottomNavItems, topNavItems } from "@/elements/NavbarElements";
 import ProfileContext from "@/context/ProfileContext";
 import { ProfileContextType } from "@/types/Profile/types";
-import UserContext from "@/context/UserContext";
+import AuthContext from "@/context/AuthContext";
 
 const NavbarDesktop = () => {
   const pageContext = useContext<PageContextType | null>(PageContext);
   const { curPage, changePage } = pageContext as PageContextType;
 
-  const currentUserContext = useContext(UserContext)
-  const currentUserId = currentUserContext?.id
+  const authContext = useContext(AuthContext);
+  const { user } = authContext;
 
-  const profileContext = useContext(ProfileContext)
+  const profileContext = useContext(ProfileContext);
   const { handleProfileInfoChange } = profileContext as ProfileContextType;
 
   const handleNavClick = (value: PageStatesType, resetProfile?: boolean) => {
     if (resetProfile) {
-      handleProfileInfoChange(currentUserId!)
+      handleProfileInfoChange(user!.id);
     }
     changePage(value);
   };
@@ -30,7 +30,12 @@ const NavbarDesktop = () => {
     return (
       <li
         key={navItem.pageName}
-        onClick={() => handleNavClick(navItem.pageName as PageStatesType, navItem.resetProfile)}
+        onClick={() =>
+          handleNavClick(
+            navItem.pageName as PageStatesType,
+            navItem.resetProfile
+          )
+        }
         className={curPage === navItem.pageName ? styles.selected : undefined}
       >
         {navItem.component}

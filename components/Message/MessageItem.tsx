@@ -5,8 +5,8 @@ import ownerStyles from "./MessageOwner.module.scss";
 import { MessageType } from "@/types/ChatWindow/types";
 import { timestampToLocalTime } from "@/helpers/ChatWindow";
 import { useContext, useState } from "react";
-import UserContext from "@/context/UserContext";
-import { User } from "@/types/User";
+import AuthContext from "@/context/AuthContext";
+import { AuthContextType } from "@/types/Context/types";
 
 type P = {
   message: MessageType;
@@ -14,9 +14,9 @@ type P = {
 };
 
 const MessageItem = ({ message, lastMessage }: P) => {
-  const currentUserContext = useContext<User>(UserContext);
-  const { id: currentUserId } = currentUserContext;
-  const isMessageOwner = message.senderId === currentUserId;
+  const currentUserContext = useContext<AuthContextType>(AuthContext);
+  const { user } = currentUserContext;
+  const isMessageOwner = message.senderId === user!.id;
   const [isMessageRead, setIsMessageRead] = useState(message.viewed);
 
   return (

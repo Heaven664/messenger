@@ -5,28 +5,26 @@ import ProfileHero from "./ProfileHero";
 import ProfileInfo from "./ProfileInfo";
 import ProfileContext from "@/context/ProfileContext";
 import { ProfileContextType } from "@/types/Profile/types";
-import { dummyAllUsers } from "@/dummyAllUsers";
 import AuthContext from "@/context/AuthContext";
 import { User } from "@/types/User";
+import { fetchProfileInfo } from "@/helpers/Api/fetchProfileInfo";
 
 const Profile = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   // Get Auth context to pass logout function to ProfileBackground
   const authContext = useContext(AuthContext);
-  const { logout } = authContext;
+  const { logout, user } = authContext;
 
   const profileContext = useContext(ProfileContext);
   const { profileId } = profileContext as ProfileContextType;
-  const [profileInfo, setProfileInfo] = useState<User | undefined>(
-    dummyAllUsers.find((contact) => contact.id === profileId)
-  );
+  const [profileInfo, setProfileInfo] = useState<User | undefined>(user!);
 
+  // Fetch profile info when profileId changes, skip if profileId is null (initial state)
   useEffect(() => {
-    const profile = dummyAllUsers.find(
-      (contact) => contact.id === profileId
-    );
-    setProfileInfo(profile as User);
+    if (profileId) {
+      fetchProfileInfo(profileId).then((userInfo) => setProfileInfo(userInfo));
+    }
   }, [profileId]);
 
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {

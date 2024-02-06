@@ -14,29 +14,30 @@ import {
 import styles from "@/components/Settings/SettingsInfo.module.scss";
 import { useContext, useState } from "react";
 import { User } from "@/types/User";
-import UserContext from "@/context/UserContext";
 import infoUpdateRequest from "@/helpers/Api/infoUpdateRequest";
+import AuthContext from "@/context/AuthContext";
+import { AuthContextType } from "@/types/Context/types";
 
 const SettingsInfo = () => {
-  const currentUserContext = useContext<User>(UserContext);
-  const {email, name, residency, lastSeenPermission, id} = currentUserContext;
+  const currentUserContext = useContext<AuthContextType>(AuthContext);
+  const { user } = currentUserContext;
 
-  const [nameValue, setNameValue] = useState(name);
-  const [emailValue, setEmailValue] = useState(email);
-  const [residenceValue, setResidenceValue] = useState(residency);
+  const [nameValue, setNameValue] = useState(user!.name);
+  const [emailValue, setEmailValue] = useState(user!.email);
+  const [residenceValue, setResidenceValue] = useState(user!.residency);
   const [isExpanded, setIsExpanded] = useState(false);
-  const [lastSeenStatus, setLastSeenStatus] = useState(lastSeenPermission);
+  const [lastSeenStatus, setLastSeenStatus] = useState(user!.lastSeenPermission);
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const newData = {
-      id: id,
+      id: user!.id,
       name: nameValue,
-      email: emailValue,  
+      email: emailValue,
       residency: residenceValue,
     };
     setIsExpanded(false);
-    infoUpdateRequest(newData)
+    infoUpdateRequest(newData);
     console.log(newData);
   };
 

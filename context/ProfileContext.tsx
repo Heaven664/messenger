@@ -1,12 +1,14 @@
 import { ComponentProps } from "@/types/Layout/types";
-import { createContext, useState } from "react";
-import { dummyCurrentUser } from "@/dummyCurUser";
+import { createContext, useContext, useState } from "react";
 import { ProfileContextType } from "@/types/Profile/types";
 
-const ProfileContext = createContext<ProfileContextType | null>(null);
+const ProfileContext = createContext<ProfileContextType>({
+  handleProfileInfoChange: () => {},
+  profileId: "",
+});
 
 const ProfileContextProvider = ({ children }: ComponentProps) => {
-  const [profileId, setProfileId] = useState(dummyCurrentUser.id);
+  const [profileId, setProfileId] = useState<string | null>(null);
 
   const handleProfileInfoChange = (value: string) => {
     setProfileId(value);

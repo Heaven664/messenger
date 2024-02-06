@@ -8,6 +8,6 @@ export type BackgroundProps = {
 };
 
 export type ProfileContextType = {
-  profileId: string;
+  profileId: string | null;
   handleProfileInfoChange: (profileInfo: string) => void;
 };
