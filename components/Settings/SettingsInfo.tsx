@@ -15,10 +15,11 @@ import styles from "@/components/Settings/SettingsInfo.module.scss";
 import { useContext, useState } from "react";
 import { User } from "@/types/User";
 import UserContext from "@/context/UserContext";
+import infoUpdateRequest from "@/helpers/Api/infoUpdateRequest";
 
 const SettingsInfo = () => {
   const currentUserContext = useContext<User>(UserContext);
-  const {email, name, residency, lastSeenPermission} = currentUserContext;
+  const {email, name, residency, lastSeenPermission, id} = currentUserContext;
 
   const [nameValue, setNameValue] = useState(name);
   const [emailValue, setEmailValue] = useState(email);
@@ -29,11 +30,13 @@ const SettingsInfo = () => {
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const newData = {
+      id: id,
       name: nameValue,
-      email: emailValue,
-      residence: residenceValue,
+      email: emailValue,  
+      residency: residenceValue,
     };
     setIsExpanded(false);
+    infoUpdateRequest(newData)
     console.log(newData);
   };
 
@@ -82,8 +85,8 @@ const SettingsInfo = () => {
               onChange={(e) => setEmailValue(e.target.value)}
             />
             <TextField
-              id="residence"
-              label="Residence"
+              id="residency"
+              label="Residency"
               variant="outlined"
               className={styles.inputField}
               value={residenceValue}
