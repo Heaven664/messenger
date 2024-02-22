@@ -6,6 +6,10 @@ import { dummyMessages } from "@/dummyMessage";
 type P = {
   messages: MessageType[];
 };
+// TODO
+// interface IMessageContainerProps {
+  // messages: MessageType[];
+// }
 
 const MessageContainer = ({ messages }: P) => {
   const allMessages = messages.map((message, index) => {

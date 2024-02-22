@@ -14,3 +14,5 @@ export interface InfoUpdateRequest {
   email: string;
   residency: string;
 }
+
+// Automatically generate from mongo schema
