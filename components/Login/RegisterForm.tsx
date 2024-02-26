@@ -4,13 +4,11 @@ import { useContext, useRef, useState } from "react";
 import { RegisterRequest } from "@/types/Api";
 import registerRequest from "@/helpers/Api/registerRequest";
 import AuthContext from "@/context/AuthContext";
+import { useRouter } from "next/router";
 
-type P = {
-  changeToLogIn: () => void;
-};
-
-const RegisterForm = ({ changeToLogIn }: P) => {
+const RegisterForm = () => {
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const router = useRouter();
 
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -93,7 +91,10 @@ const RegisterForm = ({ changeToLogIn }: P) => {
       </form>
       <div className={styles.RegisterOptionSection}>
         <p>Already have an account? </p>{" "}
-        <span className={styles.otherOption} onClick={changeToLogIn}>
+        <span
+          className={styles.otherOption}
+          onClick={() => router.push("/auth/login")}
+        >
           Sign In
         </span>
       </div>

@@ -4,6 +4,7 @@ import { User } from "@/types/User";
 import { createContext, useContext, useState } from "react";
 import ProfileContext from "./ProfileContext";
 import { ProfileContextType } from "@/types/Profile/types";
+import { useRouter } from "next/router";
 
 const authContextTemplate: AuthContextType = {
   user: null,
@@ -15,10 +16,12 @@ const AuthContext = createContext<AuthContextType>(authContextTemplate);
 
 const AuthProvider = ({ children }: ComponentProps) => {
   const [user, setUser] = useState<User | null>(null);
+  const router = useRouter();
 
   // Set logged in user data
   const login = (userData: User) => {
     setUser(userData);
+    router.push('/')
   };
 
   // Logout user

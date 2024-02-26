@@ -1,9 +1,9 @@
 import styles from "./Login.module.scss";
-import LoginForm from "./LoginForm";
+import RegisterForm from "./RegisterForm";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
-const Login = () => {
+const Register = () => {
   const router = useRouter();
   return (
     <div className={styles.layout}>
@@ -19,10 +19,10 @@ const Login = () => {
         </div>
       </div>
       <div className={styles.container}>
-        <LoginForm />
+        <RegisterForm />
       </div>
     </div>
   );
 };
 
-export default Login;
+export default Register;

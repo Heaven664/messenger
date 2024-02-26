@@ -1,21 +1,18 @@
 import { TextField } from "@mui/material";
 import styles from "./Login.module.scss";
 import { useContext, useRef, useState } from "react";
-import { RegisterRequest } from "@/types/Api";
 import AuthContext from "@/context/AuthContext";
 import loginRequest from "@/helpers/Api/loginRequest";
+import { useRouter } from "next/router";
 
-type P = {
-  changeToRegister: () => void;
-};
-
-const LoginForm = ({ changeToRegister }: P) => {
+const LoginForm = () => {
   const [errorMessage, setErrorMessage] = useState<string>("");
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
   const authContext = useContext(AuthContext);
   const { login } = authContext;
+  const router = useRouter();
 
   // Send login request to server and handle response
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -76,7 +73,7 @@ const LoginForm = ({ changeToRegister }: P) => {
       </form>
       <div className={styles.RegisterOptionSection}>
         <p>Don&#39;t have an account? </p>{" "}
-        <span className={styles.otherOption} onClick={changeToRegister}>
+        <span className={styles.otherOption} onClick={() => router.push('/auth/register')}>
           Register
         </span>
       </div>

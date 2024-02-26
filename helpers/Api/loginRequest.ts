@@ -1,5 +1,4 @@
 import { LoginRequest } from "@/types/Api";
-import { User } from "@/types/User";
 import axios from "axios";
 
 /**
@@ -13,7 +12,7 @@ const loginRequest = async (data: LoginRequest) => {
   let response: any = null;
 
   try {
-    response = (await axios.post(url, data)).data;
+    response = (await axios.post(url, data)).data.user;
   } catch (AxiosError: any) {
     // Get error message
     const errorMessage = AxiosError.response.data.message.trim();
