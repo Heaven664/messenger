@@ -1,10 +1,9 @@
+import { useSession } from "next-auth/react";
 import styles from "./Login.module.scss";
 import LoginForm from "./LoginForm";
 import Image from "next/image";
-import { useRouter } from "next/router";
 
 const Login = () => {
-  const router = useRouter();
   return (
     <div className={styles.layout}>
       <div className={styles.desktopItems}>
