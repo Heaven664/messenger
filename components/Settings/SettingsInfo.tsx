@@ -18,14 +18,14 @@ import AuthContext from "@/context/AuthContext";
 import { AuthContextType } from "@/types/Context/types";
 
 const SettingsInfo = () => {
-  const currentUserContext = useContext<AuthContextType>(AuthContext);
-  const { user } = currentUserContext;
+  const authContext = useContext<AuthContextType>(AuthContext);
+  const { user } = authContext;
 
-  const [nameValue, setNameValue] = useState(user!.name);
-  const [emailValue, setEmailValue] = useState(user!.email);
-  const [residenceValue, setResidenceValue] = useState(user!.residency);
+  const [nameValue, setNameValue] = useState(user!.name || "");
+  const [emailValue, setEmailValue] = useState(user!.email || "");
+  const [residenceValue, setResidenceValue] = useState(user!.residency || "");
   const [isExpanded, setIsExpanded] = useState(false);
-  const [lastSeenStatus, setLastSeenStatus] = useState(user!.lastSeenPermission);
+  const [lastSeenStatus, setLastSeenStatus] = useState(user!.lastSeenPermission || false);
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
