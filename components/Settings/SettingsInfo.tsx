@@ -14,12 +14,12 @@ import {
 import styles from "@/components/Settings/SettingsInfo.module.scss";
 import { useContext, useState } from "react";
 import infoUpdateRequest from "@/helpers/Api/infoUpdateRequest";
-import AuthContext from "@/context/AuthContext";
-import { AuthContextType } from "@/types/Context/types";
+import { useSession } from "next-auth/react";
 
 const SettingsInfo = () => {
-  const authContext = useContext<AuthContextType>(AuthContext);
-  const { user } = authContext;
+  // Get authenticated user data from session
+  const session = useSession().data!;
+  const user = session?.user;
 
   const [nameValue, setNameValue] = useState(user!.name || "");
   const [emailValue, setEmailValue] = useState(user!.email || "");

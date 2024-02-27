@@ -7,8 +7,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { BackgroundProps, ProfileContextType } from "@/types/Profile/types";
 import { useContext } from "react";
 import ProfileContext from "@/context/ProfileContext";
-import AuthContext from "@/context/AuthContext";
-import { AuthContextType } from "@/types/Context/types";
+import { useSession } from "next-auth/react";
 
 const ProfileBackground = ({
   handleClick,
@@ -16,8 +15,9 @@ const ProfileBackground = ({
   handleClose,
   handleLogOut,
 }: BackgroundProps) => {
-  const currentUserContext = useContext<AuthContextType>(AuthContext);
-  const { user } = currentUserContext;
+  // Get authenticated user data from session
+  const session = useSession().data!;
+  const user = session?.user;
 
   const profileContext = useContext(ProfileContext);
   const { profileId } = profileContext as ProfileContextType;

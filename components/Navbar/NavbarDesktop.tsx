@@ -6,14 +6,15 @@ import styles from "./NavbarDesktop.module.scss";
 import { bottomNavItems, topNavItems } from "@/elements/NavbarElements";
 import ProfileContext from "@/context/ProfileContext";
 import { ProfileContextType } from "@/types/Profile/types";
-import AuthContext from "@/context/AuthContext";
+import { useSession } from "next-auth/react";
 
 const NavbarDesktop = () => {
   const pageContext = useContext<PageContextType | null>(PageContext);
   const { curPage, changePage } = pageContext as PageContextType;
 
-  const authContext = useContext(AuthContext);
-  const { user } = authContext;
+  // Get authenticated user data from session
+  const session = useSession().data!;
+  const user = session?.user;
 
   const profileContext = useContext(ProfileContext);
   const { handleProfileInfoChange } = profileContext as ProfileContextType;

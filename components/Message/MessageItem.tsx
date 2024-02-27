@@ -5,8 +5,7 @@ import ownerStyles from "./MessageOwner.module.scss";
 import { MessageType } from "@/types/ChatWindow/types";
 import { timestampToLocalTime } from "@/helpers/ChatWindow";
 import { useContext, useState } from "react";
-import AuthContext from "@/context/AuthContext";
-import { AuthContextType } from "@/types/Context/types";
+import { useSession } from "next-auth/react";
 
 type P = {
   message: MessageType;
@@ -14,8 +13,9 @@ type P = {
 };
 
 const MessageItem = ({ message, lastMessage }: P) => {
-  const currentUserContext = useContext<AuthContextType>(AuthContext);
-  const { user } = currentUserContext;
+  // Get authenticated user data from session
+  const session = useSession().data!;
+  const user = session?.user;
   const isMessageOwner = message.senderId === user!.id;
   const [isMessageRead, setIsMessageRead] = useState(message.viewed);
 

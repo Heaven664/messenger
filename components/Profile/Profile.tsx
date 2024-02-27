@@ -5,16 +5,17 @@ import ProfileHero from "./ProfileHero";
 import ProfileInfo from "./ProfileInfo";
 import ProfileContext from "@/context/ProfileContext";
 import { ProfileContextType } from "@/types/Profile/types";
-import AuthContext from "@/context/AuthContext";
 import { User } from "@/types/User";
 import { fetchProfileInfo } from "@/helpers/Api/fetchProfileInfo";
+import { signOut, useSession } from "next-auth/react";
 
 const Profile = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-  // Get Auth context to pass logout function to ProfileBackground
-  const authContext = useContext(AuthContext);
-  const { logout, user } = authContext;
+  // Get authenticated user data from session
+  const session = useSession().data!;
+  const user = session?.user as User;
+
 
   const profileContext = useContext(ProfileContext);
   const { profileId } = profileContext as ProfileContextType;
@@ -34,7 +35,7 @@ const Profile = () => {
 
   // Logout user
   const handleLogOut = () => {
-    logout();
+    signOut();
     setAnchorEl(null);
   };
 

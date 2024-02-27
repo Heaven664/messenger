@@ -6,12 +6,12 @@ import Picker from "@emoji-mart/react";
 import styles from "@/components/ChatWindowDesktop/Footer.module.scss";
 import { useContext, useRef, useState } from "react";
 import ChatWindowContext from "@/context/ChatWindowContext";
-import { AuthContextType, HeaderContextType } from "@/types/Context/types";
+import { HeaderContextType } from "@/types/Context/types";
 import { HeaderInfoType, MessageType } from "@/types/ChatWindow/types";
 import { ChatsContextType } from "@/types/Chats/types";
 import ChatsContext from "@/context/ChatsContext";
 import { updateLatsMessage } from "@/helpers/Chats";
-import AuthContext from "@/context/AuthContext";
+import { useSession } from "next-auth/react";
 
 type P = {
   addMessage: (message: MessageType) => void;
@@ -22,9 +22,9 @@ const ChatWindowDesktopFooter = ({ addMessage }: P) => {
   const [inputVal, setInputVal] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Get current user data from context and destructure it
-  const currentUserContext = useContext<AuthContextType>(AuthContext);
-  const { user } = currentUserContext;
+  // Get authenticated user data from session
+  const session = useSession().data!;
+  const user = session?.user;
 
   // Get current receiver id from context
   const chatWindowContext = useContext<HeaderContextType | null>(
