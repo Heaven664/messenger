@@ -29,6 +29,8 @@ const LoginForm = () => {
     await signIn("credentials", {
       email: data.email,
       password: data.password,
+      redirect: true,
+      callbackUrl: "/"
     });
 
     if (error) {

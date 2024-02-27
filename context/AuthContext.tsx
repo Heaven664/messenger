@@ -2,8 +2,6 @@ import { AuthContextType } from "@/types/Context/types";
 import { ComponentProps } from "@/types/Layout/types";
 import { User } from "@/types/User";
 import { createContext, useContext, useState } from "react";
-import ProfileContext from "./ProfileContext";
-import { ProfileContextType } from "@/types/Profile/types";
 import { useRouter } from "next/router";
 
 const authContextTemplate: AuthContextType = {

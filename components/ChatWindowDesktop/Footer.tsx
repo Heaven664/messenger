@@ -5,7 +5,6 @@ import Picker from "@emoji-mart/react";
 
 import styles from "@/components/ChatWindowDesktop/Footer.module.scss";
 import { useContext, useRef, useState } from "react";
-import { User } from "@/types/User";
 import ChatWindowContext from "@/context/ChatWindowContext";
 import { AuthContextType, HeaderContextType } from "@/types/Context/types";
 import { HeaderInfoType, MessageType } from "@/types/ChatWindow/types";

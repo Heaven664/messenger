@@ -5,23 +5,24 @@ import NavbarDesktop from "../Navbar/NavbarDesktop";
 import styles from "./Layout.module.scss";
 import { ComponentProps } from "@/types/Layout/types";
 import ChatWindowContext from "@/context/ChatWindowContext";
-import AuthContext from "@/context/AuthContext";
-import { AuthContextType } from "@/types/Context/types";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
+import { User } from "@/types/User";
 
 const Layout = ({ children }: ComponentProps) => {
   const chatWindowDesktopContext = useContext(ChatWindowContext);
   const chatWindowSelected = chatWindowDesktopContext?.headerInfo !== null;
   const router = useRouter();
 
-  // Get authenticated user data from context
-  const authContext = useContext(AuthContext);
-  const { user } = authContext as AuthContextType;
+  // Get authenticated user data from session
+  const session = useSession().data!;
+  const user = session?.user as User;
 
   // Redirect if user is not authenticated, only on the client side
   useEffect(() => {
     if (!user && window) {
       if (router.pathname !== "/auth/register") {
+        console.log("pushed");
         router.push("/auth/login");
       }
     }
@@ -29,6 +30,8 @@ const Layout = ({ children }: ComponentProps) => {
   }, [user]);
 
   const isAuthPage = router.pathname.includes("/auth");
+
+  if (user && isAuthPage) router.push("/");
 
   if (isAuthPage) {
     return <>{children}</>;
