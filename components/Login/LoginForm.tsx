@@ -1,8 +1,8 @@
 import { TextField } from "@mui/material";
 import styles from "./Login.module.scss";
 import { useContext, useRef, useState } from "react";
-import AuthContext from "@/context/AuthContext";
-import loginRequest from "@/helpers/Api/loginRequest";
+// import AuthContext from "@/context/AuthContext";
+// import loginRequest from "@/helpers/Api/loginRequest";
 import { useRouter } from "next/router";
 import { signIn } from "next-auth/react";
 
@@ -11,8 +11,8 @@ const LoginForm = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
-  const authContext = useContext(AuthContext);
-  const { login } = authContext;
+  // const authContext = useContext(AuthContext);
+  // const { login } = authContext;
   const router = useRouter();
 
   // Send login request to server and handle response
@@ -24,7 +24,7 @@ const LoginForm = () => {
       password: passwordRef.current!.value.trim(),
     };
 
-    const { response, error } = await loginRequest(data);
+    // const { response, error } = await loginRequest(data);
 
     await signIn("credentials", {
       email: data.email,
@@ -33,13 +33,13 @@ const LoginForm = () => {
       callbackUrl: "/"
     });
 
-    if (error) {
-      // Display error message
-      setErrorMessage(error);
-    } else {
-      // Log in user
-      login(response);
-    }
+    // if (error) {
+    //   // Display error message
+    //   setErrorMessage(error);
+    // } else {
+    //   // Log in user
+    //   login(response);
+    // }
   };
 
   return (
