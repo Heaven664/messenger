@@ -7,19 +7,24 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: "Credentials",
       credentials: {
-        username: {},
+        email: {},
         password: {},
       },
       async authorize(credentials, _) {
         // Check if credentials are provided
-        if (!credentials?.username || !credentials?.password) return null;
+        if (!credentials?.email || !credentials?.password) return null;
+
+        const reqBody = {
+          email: credentials.email,
+          password: credentials.password,
+        };
 
         // Send request to server
         const res = await fetch(
           `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
           {
             method: "POST",
-            body: JSON.stringify(credentials),
+            body: JSON.stringify(reqBody),
             headers: { "Content-Type": "application/json" },
           }
         );
@@ -39,8 +44,25 @@ export const authOptions: NextAuthOptions = {
   pages: {
     signIn: "/auth/login",
   },
+  callbacks: {
+    async jwt({ token, user }) {
+      // For initial sign in
+      if (user) return { ...token, ...user };
+      // For subsequent requests
+      return token;
+    },
+    async session({ token, session }) {
+      // Add user to session
+      if (token.user) {
+        session.user = token.user;
+        session.backendTokens = token.backendTokens;
+      }
+      return session;
+    },
+  },
 };
 
 const handler = NextAuth(authOptions);
+export default handler;
 
 export { handler as GET, handler as POST };

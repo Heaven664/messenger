@@ -4,6 +4,7 @@ import { useContext, useRef, useState } from "react";
 import AuthContext from "@/context/AuthContext";
 import loginRequest from "@/helpers/Api/loginRequest";
 import { useRouter } from "next/router";
+import { signIn } from "next-auth/react";
 
 const LoginForm = () => {
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -24,6 +25,12 @@ const LoginForm = () => {
     };
 
     const { response, error } = await loginRequest(data);
+
+    await signIn("credentials", {
+      email: data.email,
+      password: data.password,
+    });
+
     if (error) {
       // Display error message
       setErrorMessage(error);
@@ -73,7 +80,10 @@ const LoginForm = () => {
       </form>
       <div className={styles.RegisterOptionSection}>
         <p>Don&#39;t have an account? </p>{" "}
-        <span className={styles.otherOption} onClick={() => router.push('/auth/register')}>
+        <span
+          className={styles.otherOption}
+          onClick={() => router.push("/auth/register")}
+        >
           Register
         </span>
       </div>
