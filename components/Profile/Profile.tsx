@@ -16,7 +16,6 @@ const Profile = () => {
   const session = useSession().data!;
   const user = session?.user as User;
 
-
   const profileContext = useContext(ProfileContext);
   const { profileId } = profileContext as ProfileContextType;
   const [profileInfo, setProfileInfo] = useState<User | undefined>(user!);
@@ -63,3 +62,4 @@ const Profile = () => {
 };
 
 export default Profile;
+

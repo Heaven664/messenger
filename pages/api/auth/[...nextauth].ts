@@ -22,6 +22,7 @@ const refreshToken = async (token: JWT): Promise<JWT> => {
 };
 
 export const authOptions: NextAuthOptions = {
+  secret: process.env.NEXT_JWT_SECRET,
   providers: [
     CredentialsProvider({
       name: "Credentials",
