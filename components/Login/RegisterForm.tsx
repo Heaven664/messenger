@@ -1,10 +1,10 @@
 import { TextField } from "@mui/material";
 import styles from "./Login.module.scss";
-import { useContext, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { RegisterRequest } from "@/types/Api";
 import registerRequest from "@/helpers/Api/registerRequest";
-import AuthContext from "@/context/AuthContext";
 import { useRouter } from "next/router";
+import { signIn } from "next-auth/react";
 
 const RegisterForm = () => {
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -13,9 +13,6 @@ const RegisterForm = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
-
-  const authContext = useContext(AuthContext);
-  const { login } = authContext;
 
   // Send register request to server and handle response
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -32,8 +29,14 @@ const RegisterForm = () => {
       // Display error message
       setErrorMessage(error);
     } else {
-      // Login user
-      login(response);
+      // Extract user data from response and lon in user using next-auth
+      const user = response.user;
+      await signIn("credentials", {
+        email: user.email,
+        password: user.password,
+        redirect: true,
+        callbackUrl: "/",
+      });
     }
   };
 
