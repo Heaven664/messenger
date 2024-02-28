@@ -1,8 +1,7 @@
 import { TextField } from "@mui/material";
 import styles from "./Login.module.scss";
 import { useContext, useRef, useState } from "react";
-// import AuthContext from "@/context/AuthContext";
-// import loginRequest from "@/helpers/Api/loginRequest";
+import loginRequest from "@/helpers/Api/loginRequest";
 import { useRouter } from "next/router";
 import { signIn } from "next-auth/react";
 
@@ -11,35 +10,31 @@ const LoginForm = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
-  // const authContext = useContext(AuthContext);
-  // const { login } = authContext;
   const router = useRouter();
 
   // Send login request to server and handle response
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     setErrorMessage("");
     e.preventDefault();
-    const data = {
+    const userData = {
       email: emailRef.current!.value.trim(),
       password: passwordRef.current!.value.trim(),
     };
+    // Send first request to validate input
+    const { response, error } = await loginRequest(userData);
 
-    // const { response, error } = await loginRequest(data);
-
-    await signIn("credentials", {
-      email: data.email,
-      password: data.password,
-      redirect: true,
-      callbackUrl: "/"
-    });
-
-    // if (error) {
-    //   // Display error message
-    //   setErrorMessage(error);
-    // } else {
-    //   // Log in user
-    //   login(response);
-    // }
+    if (error) {
+      // Display error message
+      setErrorMessage(error);
+    } else {
+      // Send second request to login user
+      await signIn("credentials", {
+        email: userData.email,
+        password: userData.password,
+        redirect: true,
+        callbackUrl: "/",
+      });
+    }
   };
 
   return (

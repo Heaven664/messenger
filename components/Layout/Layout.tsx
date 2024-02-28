@@ -18,18 +18,15 @@ const Layout = ({ children }: ComponentProps) => {
   const session = useSession().data!;
   const user = session?.user as User;
 
+  const isAuthPage = router.pathname.includes("/auth");
+
   // Redirect if user is not authenticated, only on the client side
   useEffect(() => {
-    if (!user && window) {
-      if (router.pathname !== "/auth/register") {
-        console.log("pushed");
-        router.push("/auth/login");
-      }
+    if (!user && window && !isAuthPage) {
+      router.push("/auth/login");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user]);
-
-  const isAuthPage = router.pathname.includes("/auth");
+  }, [user, isAuthPage]);
 
   if (user && isAuthPage) router.push("/");
 
