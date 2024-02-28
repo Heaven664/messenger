@@ -1,4 +1,3 @@
-import { AuthProvider } from "@/context/AuthContext";
 import { ChatWindowContextProvider } from "@/context/ChatWindowContext";
 import { ChatsContextProvider } from "@/context/ChatsContext";
 import { PageContextProvider } from "@/context/PageContext";
@@ -14,19 +13,15 @@ interface Props {
 const Providers = ({ children }: Props) => {
   return (
     <SessionProvider>
-      <AuthProvider>
-        <ChatWindowContextProvider>
-          <PageContextProvider>
-            <ChatsContextProvider>
-              <ProfileContextProvider>
-                <Layout>
-                  {children}
-                  </Layout>
-              </ProfileContextProvider>
-            </ChatsContextProvider>
-          </PageContextProvider>
-        </ChatWindowContextProvider>
-      </AuthProvider>
+      <ChatWindowContextProvider>
+        <PageContextProvider>
+          <ChatsContextProvider>
+            <ProfileContextProvider>
+              <Layout>{children}</Layout>
+            </ProfileContextProvider>
+          </ChatsContextProvider>
+        </PageContextProvider>
+      </ChatWindowContextProvider>
     </SessionProvider>
   );
 };
