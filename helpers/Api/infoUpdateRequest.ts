@@ -2,7 +2,7 @@ import { InfoUpdateRequest } from "@/types/Api";
 import axios from "axios";
 
 const infoUpdateRequest = async (data: InfoUpdateRequest) => {
-  const url = `${process.env.NEXT_PUBLIC_API_URL!}/user/info`;
+  const url = `${process.env.NEXT_PUBLIC_API_URL!}/users/info`;
   let error: string | null = null;
   let response: any = null;
 

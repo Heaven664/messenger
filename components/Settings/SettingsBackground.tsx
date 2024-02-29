@@ -9,7 +9,6 @@ const SettingsBackground = () => {
         src={"/general/background-image.jpg"}
         width={500}
         height={500}
-        priority={true}
         alt="Settings Background Image"
       />
       <h5>Settings</h5>

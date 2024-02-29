@@ -65,11 +65,15 @@ export const authOptions: NextAuthOptions = {
     signIn: "/auth/login",
   },
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger, session }) {
+      // Update user data after triggering useSession.update function on client
+      if (trigger === "update") {
+        token.user = session.user;
+      }
       // For initial sign in
       if (user) return { ...token, ...user };
 
-      // If tokes in not expired
+      // If token is not expired
       if (new Date().getTime() < token.backendTokens.expiresIn) return token;
 
       // If token is expired

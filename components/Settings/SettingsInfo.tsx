@@ -12,32 +12,39 @@ import {
 } from "@mui/material";
 
 import styles from "@/components/Settings/SettingsInfo.module.scss";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import infoUpdateRequest from "@/helpers/Api/infoUpdateRequest";
 import { useSession } from "next-auth/react";
 
 const SettingsInfo = () => {
   // Get authenticated user data from session
-  const session = useSession().data!;
+  const { data: session, update, status } = useSession();
   const user = session?.user;
 
   const [nameValue, setNameValue] = useState(user!.name || "");
   const [emailValue, setEmailValue] = useState(user!.email || "");
   const [residenceValue, setResidenceValue] = useState(user!.residency || "");
   const [isExpanded, setIsExpanded] = useState(false);
-  const [lastSeenStatus, setLastSeenStatus] = useState(user!.lastSeenPermission || false);
+  const [lastSeenStatus, setLastSeenStatus] = useState(
+    user!.lastSeenPermission || false
+  );
 
-  const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const newData = {
       id: user!.id,
-      name: nameValue,
-      email: emailValue,
-      residency: residenceValue,
+      name: nameValue.trim(),
+      email: emailValue.trim(),
+      residency: residenceValue.trim(),
     };
     setIsExpanded(false);
-    infoUpdateRequest(newData);
-    console.log(newData);
+    const { response, error } = await infoUpdateRequest(newData);
+    if (session) {
+      if (status === "authenticated") {
+        // Update session user data with updated values
+        await update({ user: response });
+      }
+    }
   };
 
   const handleLastSeenChange = (
@@ -74,6 +81,7 @@ const SettingsInfo = () => {
               variant="outlined"
               className={styles.inputField}
               value={nameValue}
+              required={true}
               onChange={(e) => setNameValue(e.target.value)}
             />
             <TextField
@@ -82,6 +90,8 @@ const SettingsInfo = () => {
               variant="outlined"
               className={styles.inputField}
               value={emailValue}
+              required={true}
+              type="email"
               onChange={(e) => setEmailValue(e.target.value)}
             />
             <TextField
