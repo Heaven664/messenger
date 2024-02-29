@@ -16,4 +16,9 @@ export interface InfoUpdateRequest {
   residency: string;
 }
 
+export interface LastSeenUpdateRequest {
+  id: string;
+  lastSeenPermission: boolean;
+}
+
 // Automatically generate from mongo schema

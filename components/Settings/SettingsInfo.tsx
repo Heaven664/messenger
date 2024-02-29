@@ -15,6 +15,7 @@ import styles from "@/components/Settings/SettingsInfo.module.scss";
 import { useState } from "react";
 import infoUpdateRequest from "@/helpers/Api/infoUpdateRequest";
 import { useSession } from "next-auth/react";
+import lastSeenUpdateRequest from "@/helpers/Api/lastSeenUpdate";
 
 const SettingsInfo = () => {
   // Get authenticated user data from session
@@ -38,7 +39,7 @@ const SettingsInfo = () => {
       residency: residenceValue.trim(),
     };
     setIsExpanded(false);
-    const { response, error } = await infoUpdateRequest(newData);
+    const { response } = await infoUpdateRequest(newData);
     if (session) {
       if (status === "authenticated") {
         // Update session user data with updated values
@@ -47,12 +48,23 @@ const SettingsInfo = () => {
     }
   };
 
-  const handleLastSeenChange = (
+  const handleLastSeenChange = async (
     e: React.ChangeEvent<HTMLInputElement>,
     checked: boolean
   ) => {
-    setLastSeenStatus(checked);
-    console.log("last seen option allowed:", checked);
+    // setLastSeenStatus(checked);
+    const { response } = await lastSeenUpdateRequest({
+      id: user!.id,
+      lastSeenPermission: checked,
+    });
+    if (session && response) {
+      if (status === "authenticated") {
+        // Update session user data with updated values
+        const updatedData = await update({ user: response });
+        // Update visual switch status
+        setLastSeenStatus(updatedData!.user!.lastSeenPermission);
+      }
+    }
   };
 
   return (
