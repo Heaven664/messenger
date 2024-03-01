@@ -57,6 +57,7 @@ const LoginForm = () => {
             label={"Email"}
             className={styles.inputField}
             autoComplete="off"
+            required={true}
             inputRef={emailRef}
           />
         </div>
@@ -68,6 +69,7 @@ const LoginForm = () => {
             label={"Password"}
             className={styles.inputField}
             autoComplete="off"
+            required={true}
             inputRef={passwordRef}
           />
         </div>
