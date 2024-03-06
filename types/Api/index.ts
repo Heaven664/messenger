@@ -21,4 +21,9 @@ export interface LastSeenUpdateRequest {
   lastSeenPermission: boolean;
 }
 
+export interface addContactRequest {
+  email: string;
+  friendEmail: string;
+}
+
 // Automatically generate from mongo schema
