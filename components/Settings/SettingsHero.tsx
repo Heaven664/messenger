@@ -22,7 +22,7 @@ const SettingsHero = () => {
               <CameraAltRounded className={styles.changeIcon} />
             </div>
           </div>
-          <p>Omar Hamid</p>
+          <p>{session?.user.name}</p>
         </div>
       </div>
       <hr />

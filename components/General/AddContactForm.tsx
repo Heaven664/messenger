@@ -9,7 +9,7 @@ const AddContactForm = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const data = {
-      id: session?.user.id,
+      email: session?.user.email,
       friendEmail: emailRef.current?.value.trim(),
     };
     console.log(data);
