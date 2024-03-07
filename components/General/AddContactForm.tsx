@@ -15,6 +15,7 @@ const AddContactForm = () => {
     };
     console.log(data);
     const { response } = await addContact(data);
+    console.log(response);
   };
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
