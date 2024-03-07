@@ -3,8 +3,14 @@ import styles from "./AddContactForm.module.scss";
 import { useRef } from "react";
 import { useSession } from "next-auth/react";
 import addContact from "@/helpers/Api/addContact";
+import { User } from "@/types/User";
 
-const AddContactForm = () => {
+type P = {
+  updateFriends: React.Dispatch<React.SetStateAction<User[]>>;
+  closeModal: () => void;
+};
+
+const AddContactForm = ({ updateFriends, closeModal }: P) => {
   const session = useSession()?.data;
   const emailRef = useRef<HTMLInputElement>(null);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -13,9 +19,18 @@ const AddContactForm = () => {
       email: session!.user.email,
       friendEmail: emailRef.current!.value.trim(),
     };
-    console.log(data);
-    const { response } = await addContact(data);
-    console.log(response);
+    const { response, error } = await addContact(data);
+    if (error) {
+      console.log(error);
+      return;
+    }
+    // Find the new friend and update the friends list
+    const { _id, ...newFriend } = response.find(
+      (user: User) => user.email === data.friendEmail
+    );
+
+    updateFriends((prev: User[]) => [...prev, newFriend]);
+    closeModal();
   };
   return (
     <form className={styles.container} onSubmit={handleSubmit}>

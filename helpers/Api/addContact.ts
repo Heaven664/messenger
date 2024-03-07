@@ -10,8 +10,7 @@ const addContact = async (data: addContactRequest) => {
     response = (await axios.post(url, data)).data;
   } catch (AxiosError: any) {
     // Get error message
-    const error = AxiosError.response.data.message.trim();
-    console.log(error);
+    error = AxiosError.response.data.message.trim();
   } finally {
     return { response, error };
   }

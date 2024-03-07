@@ -66,7 +66,10 @@ export const Contacts = () => {
         isOpen={modalState}
         onClose={() => setModalState(false)}
       >
-        <AddContactForm />
+        <AddContactForm
+          updateFriends={setFriends}
+          closeModal={() => setModalState(false)}
+        />
       </ModalCustom>
       <ul>{contactsList}</ul>
     </div>
