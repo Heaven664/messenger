@@ -49,7 +49,7 @@ export const Contacts = () => {
 
   // Creates a list of GroupedContactList components based on currentContacts
   const contactsList = currentContacts.map((contact: ContactListType) => (
-    <GroupedContactList key={contact.letter} groupedContacts={contact} />
+    <GroupedContactList key={contact.letter} groupedContacts={contact} setFriends={setFriends} />
   ));
   return (
     <div className={styles.container}>

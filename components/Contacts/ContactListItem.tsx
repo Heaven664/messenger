@@ -6,16 +6,34 @@ import { Menu } from "@mui/material";
 import ChatWindowContext from "@/context/ChatWindowContext";
 import { HeaderContextType } from "@/types/Context/types";
 import { User } from "@/types/User";
+import { useSession } from "next-auth/react";
+import removeContact from "@/helpers/Api/removeContact";
+
+type P = {
+  imageSrc: string;
+  name: string;
+  email: string;
+  id: string;
+  isOnline: boolean;
+  residency: string;
+  lastSeenPermission: boolean;
+  lastSeenTime: number;
+  setFriends: React.Dispatch<React.SetStateAction<User[]>>;
+};
 
 const ListItemContact = ({
   imageSrc,
   name,
+  email,
   id,
   isOnline,
   lastSeenPermission,
   lastSeenTime,
-}: User) => {
+  setFriends,
+}: P) => {
   const chatWindowDesktopContext = useContext(ChatWindowContext);
+  const session = useSession().data;
+  const userEmail = session!.user.email;
 
   // Get function for changing chat window header info
   const { changeChatWindowHeaderInfo } =
@@ -28,8 +46,12 @@ const ListItemContact = ({
     setAnchorEl(event.currentTarget);
   };
 
-  const handleRemoveContact = (contactId: string) => {
-    console.log(`Remove Contact with id: ${contactId}`);
+  const handleRemoveContact = async (friendEmail: string) => {
+    const { error } = await removeContact({ userEmail, friendEmail });
+    if (error) console.log(error);
+    setFriends((prev: User[]) => {
+      return prev.filter((contact: User) => contact.email !== friendEmail);
+    });
     setAnchorEl(null);
   };
 
@@ -52,7 +74,7 @@ const ListItemContact = ({
   };
 
   return (
-    <li key={id} className={styles.container} >
+    <li key={id} className={styles.container}>
       <div className={styles.infoContainer}>
         <div className={styles.imageContainer} onClick={handleStartChat}>
           <Image src={imageSrc} width={35} height={35} alt={name} />
@@ -79,7 +101,7 @@ const ListItemContact = ({
           className={styles.menuContainer}
         >
           <div className={styles.popupContainer}>
-            <button onClick={() => handleRemoveContact(id)}>
+            <button onClick={() => handleRemoveContact(email)}>
               Remove Contact
             </button>
           </div>

@@ -26,4 +26,9 @@ export interface addContactRequest {
   friendEmail: string;
 }
 
+export interface removeContactRequest {
+  userEmail: string;
+  friendEmail: string;
+}
+
 // Automatically generate from mongo schema
