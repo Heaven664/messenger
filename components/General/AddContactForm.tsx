@@ -1,6 +1,6 @@
 import { TextField } from "@mui/material";
 import styles from "./AddContactForm.module.scss";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import addContact from "@/helpers/Api/addContact";
 import { User } from "@/types/User";
@@ -11,9 +11,12 @@ type P = {
 };
 
 const AddContactForm = ({ updateFriends, closeModal }: P) => {
+  const [errorMessage, setErrorMessage] = useState<string>("");
+
   const session = useSession()?.data;
   const emailRef = useRef<HTMLInputElement>(null);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    setErrorMessage("")
     e.preventDefault();
     const data = {
       email: session!.user.email,
@@ -21,7 +24,7 @@ const AddContactForm = ({ updateFriends, closeModal }: P) => {
     };
     const { response, error } = await addContact(data);
     if (error) {
-      console.log(error);
+      setErrorMessage(error);
       return;
     }
     // Find the new friend and update the friends list
@@ -34,6 +37,9 @@ const AddContactForm = ({ updateFriends, closeModal }: P) => {
   };
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
+      {errorMessage && <div className={styles.errorContainer}>
+        <p>{errorMessage}</p>
+      </div>}
       <div className={styles.inputSection}>
         <TextField
           variant="outlined"
