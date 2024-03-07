@@ -32,13 +32,13 @@ export const dummyChats: ChatType[] = [
     lastSeenTime: new Date().getTime() - 1000,
   },
   // {
-  //   name: "Omar Hamid",
-  //   unreadMessages: 0,
-  //   imageUrl: "/general/omar-kek.JPG",
-  //   userId: "1",
-  //   lastMessage: new Date("2023-01-02T15:30:45Z").getTime(),
-  //   isOnline: false,
-  //   lastSeenPermission: true,
-  //   lastSeenTime: new Date().getTime() - 10000000,
+  //   userEmail: string
+  //   friendEmail: string,
+  //   unreadMessages: number,
+  //   friendImage: string,
+  //   lastMessage: timestamp,
+  //   isOnline: false (not stored in DB)(only updates in real-time)
+  //   lastSeenPermission: boolean,
+  //   lastSeenTime: timestamp,
   // },
 ];
