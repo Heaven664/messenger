@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styles from "./ChatWindowMobile.module.scss";
 import ChatWindowContext from "@/context/ChatWindowContext";
 import { MessageType } from "@/types/ChatWindow/types";
@@ -7,16 +7,24 @@ import ChatWindowDesktopHeader from "../ChatWindowDesktop/Header";
 import MessageContainer from "../Message/MessageContainer";
 import Footer from "../ChatWindowDesktop/Footer";
 import EmptyChat from "../ChatWindowDesktop/EmptyChatWindow";
+import MessagesContext from "@/context/MessagesContext";
 
 const ChatWindowMobile = () => {
   const chatWindowDesktopContext = useContext(ChatWindowContext);
-  
+  const messagesContext = useContext(MessagesContext);
+
   // Checks if there is a currently open chat window
   const chatWindowSelected = chatWindowDesktopContext?.headerInfo !== null;
 
-  const [messages, setMessages] = useState<MessageType[]>(dummyMessages);
+  // Update messages when chat window changes
+  useEffect(() => {
+    setCurMessages(messagesContext!.messages);
+  }, [chatWindowDesktopContext?.headerInfo, messagesContext]);
+
+  const [curMessages, setCurMessages] = useState<MessageType[]>(dummyMessages);
+
   const addMessage = (message: MessageType) => {
-    setMessages([...messages, message]);
+    setCurMessages([...curMessages, message]);
   };
 
   return (
@@ -24,7 +32,7 @@ const ChatWindowMobile = () => {
       {chatWindowSelected ? (
         <>
           <ChatWindowDesktopHeader />
-          <MessageContainer messages={messages} />
+          <MessageContainer messages={curMessages} />
           <Footer addMessage={addMessage} />
         </>
       ) : (
