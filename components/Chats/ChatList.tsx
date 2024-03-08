@@ -10,6 +10,7 @@ const ChatList = ({ chatsData }: P) => {
     ({
       userId,
       name,
+      friendEmail,
       imageUrl,
       unreadMessages,
       lastMessage,
@@ -21,6 +22,7 @@ const ChatList = ({ chatsData }: P) => {
         key={userId}
         name={name}
         userId={userId}
+        friendEmail={friendEmail}
         imageUrl={imageUrl}
         unreadMessages={unreadMessages}
         lastMessage={lastMessage}

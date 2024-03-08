@@ -1,5 +1,6 @@
 export type HeaderInfoType = {
   name: string;
+  email: string;
   userId: string;
   imageUrl: string;
   isOnline?: boolean;
@@ -8,11 +9,11 @@ export type HeaderInfoType = {
 };
 
 export type MessageType = {
-  messageId: string;
-  senderId: string;
-  receiverId: string;
+  _id?: string;
+  senderEmail: string;
+  receiverEmail: string;
   senderImageUrl: string;
   messageBody: string;
   sentTime: number;
-  viewed: boolean;
+  viewed?: boolean;
 };

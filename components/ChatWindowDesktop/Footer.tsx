@@ -12,6 +12,7 @@ import { ChatsContextType } from "@/types/Chats/types";
 import ChatsContext from "@/context/ChatsContext";
 import { updateLatsMessage } from "@/helpers/Chats";
 import { useSession } from "next-auth/react";
+import sendMessage from "@/helpers/Api/sendMessage";
 
 type P = {
   addMessage: (message: MessageType) => void;
@@ -30,7 +31,7 @@ const ChatWindowDesktopFooter = ({ addMessage }: P) => {
   const chatWindowContext = useContext<HeaderContextType | null>(
     ChatWindowContext
   );
-  const { userId: currentReceiverId } =
+  const { email: currentReceiverEmail } =
     chatWindowContext?.headerInfo as HeaderInfoType;
 
   // Get current chats from context
@@ -54,7 +55,7 @@ const ChatWindowDesktopFooter = ({ addMessage }: P) => {
   };
 
   // Handle message send
-  const handleMessageSend = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleMessageSend = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const messageBody = inputVal.trim();
@@ -63,10 +64,9 @@ const ChatWindowDesktopFooter = ({ addMessage }: P) => {
     if (!messageBody) return;
 
     const message: MessageType = {
-      messageId: Math.random().toString(36),
       messageBody,
-      senderId: user!.id,
-      receiverId: currentReceiverId,
+      senderEmail: user!.email,
+      receiverEmail: currentReceiverEmail,
       sentTime: new Date().getTime(),
       senderImageUrl: user!.imageSrc,
       viewed: false,
@@ -74,8 +74,9 @@ const ChatWindowDesktopFooter = ({ addMessage }: P) => {
 
     addMessage(message);
     setInputVal("");
-    const newChats = updateLatsMessage(curChats, currentReceiverId);
+    const newChats = updateLatsMessage(curChats, currentReceiverEmail);
     handleChatsChange(newChats);
+    await sendMessage(message);
   };
 
   return (

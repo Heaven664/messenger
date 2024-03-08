@@ -6,11 +6,16 @@ import { HeaderInfoType } from "@/types/ChatWindow/types";
 import { useContext, useState } from "react";
 import { HeaderContextType } from "@/types/Context/types";
 import ChatWindowContext from "@/context/ChatWindowContext";
+import { get } from "http";
+import { useSession } from "next-auth/react";
+import getMessages from "@/helpers/Api/getMessages";
+import MessagesContext from "@/context/MessagesContext";
 
 const ChatListItem = ({
   name,
   unreadMessages,
   userId,
+  friendEmail,
   imageUrl,
   isOnline,
   lastSeenPermission,
@@ -20,12 +25,17 @@ const ChatListItem = ({
   const headerContext = useContext<HeaderContextType | null>(ChatWindowContext);
   const { changeChatWindowHeaderInfo } = headerContext as HeaderContextType;
 
+  const messagesContext = useContext(MessagesContext);
+
+  const session = useSession().data;
+
   const [newMessages, setNewMessages] = useState<number>(unreadMessages);
 
   // Create object of HeaderInfoType to change header info
   const chatDetails: HeaderInfoType = {
     name,
     userId,
+    email: friendEmail,
     imageUrl,
     isOnline,
     lastSeenPermission,
@@ -33,9 +43,11 @@ const ChatListItem = ({
   };
 
   // Change header info when user clicks on chat list item
-  const handleChatWindowChange = () => {
+  const handleChatWindowChange = async () => {
     setNewMessages(0);
     changeChatWindowHeaderInfo(chatDetails);
+    const { response } = await getMessages(session!.user.email, friendEmail);
+    if (response) messagesContext?.changeMessages(response);
   };
 
   return (

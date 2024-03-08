@@ -6,9 +6,9 @@ import { ChatType } from "@/types/Chats/types";
  * @param receiverId id of receiver user
  * @returns shallow copy of chats with updated last message
  */
-export const updateLatsMessage = (chats: ChatType[], receiverId: string) => {
+export const updateLatsMessage = (chats: ChatType[], receiverEmail: string) => {
   const newChats = chats.map((chat) => {
-    if (chat.userId === receiverId) {
+    if (chat.friendEmail === receiverEmail) {
       return {
         ...chat,
         lastMessage: new Date().getTime(),

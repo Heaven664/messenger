@@ -21,7 +21,9 @@ const Chats = () => {
 
   useEffect(() => {
     getChats(userEmail)
-      .then((data) => handleChatsChange(data.response))
+      .then((data) => {
+        return handleChatsChange(data.response);
+      })
       .catch((error) => console.log(error));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userEmail]);
@@ -30,7 +32,7 @@ const Chats = () => {
   useEffect(() => {
     const newChats = [...curChats];
     newChats.sort((a: ChatType, b: ChatType) => {
-      return b.lastMessage - a.lastMessage;
+      return a.lastMessage - b.lastMessage;
     });
     setCurrentChats(newChats);
   }, [curChats]);

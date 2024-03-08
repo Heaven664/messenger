@@ -8,18 +8,18 @@ type P = {
 };
 // TODO
 // interface IMessageContainerProps {
-  // messages: MessageType[];
+// messages: MessageType[];
 // }
 
 const MessageContainer = ({ messages }: P) => {
   const allMessages = messages.map((message, index) => {
     let lastMessage = true;
     if (index !== messages.length - 1) {
-      lastMessage = messages[index + 1].senderId !== message.senderId;
+      lastMessage = messages[index + 1].senderEmail !== message.senderEmail;
     }
     return (
       <MessageItem
-        key={message.messageId}
+        key={message._id}
         message={message}
         lastMessage={lastMessage}
       />

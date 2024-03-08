@@ -16,7 +16,7 @@ const MessageItem = ({ message, lastMessage }: P) => {
   // Get authenticated user data from session
   const session = useSession().data!;
   const user = session?.user;
-  const isMessageOwner = message.senderId === user!.id;
+  const isMessageOwner = message.senderEmail === user!.email;
   const [isMessageRead, setIsMessageRead] = useState(message.viewed);
 
   return (
@@ -38,7 +38,7 @@ const MessageItem = ({ message, lastMessage }: P) => {
           {lastMessage && (
             <Image
               src={message.senderImageUrl}
-              alt={message.messageId}
+              alt={message._id!}
               width={40}
               height={40}
             />

@@ -1,8 +1,8 @@
-// import { getContactsRequest } from "@/types/Api";
 import axios from "axios";
 
-const getChats = async (email: string) => {
-  const url = `${process.env.NEXT_PUBLIC_API_URL!}/chats?email=${email}`;
+const getMessages = async (userEmail: string, friendEmail: string) => {
+  const url = `${process.env
+    .NEXT_PUBLIC_API_URL!}/messages?user=${userEmail}&friend=${friendEmail}`;
   let error: string | null = null;
   let response: any = null;
 
@@ -17,4 +17,4 @@ const getChats = async (email: string) => {
   }
 };
 
-export default getChats;
+export default getMessages;

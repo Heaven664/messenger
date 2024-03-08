@@ -1,7 +1,6 @@
 import { ChatType, ChatsContextType } from "@/types/Chats/types";
 import { ComponentProps } from "@/types/Layout/types";
 import { createContext, useState } from "react";
-import { dummyChats } from "@/dummyChats";
 
 const ChatsContext = createContext<ChatsContextType>({
   curChats: [],
@@ -9,7 +8,7 @@ const ChatsContext = createContext<ChatsContextType>({
 });
 
 const ChatsContextProvider = ({ children }: ComponentProps) => {
-  const [curChats, setCurChats] = useState<ChatType[]>(dummyChats);
+  const [curChats, setCurChats] = useState<ChatType[]>([]);
 
   // Update displayed chats list
   const handleChatsChange = (value: ChatType[]) => {

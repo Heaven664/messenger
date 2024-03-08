@@ -8,6 +8,8 @@ import { HeaderContextType } from "@/types/Context/types";
 import { User } from "@/types/User";
 import { useSession } from "next-auth/react";
 import removeContact from "@/helpers/Api/removeContact";
+import MessagesContext from "@/context/MessagesContext";
+import getMessages from "@/helpers/Api/getMessages";
 
 type P = {
   imageSrc: string;
@@ -32,6 +34,7 @@ const ListItemContact = ({
   setFriends,
 }: P) => {
   const chatWindowDesktopContext = useContext(ChatWindowContext);
+  const messagesContext = useContext(MessagesContext);
   const session = useSession().data;
   const userEmail = session!.user.email;
 
@@ -61,16 +64,19 @@ const ListItemContact = ({
   };
 
   // Updates chat window header info with contact info
-  const handleStartChat = () => {
+  const handleStartChat = async () => {
     const newHeaderInfo = {
       name,
+      email,
       isOnline,
       lastSeenPermission,
       lastSeenTime,
       userId: id,
       imageUrl: imageSrc,
     };
+    const { response } = await getMessages(userEmail, email);
     changeChatWindowHeaderInfo(newHeaderInfo);
+    if (response) messagesContext?.changeMessages(response);
   };
 
   return (
