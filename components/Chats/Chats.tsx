@@ -5,14 +5,26 @@ import styles from "./Chats.module.scss";
 import { findChatByName } from "@/helpers/General";
 import { ChatType, ChatsContextType } from "@/types/Chats/types";
 import ChatsContext from "@/context/ChatsContext";
+import { useSession } from "next-auth/react";
+import getChats from "@/helpers/Api/getChats";
 
 const Chats = () => {
   // Get chats from context and destructure them
   const chatsContext = useContext<ChatsContextType>(ChatsContext);
-  const { curChats } = chatsContext;
+  const { curChats, handleChatsChange } = chatsContext;
   const allChats = curChats;
 
+  const session = useSession();
+  const userEmail = session.data!.user!.email;
+
   const [currentChats, setCurrentChats] = useState(allChats);
+
+  useEffect(() => {
+    getChats(userEmail)
+      .then((data) => handleChatsChange(data.response))
+      .catch((error) => console.log(error));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userEmail]);
 
   // Sort chats based on last message timestamp when chats change
   useEffect(() => {
