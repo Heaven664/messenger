@@ -16,7 +16,7 @@ const AddContactForm = ({ updateFriends, closeModal }: P) => {
   const session = useSession()?.data;
   const emailRef = useRef<HTMLInputElement>(null);
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    setErrorMessage("")
+    setErrorMessage("");
     e.preventDefault();
     const data = {
       email: session!.user.email,
@@ -24,22 +24,27 @@ const AddContactForm = ({ updateFriends, closeModal }: P) => {
     };
     const { response, error } = await addContact(data);
     if (error) {
+      console.log(error)
       setErrorMessage(error);
       return;
     }
-    // Find the new friend and update the friends list
-    const { _id, ...newFriend } = response.find(
-      (user: User) => user.email === data.friendEmail
-    );
-
-    updateFriends((prev: User[]) => [...prev, newFriend]);
-    closeModal();
+    if (response) {
+      console.log(response)
+      // Find the new friend and update the friends list
+      const { _id, ...newFriend } = response?.find(
+        (user: User) => user.email === data.friendEmail
+      );
+      updateFriends((prev: User[]) => [...prev, newFriend]);
+      closeModal();
+    }
   };
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
-      {errorMessage && <div className={styles.errorContainer}>
-        <p>{errorMessage}</p>
-      </div>}
+      {errorMessage && (
+        <div className={styles.errorContainer}>
+          <p>{errorMessage}</p>
+        </div>
+      )}
       <div className={styles.inputSection}>
         <TextField
           variant="outlined"
