@@ -11,6 +11,6 @@ export type ChatType = {
 };
 
 export type ChatsContextType = {
-  curChats: ChatType[];
+  allChats: ChatType[];
   handleChatsChange: (chats: ChatType[]) => void;
 };

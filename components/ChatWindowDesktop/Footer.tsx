@@ -36,7 +36,7 @@ const ChatWindowDesktopFooter = ({ addMessage }: P) => {
 
   // Get current chats from context
   const currentChatsContext = useContext<ChatsContextType>(ChatsContext);
-  const { curChats, handleChatsChange } = currentChatsContext;
+  const { allChats, handleChatsChange } = currentChatsContext;
 
   // Close emoji picker when user clicks outside of it
   const handleClickOutside = (e: any) => {
@@ -74,7 +74,7 @@ const ChatWindowDesktopFooter = ({ addMessage }: P) => {
 
     addMessage(message);
     setInputVal("");
-    const newChats = updateLatsMessage(curChats, currentReceiverEmail);
+    const newChats = updateLatsMessage(allChats, currentReceiverEmail);
     handleChatsChange(newChats);
     await sendMessage(message);
   };

@@ -11,8 +11,7 @@ import getChats from "@/helpers/Api/getChats";
 const Chats = () => {
   // Get chats from context and destructure them
   const chatsContext = useContext<ChatsContextType>(ChatsContext);
-  const { curChats, handleChatsChange } = chatsContext;
-  const allChats = curChats;
+  const { allChats, handleChatsChange } = chatsContext;
 
   const session = useSession();
   const userEmail = session.data!.user!.email;
@@ -30,12 +29,12 @@ const Chats = () => {
 
   // Sort chats based on last message timestamp when chats change
   useEffect(() => {
-    const newChats = [...curChats];
+    const newChats = [...allChats];
     newChats.sort((a: ChatType, b: ChatType) => {
-      return a.lastMessage - b.lastMessage;
+      return b.lastMessage - a.lastMessage;
     });
     setCurrentChats(newChats);
-  }, [curChats]);
+  }, [allChats]);
 
   // Change chats based on input value
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {

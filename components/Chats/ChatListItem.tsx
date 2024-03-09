@@ -3,10 +3,9 @@ import styles from "./ChatListItem.module.scss";
 import { badgeNumberTransform } from "@/helpers/General";
 import { ChatType } from "@/types/Chats/types";
 import { HeaderInfoType } from "@/types/ChatWindow/types";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { HeaderContextType } from "@/types/Context/types";
 import ChatWindowContext from "@/context/ChatWindowContext";
-import { get } from "http";
 import { useSession } from "next-auth/react";
 import getMessages from "@/helpers/Api/getMessages";
 import MessagesContext from "@/context/MessagesContext";
@@ -22,14 +21,20 @@ const ChatListItem = ({
   lastSeenTime,
 }: ChatType) => {
   // Get ChatWindowContext and destructure function for changing header info
+  const [newMessages, setNewMessages] = useState<number | "9+">(unreadMessages);
+
   const headerContext = useContext<HeaderContextType | null>(ChatWindowContext);
   const { changeChatWindowHeaderInfo } = headerContext as HeaderContextType;
-
   const messagesContext = useContext(MessagesContext);
-
+  
+  // Get session data
   const session = useSession().data;
 
-  const [newMessages, setNewMessages] = useState<number>(unreadMessages);
+
+  // Trigger badge number transformation when unread messages change
+  useEffect(() => {
+    setNewMessages(badgeNumberTransform(unreadMessages));
+  }, [unreadMessages]);
 
   // Create object of HeaderInfoType to change header info
   const chatDetails: HeaderInfoType = {
@@ -59,13 +64,13 @@ const ChatListItem = ({
         {isOnline && <div className={styles.onlineBadge}></div>}
       </div>
       <div className={styles.nameContainer}>
-        <h3 className={newMessages > 0 ? styles.highlighted : undefined}>
+        <h3 className={unreadMessages > 0 ? styles.highlighted : undefined}>
           {name}
         </h3>
       </div>
-      {newMessages > 0 && (
+      {unreadMessages > 0 && (
         <div className={styles.badge}>
-          <p>{badgeNumberTransform(newMessages)}</p>
+          <p>{newMessages}</p>
         </div>
       )}
     </li>

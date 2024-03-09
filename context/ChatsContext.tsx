@@ -3,20 +3,20 @@ import { ComponentProps } from "@/types/Layout/types";
 import { createContext, useState } from "react";
 
 const ChatsContext = createContext<ChatsContextType>({
-  curChats: [],
+  allChats: [],
   handleChatsChange: () => {},
 });
 
 const ChatsContextProvider = ({ children }: ComponentProps) => {
-  const [curChats, setCurChats] = useState<ChatType[]>([]);
+  const [allChats, setAllChats] = useState<ChatType[]>([]);
 
   // Update displayed chats list
   const handleChatsChange = (value: ChatType[]) => {
-    setCurChats(value);
+    setAllChats(value);
   };
 
   const context: ChatsContextType = {
-    curChats,
+    allChats,
     handleChatsChange,
   };
 
