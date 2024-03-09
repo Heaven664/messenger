@@ -26,10 +26,12 @@ const ChatListItem = ({
   const headerContext = useContext<HeaderContextType | null>(ChatWindowContext);
   const { changeChatWindowHeaderInfo } = headerContext as HeaderContextType;
   const messagesContext = useContext(MessagesContext);
-  
+  const hasNewMessages =
+    (typeof newMessages === "number" && newMessages > 0) ||
+    typeof newMessages === "string";
+
   // Get session data
   const session = useSession().data;
-
 
   // Trigger badge number transformation when unread messages change
   useEffect(() => {
@@ -64,11 +66,9 @@ const ChatListItem = ({
         {isOnline && <div className={styles.onlineBadge}></div>}
       </div>
       <div className={styles.nameContainer}>
-        <h3 className={unreadMessages > 0 ? styles.highlighted : undefined}>
-          {name}
-        </h3>
+        <h3 className={newMessages ? styles.highlighted : undefined}>{name}</h3>
       </div>
-      {unreadMessages > 0 && (
+      {hasNewMessages && (
         <div className={styles.badge}>
           <p>{newMessages}</p>
         </div>
