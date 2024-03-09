@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import styles from "./ChatWindowMobile.module.scss";
 import ChatWindowContext from "@/context/ChatWindowContext";
 import { MessageType } from "@/types/ChatWindow/types";
-import { dummyMessages } from "@/dummyMessage";
 import ChatWindowDesktopHeader from "../ChatWindowDesktop/Header";
 import MessageContainer from "../Message/MessageContainer";
 import Footer from "../ChatWindowDesktop/Footer";
@@ -21,7 +20,7 @@ const ChatWindowMobile = () => {
     setCurMessages(messagesContext!.messages);
   }, [chatWindowDesktopContext?.headerInfo, messagesContext]);
 
-  const [curMessages, setCurMessages] = useState<MessageType[]>(dummyMessages);
+  const [curMessages, setCurMessages] = useState<MessageType[]>(messagesContext!.messages);
 
   const addMessage = (message: MessageType) => {
     setCurMessages([...curMessages, message]);
