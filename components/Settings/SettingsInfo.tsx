@@ -35,7 +35,6 @@ const SettingsInfo = () => {
     const newData = {
       id: user!.id,
       name: nameValue.trim(),
-      email: emailValue.trim(),
       residency: residenceValue.trim(),
     };
     setIsExpanded(false);
@@ -95,16 +94,6 @@ const SettingsInfo = () => {
               value={nameValue}
               required={true}
               onChange={(e) => setNameValue(e.target.value)}
-            />
-            <TextField
-              id="email"
-              label="Email"
-              variant="outlined"
-              className={styles.inputField}
-              value={emailValue}
-              required={true}
-              type="email"
-              onChange={(e) => setEmailValue(e.target.value)}
             />
             <TextField
               id="residency"

@@ -12,7 +12,6 @@ export interface LoginRequest {
 export interface InfoUpdateRequest {
   id: string;
   name: string;
-  email: string;
   residency: string;
 }
 
