@@ -6,9 +6,11 @@ import { Button } from "@mui/material";
 type P = {
   file: File | null;
   handleFileSend: () => void;
+  error: string;
+  hideError: () => void;
 };
 
-const SettingsBackground = ({ file, handleFileSend }: P) => {
+const SettingsBackground = ({ file, handleFileSend, error, hideError }: P) => {
   return (
     <div className={styles.backgroundContainer}>
       <Image
@@ -18,17 +20,29 @@ const SettingsBackground = ({ file, handleFileSend }: P) => {
         alt="Settings Background Image"
       />
       <h5>Settings</h5>
-      {file && (
-        <div className={styles.editContainer} onClick={handleFileSend}>
+
+      <div className={styles.editContainer}>
+        {error && (
           <Button
             variant="outlined"
-            className={styles.changeIcon}
+            className={styles.errorButton}
+            type="submit"
+            onClick={hideError}
+          >
+            {error}
+          </Button>
+        )}
+        {(file && !error) && (
+          <Button
+            onClick={handleFileSend}
+            variant="outlined"
+            className={styles.fileButton}
             type="submit"
           >
             Update Image
           </Button>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

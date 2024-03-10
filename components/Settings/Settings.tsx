@@ -3,17 +3,38 @@ import SettingsBackground from "./SettingsBackground";
 import SettingsHero from "./SettingsHero";
 import SettingsInfo from "./SettingsInfo";
 import { useEffect, useRef, useState } from "react";
+import { useSession } from "next-auth/react";
+import { validateProfileImage } from "@/helpers/Validation/profileImageValidation";
 
 const Settings = () => {
   const fileRef = useRef<HTMLInputElement | null>(null);
   const [file, setFile] = useState<File | null>(null);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const user = useSession()?.data?.user;
 
   const triggerUpload = () => {
     fileRef.current?.click();
   };
 
+  const aboardFileUpload = (error: string) => {
+    setFile(null);
+    setErrorMessage(error);
+  };
+
   const handleFileSend = () => {
-    console.log("Uploaded file:", file);
+    // Get file extension
+    const fileExtension = file!.type.split("/").pop();
+
+    // Create form data and append the file
+    const formData = new FormData();
+    formData.append(
+      "profileImage",
+      file!,
+      `${user?.email}-profile-image.${fileExtension}`
+    );
+
+    console.log("Uploaded file:", formData.get("profileImage"));
     setFile(null);
   };
 
@@ -27,7 +48,19 @@ const Settings = () => {
       const files = inputElement.files as FileList | null;
       if (files && files.length > 0) {
         const uploadedFile = files[0];
-        setFile(uploadedFile);
+        setErrorMessage("");
+
+        // Validate file
+        const { error, validFile } = validateProfileImage(uploadedFile);
+
+        // If error, set error message
+        if (error) return aboardFileUpload(error);
+
+        // If file not found, set error message
+        if (!validFile) return aboardFileUpload("File not found");
+
+        // Set the file
+        setFile(validFile);
       }
     };
 
@@ -46,7 +79,12 @@ const Settings = () => {
 
   return (
     <div className={styles.container}>
-      <SettingsBackground file={file} handleFileSend={handleFileSend} />
+      <SettingsBackground
+        file={file}
+        handleFileSend={handleFileSend}
+        error={errorMessage}
+        hideError={() => setErrorMessage("")}
+      />
       <SettingsHero fileRef={fileRef} triggerUpload={triggerUpload} />
       <SettingsInfo />
     </div>

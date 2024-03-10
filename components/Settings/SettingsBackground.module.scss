@@ -3,13 +3,22 @@
 .backgroundContainer {
   position: relative;
 
-  .changeIcon {
+  .fileButton {
     background-color: $dark-background-color;
     color: $navbar-action-active-color;
     border-color: $navbar-action-active-color;
     &:hover {
       background-color: $navbar-action-active-color;
       color: $light-background-text-color-secondary;
+      border-color: $dark-background-color;
+    }
+  }
+  .errorButton {
+    color: red;
+    background-color: $dark-background-color;
+    border-color: red;
+    &:hover {
+      background-color: $light-background-text-color-secondary;
       border-color: $dark-background-color;
     }
   }
