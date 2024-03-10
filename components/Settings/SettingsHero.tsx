@@ -2,9 +2,16 @@ import Image from "next/image";
 import styles from "@/components/Settings/SettingsHero.module.scss";
 import CameraAltRounded from "@mui/icons-material/CameraAltRounded";
 import { useSession } from "next-auth/react";
+import { useRef } from "react";
 
-const SettingsHero = () => {
+type P = {
+  fileRef: React.RefObject<HTMLInputElement>;
+  triggerUpload: () => void;
+};
+
+const SettingsHero = ({ fileRef, triggerUpload }: P) => {
   const session = useSession()?.data;
+
   return (
     <div className={styles.layout}>
       <div className={styles.container}>
@@ -18,9 +25,10 @@ const SettingsHero = () => {
                 alt="hero-image"
               />
             </div>
-            <div className={styles.changeIconContainer}>
+            <div className={styles.changeIconContainer} onClick={triggerUpload}>
               <CameraAltRounded className={styles.changeIcon} />
             </div>
+            <input type="file" className={styles.fileInput} ref={fileRef} />
           </div>
           <p>{session?.user.name}</p>
         </div>

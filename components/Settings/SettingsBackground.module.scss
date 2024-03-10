@@ -3,6 +3,17 @@
 .backgroundContainer {
   position: relative;
 
+  .changeIcon {
+    background-color: $dark-background-color;
+    color: $navbar-action-active-color;
+    border-color: $navbar-action-active-color;
+    &:hover {
+      background-color: $navbar-action-active-color;
+      color: $light-background-text-color-secondary;
+      border-color: $dark-background-color;
+    }
+  }
+
   img {
     width: 100%;
     height: 160px;
