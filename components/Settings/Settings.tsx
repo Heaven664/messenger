@@ -5,13 +5,16 @@ import SettingsInfo from "./SettingsInfo";
 import { useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { validateProfileImage } from "@/helpers/Validation/profileImageValidation";
+import sendImageFile from "@/helpers/Api/sendImageFile";
 
 const Settings = () => {
   const fileRef = useRef<HTMLInputElement | null>(null);
   const [file, setFile] = useState<File | null>(null);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const user = useSession()?.data?.user;
+  const session = useSession();
+
+  const user = session?.data?.user;
 
   const triggerUpload = () => {
     fileRef.current?.click();
@@ -22,7 +25,7 @@ const Settings = () => {
     setErrorMessage(error);
   };
 
-  const handleFileSend = () => {
+  const handleFileSend = async () => {
     // Get file extension
     const fileExtension = file!.type.split("/").pop();
 
@@ -34,7 +37,10 @@ const Settings = () => {
       `${user?.email}-profile-image.${fileExtension}`
     );
 
-    console.log("Uploaded file:", formData.get("profileImage"));
+    const token = session.data?.backendTokens.accessToken;
+
+    const { response, error } = await sendImageFile(formData, token!);
+    console.log("Response: ", response, " Error: ", error);
     setFile(null);
   };
 
