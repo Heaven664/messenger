@@ -22,7 +22,7 @@ export const validateProfileImage = (file: File | null) => {
     return { error, validFile };
   }
 
-  const allowedExtensions = ["jpeg", "png", "webp"];
+  const allowedExtensions = ["jpeg", "png", "webp", "heic"];
 
   // If file extension is not allowed
   if (!allowedExtensions.includes(fileExtension as string)) {
@@ -31,7 +31,7 @@ export const validateProfileImage = (file: File | null) => {
   }
 
   // Define max file size 3 MB
-  const maxFileSize = 1024 * 1024 * 3; // 3MB
+  const maxFileSize = 1024 * 1024 * 4; // 3MB
 
   // If file is to large
   if (file.size > maxFileSize) {
