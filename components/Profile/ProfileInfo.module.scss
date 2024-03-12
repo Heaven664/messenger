@@ -3,20 +3,18 @@
 .container {
   color: $light-background-text-color-primary;
   ul {
-    li {
-      .profileInfoElement {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        font-size: 21px;
-        margin: 10px 15px;
-        h3 {
-          max-width: 95%;
-          font-weight: 400;
-          font-size: 15px;
-          margin-left: 12px;
-          word-wrap: break-word;
-        }
+    .profileInfoElement {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      font-size: 21px;
+      margin: 10px 15px;
+      h3 {
+        max-width: 95%;
+        font-weight: 400;
+        font-size: 15px;
+        margin-left: 12px;
+        word-wrap: break-word;
       }
     }
   }

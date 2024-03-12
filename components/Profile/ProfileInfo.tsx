@@ -7,29 +7,23 @@ type P = {
   name: string;
   residency: string | null;
   email: string;
-}
+};
 
-const ProfileInfo = ({name, residency, email} : P) => {
+const ProfileInfo = ({ name, residency, email }: P) => {
   return (
     <div className={styles.container}>
       <ul>
-        <li>
-          <div className={styles.profileInfoElement}>
-            <Person fontSize="inherit" />
-            <h3>{name}</h3>
-          </div>
+        <li className={styles.profileInfoElement}>
+          <Person fontSize="inherit" />
+          <h3>{name}</h3>
         </li>
-        <li>
-          <div className={styles.profileInfoElement}>
-            <SmsOutlined fontSize="inherit" />
-            <h3>{email}</h3>
-          </div>
+        <li className={styles.profileInfoElement}>
+          <SmsOutlined fontSize="inherit" />
+          <h3>{email}</h3>
         </li>
-        <li>
-          <div className={styles.profileInfoElement}>
-            <LocationOnOutlined fontSize="inherit" />
-            <h3>{residency || "Not specified"}</h3>
-          </div>
+        <li className={styles.profileInfoElement}>
+          <LocationOnOutlined fontSize="inherit" />
+          <h3>{residency || "Not specified"}</h3>
         </li>
       </ul>
       <hr />
