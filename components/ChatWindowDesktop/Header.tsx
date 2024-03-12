@@ -9,12 +9,13 @@ import ProfileContext from "@/context/ProfileContext";
 import { ProfileContextType } from "@/types/Profile/types";
 import { useRouter } from "next/router";
 import PageContext from "@/context/PageContext";
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 const ChatWindowDesktopHeader = () => {
   // Get ChatWindowContext and destructure for current header info
   const headerContext = useContext<HeaderContextType | null>(ChatWindowContext);
-  const { headerInfo, changeChatWindowHeaderInfo } = headerContext as HeaderContextType;
+  const { headerInfo, changeChatWindowHeaderInfo } =
+    headerContext as HeaderContextType;
   const { name, imageUrl, isOnline, userId, lastSeenPermission, lastSeenTime } =
     headerInfo as HeaderInfoType;
 
@@ -60,7 +61,12 @@ const ChatWindowDesktopHeader = () => {
       <div className={styles.imageSection}>
         <div className={styles.imageContainer}>
           <div className={styles.image} onClick={handleProfileOpen}>
-            <Image src={imageUrl} alt={userId} width={40} height={40} />
+            <Image
+              src={`${imageUrl}?timestamp=${new Date().getTime()}`}
+              alt={userId}
+              width={40}
+              height={40}
+            />
           </div>
           {isOnline && <div className={styles.onlineBadge}></div>}
         </div>

@@ -37,7 +37,9 @@ const MessageItem = ({ message, lastMessage }: P) => {
         >
           {lastMessage && (
             <Image
-              src={message.senderImageUrl}
+              src={`${
+                message.senderImageUrl
+              }?timestamp=${new Date().getTime()}`}
               alt={`${message.messageBody}`}
               width={40}
               height={40}

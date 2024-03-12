@@ -83,7 +83,12 @@ const ListItemContact = ({
     <li key={id} className={styles.container}>
       <div className={styles.infoContainer}>
         <div className={styles.imageContainer} onClick={handleStartChat}>
-          <Image src={imageSrc} width={35} height={35} alt={name} />
+          <Image
+            src={`${imageSrc}?timestamp=${new Date().getTime()}`}
+            width={35}
+            height={35}
+            alt={name}
+          />
         </div>
         <div className={styles.nameContainer} onClick={handleStartChat}>
           <h3>{name}</h3>

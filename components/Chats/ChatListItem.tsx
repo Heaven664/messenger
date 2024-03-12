@@ -61,7 +61,12 @@ const ChatListItem = ({
     <li className={styles.container} onClick={handleChatWindowChange}>
       <div className={styles.imageSection}>
         <div className={styles.imageContainer}>
-          <Image src={imageUrl} alt={userId} width={40} height={40} />
+          <Image
+            src={`${imageUrl}?timestamp=${new Date().getTime()}`}
+            alt={userId}
+            width={40}
+            height={40}
+          />
         </div>
         {isOnline && <div className={styles.onlineBadge}></div>}
       </div>
