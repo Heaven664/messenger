@@ -2,7 +2,6 @@ import Image from "next/image";
 import styles from "@/components/Settings/SettingsHero.module.scss";
 import CameraAltRounded from "@mui/icons-material/CameraAltRounded";
 import { useSession } from "next-auth/react";
-import { useRef } from "react";
 
 type P = {
   fileRef: React.RefObject<HTMLInputElement>;
@@ -19,7 +18,9 @@ const SettingsHero = ({ fileRef, triggerUpload }: P) => {
           <div className={styles.imageContainer}>
             <div className={styles.imageBackground}>
               <Image
-                src={session!.user!.imageSrc}
+                src={`${
+                  session!.user!.imageSrc
+                }?timestamp=${new Date().getTime()}`}
                 width={150}
                 height={150}
                 alt="hero-image"
