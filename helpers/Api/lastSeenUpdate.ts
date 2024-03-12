@@ -6,7 +6,11 @@ const lastSeenUpdateRequest = async (data: LastSeenUpdateRequest) => {
   let response: any = null;
 
   try {
-    response = (await axios.put(url, data)).data;
+    response = (
+      await axios.put(url, data, {
+        headers: { Authorization: `Bearer ${data.token}` },
+      })
+    ).data;
   } catch (AxiosError: any) {
     // Get error message
     const errorMessage = AxiosError.response.data.message.trim();

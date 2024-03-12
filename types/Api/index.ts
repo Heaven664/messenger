@@ -18,6 +18,7 @@ export interface InfoUpdateRequest {
 export interface LastSeenUpdateRequest {
   id: string;
   lastSeenPermission: boolean;
+  token: string;
 }
 
 export interface addContactRequest {

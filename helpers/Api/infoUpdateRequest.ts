@@ -1,13 +1,17 @@
 import { InfoUpdateRequest } from "@/types/Api";
 import axios from "axios";
 
-const infoUpdateRequest = async (data: InfoUpdateRequest) => {
+const infoUpdateRequest = async (data: InfoUpdateRequest, token: string) => {
   const url = `${process.env.NEXT_PUBLIC_API_URL!}/users/info`;
   let error: string | null = null;
   let response: any = null;
 
   try {
-    response = (await axios.put(url, data)).data;
+    response = (
+      await axios.put(url, data, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+    ).data;
   } catch (AxiosError: any) {
     // Get error message
     const errorMessage = AxiosError.response.data.message.trim();

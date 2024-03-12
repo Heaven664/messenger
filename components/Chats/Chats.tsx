@@ -7,7 +7,6 @@ import { ChatType, ChatsContextType } from "@/types/Chats/types";
 import ChatsContext from "@/context/ChatsContext";
 import { useSession } from "next-auth/react";
 import getChats from "@/helpers/Api/getChats";
-import { all } from "axios";
 
 const Chats = () => {
   // Get chats from context and destructure them
@@ -16,7 +15,6 @@ const Chats = () => {
 
   const session = useSession();
   const userEmail = session.data!.user!.email;
-  console.log(allChats)
 
   const [currentChats, setCurrentChats] = useState(allChats || []);
 

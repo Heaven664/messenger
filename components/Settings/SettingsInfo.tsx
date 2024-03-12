@@ -38,7 +38,9 @@ const SettingsInfo = () => {
       residency: residenceValue.trim(),
     };
     setIsExpanded(false);
-    const { response } = await infoUpdateRequest(newData);
+    const token = session!.backendTokens!.accessToken;
+
+    const { response } = await infoUpdateRequest(newData, token);
     if (session) {
       if (status === "authenticated") {
         // Update session user data with updated values
@@ -51,10 +53,10 @@ const SettingsInfo = () => {
     e: React.ChangeEvent<HTMLInputElement>,
     checked: boolean
   ) => {
-    // setLastSeenStatus(checked);
     const { response } = await lastSeenUpdateRequest({
       id: user!.id,
       lastSeenPermission: checked,
+      token: session!.backendTokens!.accessToken,
     });
     if (session && response) {
       if (status === "authenticated") {
