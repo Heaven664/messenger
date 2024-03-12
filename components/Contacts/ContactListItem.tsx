@@ -44,6 +44,11 @@ const ListItemContact = ({
 
   const [anchorEl, setAnchorEl] = useState<null | SVGSVGElement>(null);
 
+  // Image error state
+  const [imageError, setImageError] = useState(false);
+  // Image path for src get request with timestamp to prevent caching
+  const imageGetPath = `${imageSrc}?timestamp=${new Date().getTime()}`;
+
   // Trigger remove contact popup
   const handleClick = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
     setAnchorEl(event.currentTarget);
@@ -84,10 +89,12 @@ const ListItemContact = ({
       <div className={styles.infoContainer}>
         <div className={styles.imageContainer} onClick={handleStartChat}>
           <Image
-            src={`${imageSrc}?timestamp=${new Date().getTime()}`}
+            src={!imageError ? imageGetPath : "/general/default-profile-image.webp"}
             width={35}
             height={35}
             alt={name}
+            // Set default image if there is an error
+            onError={() => setImageError(true)}
           />
         </div>
         <div className={styles.nameContainer} onClick={handleStartChat}>

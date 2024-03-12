@@ -23,6 +23,11 @@ const ChatListItem = ({
   // Get ChatWindowContext and destructure function for changing header info
   const [newMessages, setNewMessages] = useState<number | "9+">(unreadMessages);
 
+  // Image error state
+  const [imageError, setImageError] = useState(false);
+  // Image path for src get request with timestamp to prevent caching
+  const imageGetPath = `${imageUrl}?timestamp=${new Date().getTime()}`;
+
   const headerContext = useContext<HeaderContextType | null>(ChatWindowContext);
   const { changeChatWindowHeaderInfo } = headerContext as HeaderContextType;
   const messagesContext = useContext(MessagesContext);
@@ -62,10 +67,13 @@ const ChatListItem = ({
       <div className={styles.imageSection}>
         <div className={styles.imageContainer}>
           <Image
-            src={`${imageUrl}?timestamp=${new Date().getTime()}`}
+            src={
+              !imageError ? imageGetPath : "/general/default-profile-image.webp"
+            }
             alt={userId}
             width={40}
             height={40}
+            onError={() => setImageError(true)}
           />
         </div>
         {isOnline && <div className={styles.onlineBadge}></div>}

@@ -19,6 +19,13 @@ const MessageItem = ({ message, lastMessage }: P) => {
   const isMessageOwner = message.senderEmail === user!.email;
   const [isMessageRead, setIsMessageRead] = useState(message.viewed);
 
+  // Image error state
+  const [imageError, setImageError] = useState(false);
+  // Image path for src get request with timestamp to prevent caching
+  const imageGetPath = `${
+    message.senderImageUrl
+  }?timestamp=${new Date().getTime()}`;
+
   return (
     <li className={isMessageOwner ? ownerStyles.container : styles.container}>
       <div
@@ -37,12 +44,12 @@ const MessageItem = ({ message, lastMessage }: P) => {
         >
           {lastMessage && (
             <Image
-              src={`${
-                message.senderImageUrl
-              }?timestamp=${new Date().getTime()}`}
+              src={!imageError ? imageGetPath : "/general/default-profile-image.webp"}
               alt={`${message.messageBody}`}
               width={40}
               height={40}
+              // Set default image if there is an error
+              onError={() => setImageError(true)}
             />
           )}
         </div>

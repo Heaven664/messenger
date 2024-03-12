@@ -21,6 +21,11 @@ const ChatWindowDesktopHeader = () => {
 
   const [lastSeen, setLastSeen] = useState<string>("");
 
+  // Image error state
+  const [imageError, setImageError] = useState(false);
+  // Image path for src get request with timestamp to prevent caching
+  const imageGetPath = `${imageUrl}?timestamp=${new Date().getTime()}`;
+
   const router = useRouter();
 
   // Destructure the function for changing page
@@ -62,10 +67,16 @@ const ChatWindowDesktopHeader = () => {
         <div className={styles.imageContainer}>
           <div className={styles.image} onClick={handleProfileOpen}>
             <Image
-              src={`${imageUrl}?timestamp=${new Date().getTime()}`}
+              src={
+                !imageError
+                  ? imageGetPath
+                  : "/general/default-profile-image.webp"
+              }
               alt={userId}
               width={40}
               height={40}
+              // Set default image if there is an error
+              onError={() => setImageError(true)}
             />
           </div>
           {isOnline && <div className={styles.onlineBadge}></div>}
