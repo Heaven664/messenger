@@ -12,9 +12,9 @@ const Settings = () => {
   const [file, setFile] = useState<File | null>(null);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const session = useSession();
+  const { data: session, update, status } = useSession();
 
-  const user = session?.data?.user;
+  const user = session?.user;
 
   const triggerUpload = () => {
     fileRef.current?.click();
@@ -37,10 +37,22 @@ const Settings = () => {
       `${user?.email}-profile-image.${fileExtension}`
     );
 
-    const token = session.data?.backendTokens.accessToken;
+    const token = session?.backendTokens.accessToken;
 
-    const { response, error } = await sendImageFile(formData, token!);
-    console.log("Response: ", response, " Error: ", error);
+    const { response: newImage, error } = await sendImageFile(
+      formData,
+      token!
+    );
+    const fullImagePath = `${process.env.NEXT_PUBLIC_API_URL!}/images/${newImage}`;
+    if (session) {
+      if (status === "authenticated") {
+        // Update session user data with updated values
+        const newUser = { ...user, imageSrc: fullImagePath };
+        console.log(newUser);
+        // console.log(user);
+        await update({ user: newUser });
+      }
+    }
     setFile(null);
   };
 
