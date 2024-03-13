@@ -14,7 +14,6 @@ const sendImageFile = async (file: FormData, token: string) => {
   } catch (AxiosError: any) {
     // Get error message
     error = AxiosError.response.data.message.trim();
-    console.log(error);
   } finally {
     return { response, error };
   }
