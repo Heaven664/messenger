@@ -22,7 +22,7 @@ export const validateProfileImage = (file: File | null) => {
     return { error, validFile };
   }
 
-  const allowedExtensions = ["jpeg", "png", "webp", "heic"];
+  const allowedExtensions = ["jpeg", "png", "webp"];
 
   // If file extension is not allowed
   if (!allowedExtensions.includes(fileExtension as string)) {
