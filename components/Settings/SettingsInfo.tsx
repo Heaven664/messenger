@@ -40,8 +40,9 @@ const SettingsInfo = () => {
     setIsExpanded(false);
     const token = session!.backendTokens!.accessToken;
 
-    const { response } = await infoUpdateRequest(newData, token);
-    if (session) {
+    const { response, error } = await infoUpdateRequest(newData, token);
+    if (error) return console.error(error);
+    if (session && response) {
       if (status === "authenticated") {
         // Update session user data with updated values
         await update({ user: response });
