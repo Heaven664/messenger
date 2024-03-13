@@ -37,22 +37,27 @@ const Settings = () => {
       `${user?.email}-profile-image.${fileExtension}`
     );
 
+    // Get access token from session
     const token = session?.backendTokens.accessToken;
 
-    const { response: newImage, error } = await sendImageFile(
-      formData,
-      token!
-    );
-    const fullImagePath = `${process.env.NEXT_PUBLIC_API_URL!}/images/${newImage}`;
-    if (session) {
+    // Send request to update user image and destructure the response and error
+    const { response: newImage, error } = await sendImageFile(formData, token!);
+
+    // Exit if error
+    if (error) return console.log(error);
+
+    // Construct full image path
+    const fullImagePath = `${process.env
+      .NEXT_PUBLIC_API_URL!}/images/${newImage}`;
+
+    if (session && newImage) {
       if (status === "authenticated") {
         // Update session user data with updated values
         const newUser = { ...user, imageSrc: fullImagePath };
-        console.log(newUser);
-        // console.log(user);
         await update({ user: newUser });
       }
     }
+    // Reset file
     setFile(null);
   };
 
