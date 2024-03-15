@@ -46,14 +46,10 @@ const Settings = () => {
     // Exit if error
     if (error) return console.log(error);
 
-    // Construct full image path
-    const fullImagePath = `${process.env
-      .NEXT_PUBLIC_API_URL!}/images/${newImage}`;
-
     if (session && newImage) {
       if (status === "authenticated") {
         // Update session user data with updated values
-        const newUser = { ...user, imageSrc: fullImagePath };
+        const newUser = { ...user, imageSrc: newImage };
         await update({ user: newUser });
       }
     }

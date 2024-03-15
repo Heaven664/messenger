@@ -4,7 +4,7 @@ import styles from "./MessageItem.module.scss";
 import ownerStyles from "./MessageOwner.module.scss";
 import { MessageType } from "@/types/ChatWindow/types";
 import { timestampToLocalTime } from "@/helpers/ChatWindow";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useSession } from "next-auth/react";
 
 type P = {
@@ -22,7 +22,7 @@ const MessageItem = ({ message, lastMessage }: P) => {
   // Image error state
   const [imageError, setImageError] = useState(false);
   // Image path for src get request with timestamp to prevent caching
-  const imageGetPath = `${
+  const imageGetPath = `${process.env.NEXT_PUBLIC_API_URL}${
     message.senderImageUrl
   }?timestamp=${new Date().getTime()}`;
 
@@ -44,7 +44,11 @@ const MessageItem = ({ message, lastMessage }: P) => {
         >
           {lastMessage && (
             <Image
-              src={!imageError ? imageGetPath : "/general/default-profile-image.webp"}
+              src={
+                !imageError
+                  ? imageGetPath
+                  : "/general/default-profile-image.webp"
+              }
               alt={`${message.messageBody}`}
               width={40}
               height={40}

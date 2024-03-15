@@ -11,6 +11,10 @@ type P = {
 const SettingsHero = ({ fileRef, triggerUpload }: P) => {
   const session = useSession()?.data;
 
+  const imagePath = `${process.env.NEXT_PUBLIC_API_URL}${
+    session!.user!.imageSrc
+  }?timestamp=${new Date().getTime()}`;
+
   return (
     <div className={styles.layout}>
       <div className={styles.container}>
@@ -18,9 +22,7 @@ const SettingsHero = ({ fileRef, triggerUpload }: P) => {
           <div className={styles.imageContainer}>
             <div className={styles.imageBackground}>
               <Image
-                src={`${
-                  session!.user!.imageSrc
-                }?timestamp=${new Date().getTime()}`}
+                src={imagePath}
                 width={150}
                 height={150}
                 alt="hero-image"

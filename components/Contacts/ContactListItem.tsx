@@ -47,7 +47,7 @@ const ListItemContact = ({
   // Image error state
   const [imageError, setImageError] = useState(false);
   // Image path for src get request with timestamp to prevent caching
-  const imageGetPath = `${imageSrc}?timestamp=${new Date().getTime()}`;
+  const imageGetPath = `${process.env.NEXT_PUBLIC_API_URL}${imageSrc}?timestamp=${new Date().getTime()}`;
 
   // Trigger remove contact popup
   const handleClick = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
