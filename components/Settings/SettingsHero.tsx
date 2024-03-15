@@ -13,7 +13,7 @@ const SettingsHero = ({ fileRef, triggerUpload }: P) => {
 
   const imagePath = `${process.env.NEXT_PUBLIC_API_URL}${
     session!.user!.imageSrc
-  }?timestamp=${new Date().getTime()}`;
+  }`;
 
   return (
     <div className={styles.layout}>

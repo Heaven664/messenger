@@ -23,8 +23,8 @@ const ChatWindowDesktopHeader = () => {
 
   // Image error state
   const [imageError, setImageError] = useState(false);
-  // Image path for src get request with timestamp to prevent caching
-  const imageGetPath = `${process.env.NEXT_PUBLIC_API_URL}${imageUrl}?timestamp=${new Date().getTime()}`;
+  // Image path for src get request
+  const imageGetPath = `${process.env.NEXT_PUBLIC_API_URL}${imageUrl}`;
 
   const router = useRouter();
 

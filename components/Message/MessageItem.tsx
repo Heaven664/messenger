@@ -21,10 +21,10 @@ const MessageItem = ({ message, lastMessage }: P) => {
 
   // Image error state
   const [imageError, setImageError] = useState(false);
-  // Image path for src get request with timestamp to prevent caching
+  // Image path for src get request
   const imageGetPath = `${process.env.NEXT_PUBLIC_API_URL}${
     message.senderImageUrl
-  }?timestamp=${new Date().getTime()}`;
+  }`;
 
   return (
     <li className={isMessageOwner ? ownerStyles.container : styles.container}>

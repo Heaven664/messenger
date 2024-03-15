@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { validateProfileImage } from "@/helpers/Validation/profileImageValidation";
 import sendImageFile from "@/helpers/Api/sendImageFile";
+import removeImage from "@/helpers/Api/removeImage";
 
 const Settings = () => {
   const fileRef = useRef<HTMLInputElement | null>(null);
@@ -34,11 +35,15 @@ const Settings = () => {
     formData.append(
       "profileImage",
       file!,
-      `${user?.email}-profile-image.${fileExtension}`
+      `${user?.email}-${new Date().getTime()}.${fileExtension}`
     );
 
     // Get access token from session
     const token = session?.backendTokens.accessToken;
+
+    // Send request to remove old image
+    const imageSrc = user!.imageSrc!.split("/")[2];
+    await removeImage(imageSrc, token!);
 
     // Send request to update user image and destructure the response and error
     const { response: newImage, error } = await sendImageFile(formData, token!);

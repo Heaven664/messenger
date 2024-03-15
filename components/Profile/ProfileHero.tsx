@@ -11,7 +11,7 @@ const ProfileHero = ({ imageSrc, name }: P) => {
   // Image error state
   const [imageError, setImageError] = useState(false);
   // Image path for src get request with timestamp to prevent caching
-  const imageGetPath = `${process.env.NEXT_PUBLIC_API_URL}${imageSrc}?timestamp=${new Date().getTime()}`;
+  const imageGetPath = `${process.env.NEXT_PUBLIC_API_URL}${imageSrc}`;
 
   return (
     <div className={styles.layout}>
