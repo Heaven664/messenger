@@ -1,3 +1,4 @@
+import { Dispatch, SetStateAction } from "react";
 import { HeaderInfoType, MessageType } from "../ChatWindow/types";
 import { PageStatesType } from "../Navbar/types";
 
@@ -13,5 +14,5 @@ export type HeaderContextType = {
 
 export type MessagesContextType = {
   messages: MessageType[];
-  changeMessages: (value: MessageType[]) => void;
+  setMessages: Dispatch<SetStateAction<MessageType[] | []>>;
 };

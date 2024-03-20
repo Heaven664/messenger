@@ -81,7 +81,7 @@ const ListItemContact = ({
     };
     const { response } = await getMessages(userEmail, email);
     changeChatWindowHeaderInfo(newHeaderInfo);
-    if (response) messagesContext?.changeMessages(response);
+    if (response) messagesContext?.setMessages(response);
   };
 
   return (

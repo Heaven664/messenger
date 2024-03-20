@@ -8,14 +8,9 @@ const MessagesContext = createContext<MessagesContextType | null>(null);
 const MessagesContextProvider = ({ children }: ComponentProps) => {
   const [messages, setMessages] = useState<MessageType[] | []>([]);
 
-  // Update chat window header info
-  const changeMessages = (value: MessageType[]) => {
-    setMessages(value);
-  };
-
   const context: MessagesContextType = {
     messages,
-    changeMessages,
+    setMessages,
   };
 
   return (

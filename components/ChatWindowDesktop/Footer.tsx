@@ -15,11 +15,7 @@ import { useSession } from "next-auth/react";
 import sendMessage from "@/helpers/Api/sendMessage";
 import WebSocketContext from "@/context/WebSocketContext";
 
-type P = {
-  addMessage: (message: MessageType) => void;
-};
-
-const ChatWindowDesktopFooter = ({ addMessage }: P) => {
+const ChatWindowDesktopFooter = () => {
   const [emojiPicker, setEmojiPicker] = useState<Boolean>(false);
   const [inputVal, setInputVal] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
@@ -83,7 +79,6 @@ const ChatWindowDesktopFooter = ({ addMessage }: P) => {
 
     emitNewMessage(message);
 
-    addMessage(message);
     setInputVal("");
     const newChats = updateLatsMessage(allChats, currentReceiverEmail);
     handleChatsChange(newChats);

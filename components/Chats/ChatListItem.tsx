@@ -61,7 +61,7 @@ const ChatListItem = ({
     setNewMessages(0);
     changeChatWindowHeaderInfo(chatDetails);
     const { response } = await getMessages(session!.user.email, friendEmail);
-    if (response) messagesContext?.changeMessages(response);
+    if (response) messagesContext?.setMessages(response);
   };
 
   return (

@@ -8,51 +8,48 @@ import EmptyChat from "./EmptyChatWindow";
 import { MessageType } from "@/types/ChatWindow/types";
 import MessagesContext from "@/context/MessagesContext";
 import WebSocketContext from "@/context/WebSocketContext";
+import { useSession } from "next-auth/react";
 
 const ChatWindowDesktop = () => {
   const chatWindowDesktopContext = useContext(ChatWindowContext);
-  const messagesContext = useContext(MessagesContext);
+  const { messages, setMessages } = useContext(MessagesContext)!;
+  const friendEmail = chatWindowDesktopContext?.headerInfo?.email;
+  const { email: userEmail } = useSession().data!.user;
 
   // Checks if there is a currently open chat window
   const chatWindowSelected = chatWindowDesktopContext?.headerInfo !== null;
 
+  // Get WebSocket instance from context
   const { socket } = useContext(WebSocketContext);
 
   useEffect(() => {
     if (socket) {
       socket.on("private message", (message: MessageType) => {
+        // Check if the message is from conversation with the current user
         if (
-          message.senderEmail === chatWindowDesktopContext?.headerInfo?.email
+          // If the message if from the friend
+          message.senderEmail === friendEmail ||
+          // If the message was sent to the friend
+          (message.receiverEmail === friendEmail &&
+            message.senderEmail === userEmail)
         ) {
-          console.log("updating messages");
-          setCurMessages((prev) => [...prev, message]);
+          // Update messages context
+          setMessages((prev) => [...prev, message]);
         }
       });
       return () => {
         socket.off("private message");
       };
     }
-  }, [socket, chatWindowDesktopContext?.headerInfo?.email]);
-
-  // Update messages when chat window changes
-  useEffect(() => {
-    setCurMessages(messagesContext!.messages);
-  }, [chatWindowDesktopContext?.headerInfo, messagesContext]);
-
-  const [curMessages, setCurMessages] = useState<MessageType[]>(
-    messagesContext!.messages
-  );
-  const addMessage = (message: MessageType) => {
-    setCurMessages([...curMessages, message]);
-  };
+  }, [socket, friendEmail, userEmail, setMessages]);
 
   return (
     <div className={styles.container}>
       {chatWindowSelected ? (
         <>
           <ChatWindowDesktopHeader />
-          <MessageContainer messages={curMessages} />
-          <Footer addMessage={addMessage} />
+          <MessageContainer messages={messages} />
+          <Footer />
         </>
       ) : (
         <EmptyChat />
