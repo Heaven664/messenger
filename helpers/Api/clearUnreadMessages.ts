@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const readMessages = async (userEmail: string, friendEmail: string) => {
+const clearUnreadMessages = async (userEmail: string, friendEmail: string) => {
   const url = `${process.env.NEXT_PUBLIC_API_URL!}/chats/read`;
   let response: any = null;
 
@@ -14,4 +14,4 @@ const readMessages = async (userEmail: string, friendEmail: string) => {
   }
 };
 
-export default readMessages;
+export default clearUnreadMessages;
