@@ -13,6 +13,7 @@ import ChatsContext from "@/context/ChatsContext";
 import { updateLatsMessage } from "@/helpers/Chats";
 import { useSession } from "next-auth/react";
 import sendMessage from "@/helpers/Api/sendMessage";
+import WebSocketContext from "@/context/WebSocketContext";
 
 type P = {
   addMessage: (message: MessageType) => void;
@@ -26,6 +27,14 @@ const ChatWindowDesktopFooter = ({ addMessage }: P) => {
   // Get authenticated user data from session
   const session = useSession().data!;
   const user = session?.user;
+
+  // Get WebSocket instance from context
+  const { socket } = useContext(WebSocketContext);
+
+  // Emit new private message to server
+  const emitNewMessage = (message: MessageType) => {
+    socket?.emit("private message", message);
+  };
 
   // Get current receiver id from context
   const chatWindowContext = useContext<HeaderContextType | null>(
@@ -71,6 +80,8 @@ const ChatWindowDesktopFooter = ({ addMessage }: P) => {
       senderImageUrl: user!.imageSrc,
       viewed: false,
     };
+
+    emitNewMessage(message);
 
     addMessage(message);
     setInputVal("");

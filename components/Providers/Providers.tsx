@@ -6,6 +6,7 @@ import { MessagesContextProvider } from "@/context/MessagesContext";
 import { SessionProvider } from "next-auth/react";
 import { ReactNode } from "react";
 import Layout from "../Layout/Layout";
+import { WebSocketContextProvider } from "@/context/WebSocketContext";
 
 interface Props {
   children: ReactNode;
@@ -14,17 +15,19 @@ interface Props {
 const Providers = ({ children }: Props) => {
   return (
     <SessionProvider>
-      <ChatWindowContextProvider>
-        <MessagesContextProvider>
-          <PageContextProvider>
-            <ChatsContextProvider>
-              <ProfileContextProvider>
-                <Layout>{children}</Layout>
-              </ProfileContextProvider>
-            </ChatsContextProvider>
-          </PageContextProvider>
-        </MessagesContextProvider>
-      </ChatWindowContextProvider>
+      <WebSocketContextProvider>
+        <ChatWindowContextProvider>
+          <MessagesContextProvider>
+            <PageContextProvider>
+              <ChatsContextProvider>
+                <ProfileContextProvider>
+                  <Layout>{children}</Layout>
+                </ProfileContextProvider>
+              </ChatsContextProvider>
+            </PageContextProvider>
+          </MessagesContextProvider>
+        </ChatWindowContextProvider>
+      </WebSocketContextProvider>
     </SessionProvider>
   );
 };
