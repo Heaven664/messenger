@@ -77,12 +77,12 @@ const ChatWindowDesktopFooter = () => {
       viewed: false,
     };
 
-    emitNewMessage(message);
-
+    
     setInputVal("");
     const newChats = updateLatsMessage(allChats, currentReceiverEmail);
     handleChatsChange(newChats);
     await sendMessage(message);
+    emitNewMessage(message);
   };
 
   return (

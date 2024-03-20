@@ -4,7 +4,7 @@ import styles from "./MessageItem.module.scss";
 import ownerStyles from "./MessageOwner.module.scss";
 import { MessageType } from "@/types/ChatWindow/types";
 import { timestampToLocalTime } from "@/helpers/ChatWindow";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 
 type P = {
@@ -19,12 +19,14 @@ const MessageItem = ({ message, lastMessage }: P) => {
   const isMessageOwner = message.senderEmail === user!.email;
   const [isMessageRead, setIsMessageRead] = useState(message.viewed);
 
+  useEffect(() => {
+    setIsMessageRead(message.viewed);
+  }, [message]);
+
   // Image error state
   const [imageError, setImageError] = useState(false);
   // Image path for src get request
-  const imageGetPath = `${process.env.NEXT_PUBLIC_API_URL}${
-    message.senderImageUrl
-  }`;
+  const imageGetPath = `${process.env.NEXT_PUBLIC_API_URL}${message.senderImageUrl}`;
 
   return (
     <li className={isMessageOwner ? ownerStyles.container : styles.container}>

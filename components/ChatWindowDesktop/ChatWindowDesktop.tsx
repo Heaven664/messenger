@@ -35,10 +35,28 @@ const ChatWindowDesktop = () => {
         ) {
           // Update messages context
           setMessages((prev) => [...prev, message]);
+
+          if (message.senderEmail === friendEmail) {
+            // Emit message read event
+            socket.emit("message read", {
+              senderEmail: message.senderEmail,
+              receiverEmail: message.receiverEmail,
+            });
+          }
         }
+
+        socket.on("message read", () => {
+          console.log("message read");
+          setMessages((prev) =>
+            prev.map((msg) => {
+              return { ...msg, viewed: true };
+            })
+          );
+        });
       });
       return () => {
         socket.off("private message");
+        socket.off("message read");
       };
     }
   }, [socket, friendEmail, userEmail, setMessages]);
