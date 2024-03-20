@@ -22,10 +22,6 @@ export const useWebSocketConnection = (url: string) => {
       console.log("Disconnected from WebSocket server");
     });
 
-    socket.on("private message", (message: MessageType) => {
-      console.log("Received private message", message);
-    });
-
     return () => {
       updateSocket(null);
       socket.off("private message");
@@ -33,5 +29,6 @@ export const useWebSocketConnection = (url: string) => {
       socket.off("disconnect");
       socket.disconnect();
     };
-  }, [url]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [url, email]);
 };

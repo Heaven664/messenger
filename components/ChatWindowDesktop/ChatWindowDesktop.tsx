@@ -7,6 +7,7 @@ import ChatWindowContext from "@/context/ChatWindowContext";
 import EmptyChat from "./EmptyChatWindow";
 import { MessageType } from "@/types/ChatWindow/types";
 import MessagesContext from "@/context/MessagesContext";
+import WebSocketContext from "@/context/WebSocketContext";
 
 const ChatWindowDesktop = () => {
   const chatWindowDesktopContext = useContext(ChatWindowContext);
@@ -14,6 +15,24 @@ const ChatWindowDesktop = () => {
 
   // Checks if there is a currently open chat window
   const chatWindowSelected = chatWindowDesktopContext?.headerInfo !== null;
+
+  const { socket } = useContext(WebSocketContext);
+
+  useEffect(() => {
+    if (socket) {
+      socket.on("private message", (message: MessageType) => {
+        if (
+          message.senderEmail === chatWindowDesktopContext?.headerInfo?.email
+        ) {
+          console.log("updating messages");
+          setCurMessages((prev) => [...prev, message]);
+        }
+      });
+      return () => {
+        socket.off("private message");
+      };
+    }
+  }, [socket, chatWindowDesktopContext?.headerInfo?.email]);
 
   // Update messages when chat window changes
   useEffect(() => {
