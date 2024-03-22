@@ -9,10 +9,12 @@ import { MessageType } from "@/types/ChatWindow/types";
 import MessagesContext from "@/context/MessagesContext";
 import WebSocketContext from "@/context/WebSocketContext";
 import { useSession } from "next-auth/react";
+import ChatsContext from "@/context/ChatsContext";
 
 const ChatWindowDesktop = () => {
   const chatWindowDesktopContext = useContext(ChatWindowContext);
   const { messages, setMessages } = useContext(MessagesContext)!;
+  const { addUnreadChat } = useContext(ChatsContext);
   const friendEmail = chatWindowDesktopContext?.headerInfo?.email;
   const { email: userEmail } = useSession().data!.user;
 
@@ -43,6 +45,8 @@ const ChatWindowDesktop = () => {
               receiverEmail: message.receiverEmail,
             });
           }
+        } else {
+          addUnreadChat(message);
         }
 
         socket.on("message read", () => {
@@ -58,7 +62,7 @@ const ChatWindowDesktop = () => {
         socket.off("message read");
       };
     }
-  }, [socket, friendEmail, userEmail, setMessages]);
+  }, [socket, friendEmail, userEmail, addUnreadChat, setMessages]);
 
   return (
     <div className={styles.container}>
