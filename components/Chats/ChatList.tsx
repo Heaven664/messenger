@@ -26,7 +26,7 @@ const ChatList = ({ chatsData }: P) => {
         imageUrl={imageUrl}
         unreadMessages={unreadMessages}
         lastMessage={lastMessage}
-        isOnline={isOnline}
+        isOnline={isOnline || false}
         lastSeenPermission={lastSeenPermission}
         lastSeenTime={lastSeenTime}
       />

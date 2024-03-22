@@ -46,7 +46,6 @@ const ChatWindowDesktop = () => {
         }
 
         socket.on("message read", () => {
-          console.log("message read");
           setMessages((prev) =>
             prev.map((msg) => {
               return { ...msg, viewed: true };

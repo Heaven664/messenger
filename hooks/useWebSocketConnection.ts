@@ -1,16 +1,17 @@
+import { ChatType } from "@/types/Chats/types";
+import ChatsContext from "@/context/ChatsContext";
 import WebSocketContext from "@/context/WebSocketContext";
-import { MessageType } from "@/types/ChatWindow/types";
 import { useSession } from "next-auth/react";
 import { useContext, useEffect } from "react";
 import { io } from "socket.io-client";
 
 export const useWebSocketConnection = (url: string) => {
   const { updateSocket } = useContext(WebSocketContext);
+  const { setAllChats } = useContext(ChatsContext);
   const session = useSession().data!;
   const email = session?.user?.email;
 
   useEffect(() => {
-    console.log("connecting to websocket");
     const socket = io(url);
     updateSocket(socket);
 
@@ -18,17 +19,46 @@ export const useWebSocketConnection = (url: string) => {
       socket.emit("join", email);
     });
 
-    socket.on("disconnect", () => {
-      console.log("Disconnected from WebSocket server");
+    socket.on("disconnect", (reason, _) => {
+      console.log("Disconnected from WebSocket server", reason);
+    });
+
+    socket.on("friend online", (email: string) => {
+      setAllChats((prevChats) =>
+        prevChats.map((chat: ChatType) => {
+          if (chat.friendEmail === email) {
+            return {
+              ...chat,
+              isOnline: true,
+            };
+          }
+          return chat;
+        })
+      );
+    });
+
+    socket.on("friend offline", (email: string) => {
+      setAllChats((prevChats) =>
+        prevChats.map((chat: ChatType) => {
+          if (chat.friendEmail === email) {
+            return {
+              ...chat,
+              isOnline: false,
+            };
+          }
+          return chat;
+        })
+      );
     });
 
     return () => {
-      updateSocket(null);
-      socket.off("private message");
+      socket.off("friend online");
+      socket.off("friend offline");
       socket.off("connect");
       socket.off("disconnect");
       socket.disconnect();
+      updateSocket(null);
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url, email]);
 };

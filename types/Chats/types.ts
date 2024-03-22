@@ -12,5 +12,5 @@ export type ChatType = {
 
 export type ChatsContextType = {
   allChats: ChatType[];
-  handleChatsChange: (chats: ChatType[]) => void;
+  setAllChats: React.Dispatch<React.SetStateAction<ChatType[]>>;
 };

@@ -21,8 +21,8 @@ const ChatWindowContextProvider = ({ children }: ComponentProps) => {
         receiverEmail: session.user.email,
         senderEmail: value.email,
       });
+      await clearUnreadMessages(session!.user!.email, value!.email);
     }
-    await clearUnreadMessages(session!.user!.email, value!.email);
     setHeaderInfo(value);
   };
 
