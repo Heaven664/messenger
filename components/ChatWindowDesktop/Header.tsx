@@ -10,14 +10,42 @@ import { ProfileContextType } from "@/types/Profile/types";
 import { useRouter } from "next/router";
 import PageContext from "@/context/PageContext";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import WebSocketContext from "@/context/WebSocketContext";
 
 const ChatWindowDesktopHeader = () => {
   // Get ChatWindowContext and destructure for current header info
   const headerContext = useContext<HeaderContextType | null>(ChatWindowContext);
-  const { headerInfo, changeChatWindowHeaderInfo } =
+  const { headerInfo, changeChatWindowHeaderInfo, setHeaderInfo } =
     headerContext as HeaderContextType;
   const { name, imageUrl, isOnline, userId, lastSeenPermission, lastSeenTime } =
     headerInfo as HeaderInfoType;
+
+  const { socket } = useContext(WebSocketContext);
+
+  useEffect(() => {
+    if (socket && headerInfo) {
+      socket.on("check header online status", (onlineUserEmail: string) => {
+        if (onlineUserEmail === headerInfo?.email) {
+          setHeaderInfo((prev) => {
+            return { ...prev!, isOnline: true };
+          });
+        }
+      });
+
+      socket.on("check header offline status", (onlineUserEmail: string) => {
+        if (onlineUserEmail === headerInfo?.email) {
+          setHeaderInfo((prev) => {
+            return { ...prev!, isOnline: false };
+          });
+        }
+      });
+
+      return () => {
+        socket.off("check header online status");
+        socket.off("check header offline status");
+      };
+    }
+  }, [socket, headerInfo, setHeaderInfo]);
 
   const [lastSeen, setLastSeen] = useState<string>("");
 

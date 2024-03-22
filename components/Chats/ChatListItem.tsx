@@ -26,9 +26,7 @@ const ChatListItem = ({
   // Image error state
   const [imageError, setImageError] = useState(false);
   // Image path for src get request with timestamp to prevent caching
-  const imageGetPath = `${
-    process.env.NEXT_PUBLIC_API_URL
-  }${imageUrl}`;
+  const imageGetPath = `${process.env.NEXT_PUBLIC_API_URL}${imageUrl}`;
 
   const headerContext = useContext<HeaderContextType | null>(ChatWindowContext);
   const { changeChatWindowHeaderInfo } = headerContext as HeaderContextType;

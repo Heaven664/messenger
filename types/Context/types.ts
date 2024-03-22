@@ -10,6 +10,7 @@ export type PageContextType = {
 export type HeaderContextType = {
   headerInfo: HeaderInfoType | null;
   changeChatWindowHeaderInfo: (value: HeaderInfoType | null) => void;
+  setHeaderInfo: Dispatch<SetStateAction<HeaderInfoType | null>>;
 };
 
 export type MessagesContextType = {

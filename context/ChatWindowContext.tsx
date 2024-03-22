@@ -29,6 +29,7 @@ const ChatWindowContextProvider = ({ children }: ComponentProps) => {
   const context: HeaderContextType = {
     headerInfo,
     changeChatWindowHeaderInfo,
+    setHeaderInfo,
   };
 
   return (
