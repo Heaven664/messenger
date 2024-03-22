@@ -24,18 +24,18 @@ const ChatWindowDesktopHeader = () => {
 
   useEffect(() => {
     if (socket && headerInfo) {
-      socket.on("check header online status", (onlineUserEmail: string) => {
-        if (onlineUserEmail === headerInfo?.email) {
+      socket.on("check header online status", (email) => {
+        if (email === headerInfo?.email) {
           setHeaderInfo((prev) => {
             return { ...prev!, isOnline: true };
           });
         }
       });
 
-      socket.on("check header offline status", (onlineUserEmail: string) => {
-        if (onlineUserEmail === headerInfo?.email) {
+      socket.on("check header offline status", ({ email, lastSeenTime }) => {
+        if (email === headerInfo?.email) {
           setHeaderInfo((prev) => {
-            return { ...prev!, isOnline: false };
+            return { ...prev!, isOnline: false, lastSeenTime };
           });
         }
       });
