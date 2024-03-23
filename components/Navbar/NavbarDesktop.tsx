@@ -1,18 +1,32 @@
 import PageContext from "@/context/PageContext";
 import { PageContextType } from "@/types/Context/types";
 import { PageStatesType } from "@/types/Navbar/types";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import styles from "./NavbarDesktop.module.scss";
 import ProfileContext from "@/context/ProfileContext";
 import NavbarContext from "@/context/NavbarContext";
 import { ProfileContextType } from "@/types/Profile/types";
 import { useSession } from "next-auth/react";
+import ChatsContext from "@/context/ChatsContext";
 
 const NavbarDesktop = () => {
   const pageContext = useContext<PageContextType | null>(PageContext);
   const { curPage, changePage } = pageContext as PageContextType;
+
   const navbarContext = useContext(NavbarContext);
-  const { navbarItems, removeNewActivityBadge } = navbarContext!;
+  const { navbarItems, removeNewActivityBadge, addNewActivityBadge } =
+    navbarContext!;
+
+  const chatsContext = useContext(ChatsContext);
+  const { allChats } = chatsContext!;
+
+  // Display a new activity badge if there are unread messages in the chats
+  useEffect(() => {
+    const newChatActivity = allChats.some((chat) => chat.unreadMessages > 0);
+    if (newChatActivity) addNewActivityBadge("chats");
+    else removeNewActivityBadge("chats");
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [allChats]);
 
   // Get authenticated user data from session
   const session = useSession().data!;
