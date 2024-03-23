@@ -1,13 +1,17 @@
 import { addContactRequest } from "@/types/Api";
 import axios from "axios";
 
-const addContact = async (data: addContactRequest) => {
+const addContact = async (data: addContactRequest, token: string) => {
   const url = `${process.env.NEXT_PUBLIC_API_URL!}/contacts/add`;
   let error: string | null = null;
   let response: any = null;
 
   try {
-    response = (await axios.post(url, data)).data;
+    response = (
+      await axios.post(url, data, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+    ).data;
     console.log(response);
   } catch (AxiosError: any) {
     // Get error message

@@ -22,14 +22,17 @@ const AddContactForm = ({ updateFriends, closeModal }: P) => {
       email: session!.user.email,
       friendEmail: emailRef.current!.value.trim(),
     };
-    const { response, error } = await addContact(data);
+    const { response, error } = await addContact(
+      data,
+      session?.backendTokens.accessToken
+    );
     if (error) {
-      console.log(error)
+      console.log(error);
       setErrorMessage(error);
       return;
     }
     if (response) {
-      console.log(response)
+      console.log(response);
       // Find the new friend and update the friends list
       const { _id, ...newFriend } = response?.find(
         (user: User) => user.email === data.friendEmail
