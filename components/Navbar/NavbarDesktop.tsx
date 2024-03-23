@@ -41,6 +41,7 @@ const NavbarDesktop = () => {
         className={curPage === navItem.pageName ? styles.selected : undefined}
       >
         {navItem.component}
+        {navItem.newActivity && <div className={styles.newActivityBadge}></div>}
       </li>
     );
   });
@@ -54,6 +55,7 @@ const NavbarDesktop = () => {
         className={curPage === navItem.pageName ? styles.selected : undefined}
       >
         {navItem.component}
+        {navItem.newActivity && <div className={styles.newActivityBadge}></div>}
       </li>
     );
   });

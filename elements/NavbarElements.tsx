@@ -8,14 +8,17 @@ export const topNavItems = [
     pageName: "profile",
     component: <AccountCircleRounded fontSize="inherit" />,
     resetProfile: true,
+    newActivity: false,
   },
   {
     pageName: "contacts",
     component: <Group fontSize="inherit" />,
+    newActivity: false,
   },
   {
     pageName: "chats",
     component: <QuestionAnswerOutlined fontSize="inherit" />,
+    newActivity: false,
   },
 ];
 
@@ -23,5 +26,6 @@ export const bottomNavItems = [
   {
     pageName: "settings",
     component: <Settings fontSize="inherit" />,
+    newActivity: false,
   },
 ];
