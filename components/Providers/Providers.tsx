@@ -7,6 +7,7 @@ import { SessionProvider } from "next-auth/react";
 import { ReactNode } from "react";
 import Layout from "../Layout/Layout";
 import { WebSocketContextProvider } from "@/context/WebSocketContext";
+import { NavbarContextProvider } from "@/context/NavbarContext";
 
 interface Props {
   children: ReactNode;
@@ -20,9 +21,11 @@ const Providers = ({ children }: Props) => {
           <MessagesContextProvider>
             <PageContextProvider>
               <ChatsContextProvider>
-                <ProfileContextProvider>
-                  <Layout>{children}</Layout>
-                </ProfileContextProvider>
+                <NavbarContextProvider>
+                  <ProfileContextProvider>
+                    <Layout>{children}</Layout>
+                  </ProfileContextProvider>
+                </NavbarContextProvider>
               </ChatsContextProvider>
             </PageContextProvider>
           </MessagesContextProvider>

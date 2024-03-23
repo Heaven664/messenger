@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { HeaderInfoType, MessageType } from "../ChatWindow/types";
-import { PageStatesType } from "../Navbar/types";
+import { NavbarItemType, PageStatesType } from "../Navbar/types";
 
 export type PageContextType = {
   curPage: PageStatesType;
@@ -16,4 +16,10 @@ export type HeaderContextType = {
 export type MessagesContextType = {
   messages: MessageType[];
   setMessages: Dispatch<SetStateAction<MessageType[] | []>>;
+};
+
+export type NavbarContextType = {
+  navbarItems: NavbarItemType[];
+  addNewActivityBadge: (pageName: PageStatesType) => void;
+  removeNewActivityBadge: (pageName: PageStatesType) => void;
 };
