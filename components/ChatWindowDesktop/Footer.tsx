@@ -80,7 +80,12 @@ const ChatWindowDesktopFooter = () => {
     setInputVal("");
     const newChats = updateLatsMessage(allChats, currentReceiverEmail);
     setAllChats(newChats);
-    await sendMessage(message);
+
+    const { response, error } = await sendMessage(
+      message,
+      session.backendTokens.accessToken
+    );
+    if (error) return console.error(error);
     emitNewMessage(message);
   };
 
