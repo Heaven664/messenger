@@ -3,17 +3,20 @@ import SearchActions from "../General/SearchActions";
 import { ContactListType } from "@/types/Contacts/types";
 import { contactsDataToContactsList } from "@/helpers/Contacts";
 import GroupedContactList from "./GroupedContactList";
-import { useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { filterUsersByName } from "@/helpers/General";
 import ModalCustom from "../General/Modal";
 import AddContactForm from "../General/AddContactForm";
 import { useSession } from "next-auth/react";
 import getContacts from "@/helpers/Api/getContacts";
 import { User } from "@/types/User";
+import WebSocketContext from "@/context/WebSocketContext";
 
 export const Contacts = () => {
   const [modalState, setModalState] = useState(false);
   const [friends, setFriends] = useState<User[]>([]);
+
+  const { socket } = useContext(WebSocketContext);
 
   const session = useSession().data;
   const user = session!.user;
@@ -26,6 +29,23 @@ export const Contacts = () => {
       })
       .catch((error) => console.log(error));
   }, [user]);
+
+  // Update contacts list when added by other user
+  useEffect(() => {
+    if (socket) {
+      socket.on("new contact", ({ friendship, adderEmail }) => {
+        // Find the new friend and update the friends list
+        const { _id, ...newFriend } = friendship?.find(
+          (user: User) => user.email === adderEmail
+        );
+        setFriends((prev: User[]) => [...prev, newFriend]);
+      });
+
+      return () => {
+        socket.off("new contact");
+      };
+    }
+  }, [socket, setFriends]);
 
   // Converts raw contacts into an ordered list of contacts
   const contacts = useMemo(
@@ -49,7 +69,11 @@ export const Contacts = () => {
 
   // Creates a list of GroupedContactList components based on currentContacts
   const contactsList = currentContacts.map((contact: ContactListType) => (
-    <GroupedContactList key={contact.letter} groupedContacts={contact} setFriends={setFriends} />
+    <GroupedContactList
+      key={contact.letter}
+      groupedContacts={contact}
+      setFriends={setFriends}
+    />
   ));
   return (
     <div className={styles.container}>
