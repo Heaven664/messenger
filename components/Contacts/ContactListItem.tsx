@@ -11,6 +11,7 @@ import removeContact from "@/helpers/Api/removeContact";
 import MessagesContext from "@/context/MessagesContext";
 import getMessages from "@/helpers/Api/getMessages";
 import WebSocketContext from "@/context/WebSocketContext";
+import { fetchProfileInfo } from "@/helpers/Api/fetchProfileInfo";
 
 type P = {
   imageSrc: string;
@@ -79,16 +80,20 @@ const ListItemContact = ({
 
   // Updates chat window header info with contact info
   const handleStartChat = async () => {
-    const newHeaderInfo = {
-      name,
-      email,
-      isOnline,
-      lastSeenPermission,
-      lastSeenTime,
-      userId: id,
-      imageUrl: imageSrc,
-    };
+    // Get user info
+    const user = await fetchProfileInfo(id);
+    // Get messages
     const { response } = await getMessages(userEmail, email);
+    // Update chat window header info
+    const newHeaderInfo = {
+      name: user.name,
+      email: user.email,
+      isOnline: user.isOnline,
+      lastSeenPermission: user.lastSeenPermission,
+      lastSeenTime: user.lastSeenTime,
+      userId: user.id,
+      imageUrl: user.imageSrc,
+    };
     changeChatWindowHeaderInfo(newHeaderInfo);
     if (response) messagesContext?.setMessages(response);
   };
