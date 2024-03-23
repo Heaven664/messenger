@@ -10,6 +10,7 @@ import { useSession } from "next-auth/react";
 import removeContact from "@/helpers/Api/removeContact";
 import MessagesContext from "@/context/MessagesContext";
 import getMessages from "@/helpers/Api/getMessages";
+import WebSocketContext from "@/context/WebSocketContext";
 
 type P = {
   imageSrc: string;
@@ -38,6 +39,8 @@ const ListItemContact = ({
   const session = useSession().data;
   const userEmail = session!.user.email;
 
+  const { socket } = useContext(WebSocketContext);
+
   // Get function for changing chat window header info
   const { changeChatWindowHeaderInfo } =
     chatWindowDesktopContext as HeaderContextType;
@@ -60,6 +63,12 @@ const ListItemContact = ({
     setFriends((prev: User[]) => {
       return prev.filter((contact: User) => contact.email !== friendEmail);
     });
+    if (socket) {
+      socket.emit("remove contact", {
+        userEmail,
+        friendEmail,
+      });
+    }
     setAnchorEl(null);
   };
 
@@ -89,7 +98,9 @@ const ListItemContact = ({
       <div className={styles.infoContainer}>
         <div className={styles.imageContainer} onClick={handleStartChat}>
           <Image
-            src={!imageError ? imageGetPath : "/general/default-profile-image.webp"}
+            src={
+              !imageError ? imageGetPath : "/general/default-profile-image.webp"
+            }
             width={35}
             height={35}
             alt={name}

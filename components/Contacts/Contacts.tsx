@@ -41,6 +41,13 @@ export const Contacts = () => {
         setFriends((prev: User[]) => [...prev, newFriend]);
       });
 
+      socket.on("contact removed", (removedEmail) => {
+        // Find the new friend and update the friends list
+        setFriends((prev: User[]) => {
+          return prev.filter((contact: User) => contact.email !== removedEmail);
+        });
+      });
+
       return () => {
         socket.off("new contact");
       };
