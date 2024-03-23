@@ -25,16 +25,7 @@ type P = {
   setFriends: React.Dispatch<React.SetStateAction<User[]>>;
 };
 
-const ListItemContact = ({
-  imageSrc,
-  name,
-  email,
-  id,
-  isOnline,
-  lastSeenPermission,
-  lastSeenTime,
-  setFriends,
-}: P) => {
+const ListItemContact = ({ imageSrc, name, email, id, setFriends }: P) => {
   const chatWindowDesktopContext = useContext(ChatWindowContext);
   const messagesContext = useContext(MessagesContext);
   const session = useSession().data;
@@ -59,7 +50,10 @@ const ListItemContact = ({
   };
 
   const handleRemoveContact = async (friendEmail: string) => {
-    const { error } = await removeContact({ userEmail, friendEmail });
+    const { error } = await removeContact(
+      { userEmail, friendEmail },
+      session!.backendTokens.accessToken
+    );
     if (error) console.log(error);
     setFriends((prev: User[]) => {
       return prev.filter((contact: User) => contact.email !== friendEmail);
