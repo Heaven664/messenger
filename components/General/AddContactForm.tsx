@@ -32,7 +32,6 @@ const AddContactForm = ({ updateFriends, closeModal }: P) => {
       return;
     }
     if (response) {
-      console.log(response);
       // Find the new friend and update the friends list
       const { _id, ...newFriend } = response?.find(
         (user: User) => user.email === data.friendEmail

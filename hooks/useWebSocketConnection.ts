@@ -39,7 +39,6 @@ export const useWebSocketConnection = (url: string) => {
     });
 
     socket.on("friend offline", (email: string) => {
-      console.log("Friend offline", email);
       setAllChats((prevChats) =>
         prevChats.map((chat: ChatType) => {
           if (chat.friendEmail === email) {

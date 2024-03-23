@@ -8,7 +8,6 @@ const addContact = async (data: addContactRequest) => {
 
   try {
     response = (await axios.post(url, data)).data;
-    console.log(response);
   } catch (AxiosError: any) {
     // Get error message
     error = AxiosError.response.data.message.trim();
