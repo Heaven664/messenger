@@ -1,9 +1,10 @@
 import { TextField } from "@mui/material";
 import styles from "./AddContactForm.module.scss";
-import { useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import addContact from "@/helpers/Api/addContact";
 import { User } from "@/types/User";
+import WebSocketContext from "@/context/WebSocketContext";
 
 type P = {
   updateFriends: React.Dispatch<React.SetStateAction<User[]>>;
@@ -12,6 +13,8 @@ type P = {
 
 const AddContactForm = ({ updateFriends, closeModal }: P) => {
   const [errorMessage, setErrorMessage] = useState<string>("");
+
+  const { socket } = useContext(WebSocketContext);
 
   const session = useSession()?.data;
   const emailRef = useRef<HTMLInputElement>(null);
@@ -32,15 +35,27 @@ const AddContactForm = ({ updateFriends, closeModal }: P) => {
       return;
     }
     if (response) {
+<<<<<<< HEAD
       console.log(response);
+=======
+>>>>>>> main
       // Find the new friend and update the friends list
       const { _id, ...newFriend } = response?.find(
         (user: User) => user.email === data.friendEmail
       );
       updateFriends((prev: User[]) => [...prev, newFriend]);
+      // Emit add contact event to trigger friend to update their contacts
+      if (socket) {
+        socket.emit("add contact", {
+          userEmail: data.email,
+          friendEmail: data.friendEmail,
+        });
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+      }
       closeModal();
     }
   };
+
   return (
     <form className={styles.container} onSubmit={handleSubmit}>
       {errorMessage && (

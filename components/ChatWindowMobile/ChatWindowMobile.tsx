@@ -10,29 +10,18 @@ import MessagesContext from "@/context/MessagesContext";
 
 const ChatWindowMobile = () => {
   const chatWindowDesktopContext = useContext(ChatWindowContext);
-  const messagesContext = useContext(MessagesContext);
+  const { messages, setMessages } = useContext(MessagesContext)!;
 
   // Checks if there is a currently open chat window
   const chatWindowSelected = chatWindowDesktopContext?.headerInfo !== null;
-
-  // Update messages when chat window changes
-  useEffect(() => {
-    setCurMessages(messagesContext!.messages);
-  }, [chatWindowDesktopContext?.headerInfo, messagesContext]);
-
-  const [curMessages, setCurMessages] = useState<MessageType[]>(messagesContext!.messages);
-
-  const addMessage = (message: MessageType) => {
-    setCurMessages([...curMessages, message]);
-  };
 
   return (
     <div className={styles.container}>
       {chatWindowSelected ? (
         <>
           <ChatWindowDesktopHeader />
-          <MessageContainer messages={curMessages} />
-          <Footer addMessage={addMessage} />
+          <MessageContainer messages={messages} />
+          <Footer />
         </>
       ) : (
         <EmptyChat />

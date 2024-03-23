@@ -1,5 +1,6 @@
+import { Dispatch, SetStateAction } from "react";
 import { HeaderInfoType, MessageType } from "../ChatWindow/types";
-import { PageStatesType } from "../Navbar/types";
+import { NavbarItemType, PageStatesType } from "../Navbar/types";
 
 export type PageContextType = {
   curPage: PageStatesType;
@@ -9,9 +10,16 @@ export type PageContextType = {
 export type HeaderContextType = {
   headerInfo: HeaderInfoType | null;
   changeChatWindowHeaderInfo: (value: HeaderInfoType | null) => void;
+  setHeaderInfo: Dispatch<SetStateAction<HeaderInfoType | null>>;
 };
 
 export type MessagesContextType = {
   messages: MessageType[];
-  changeMessages: (value: MessageType[]) => void;
+  setMessages: Dispatch<SetStateAction<MessageType[] | []>>;
+};
+
+export type NavbarContextType = {
+  navbarItems: NavbarItemType[];
+  addNewActivityBadge: (pageName: PageStatesType) => void;
+  removeNewActivityBadge: (pageName: PageStatesType) => void;
 };

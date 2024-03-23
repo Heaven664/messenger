@@ -13,12 +13,9 @@ import ChatsContext from "@/context/ChatsContext";
 import { updateLatsMessage } from "@/helpers/Chats";
 import { useSession } from "next-auth/react";
 import sendMessage from "@/helpers/Api/sendMessage";
+import WebSocketContext from "@/context/WebSocketContext";
 
-type P = {
-  addMessage: (message: MessageType) => void;
-};
-
-const ChatWindowDesktopFooter = ({ addMessage }: P) => {
+const ChatWindowDesktopFooter = () => {
   const [emojiPicker, setEmojiPicker] = useState<Boolean>(false);
   const [inputVal, setInputVal] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
@@ -26,6 +23,14 @@ const ChatWindowDesktopFooter = ({ addMessage }: P) => {
   // Get authenticated user data from session
   const session = useSession().data!;
   const user = session?.user;
+
+  // Get WebSocket instance from context
+  const { socket } = useContext(WebSocketContext);
+
+  // Emit new private message to server
+  const emitNewMessage = (message: MessageType) => {
+    socket?.emit("private message", message);
+  };
 
   // Get current receiver id from context
   const chatWindowContext = useContext<HeaderContextType | null>(
@@ -36,7 +41,7 @@ const ChatWindowDesktopFooter = ({ addMessage }: P) => {
 
   // Get current chats from context
   const currentChatsContext = useContext<ChatsContextType>(ChatsContext);
-  const { allChats, handleChatsChange } = currentChatsContext;
+  const { allChats, setAllChats } = currentChatsContext;
 
   // Close emoji picker when user clicks outside of it
   const handleClickOutside = (e: any) => {
@@ -72,11 +77,11 @@ const ChatWindowDesktopFooter = ({ addMessage }: P) => {
       viewed: false,
     };
 
-    addMessage(message);
     setInputVal("");
     const newChats = updateLatsMessage(allChats, currentReceiverEmail);
-    handleChatsChange(newChats);
+    setAllChats(newChats);
     await sendMessage(message);
+    emitNewMessage(message);
   };
 
   return (

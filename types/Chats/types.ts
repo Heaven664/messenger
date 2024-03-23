@@ -1,3 +1,5 @@
+import { MessageType } from "../ChatWindow/types";
+
 export type ChatType = {
   name: string;
   unreadMessages: number;
@@ -12,5 +14,7 @@ export type ChatType = {
 
 export type ChatsContextType = {
   allChats: ChatType[];
-  handleChatsChange: (chats: ChatType[]) => void;
+  setAllChats: React.Dispatch<React.SetStateAction<ChatType[]>>;
+  clearUnreadMessages: (friendEmail: string) => void;
+  addUnreadChat: (message: MessageType) => void;
 };

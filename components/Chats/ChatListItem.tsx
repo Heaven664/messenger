@@ -9,6 +9,7 @@ import ChatWindowContext from "@/context/ChatWindowContext";
 import { useSession } from "next-auth/react";
 import getMessages from "@/helpers/Api/getMessages";
 import MessagesContext from "@/context/MessagesContext";
+import ChatsContext from "@/context/ChatsContext";
 
 const ChatListItem = ({
   name,
@@ -22,15 +23,15 @@ const ChatListItem = ({
 }: ChatType) => {
   // Get ChatWindowContext and destructure function for changing header info
   const [newMessages, setNewMessages] = useState<number | "9+">(unreadMessages);
-
   // Image error state
   const [imageError, setImageError] = useState(false);
   // Image path for src get request with timestamp to prevent caching
-  const imageGetPath = `${imageUrl}?timestamp=${new Date().getTime()}`;
+  const imageGetPath = `${process.env.NEXT_PUBLIC_API_URL}${imageUrl}`;
 
   const headerContext = useContext<HeaderContextType | null>(ChatWindowContext);
   const { changeChatWindowHeaderInfo } = headerContext as HeaderContextType;
   const messagesContext = useContext(MessagesContext);
+  const { clearUnreadMessages } = useContext(ChatsContext);
   const hasNewMessages =
     (typeof newMessages === "number" && newMessages > 0) ||
     typeof newMessages === "string";
@@ -57,9 +58,10 @@ const ChatListItem = ({
   // Change header info when user clicks on chat list item
   const handleChatWindowChange = async () => {
     setNewMessages(0);
+    clearUnreadMessages(friendEmail);
     changeChatWindowHeaderInfo(chatDetails);
     const { response } = await getMessages(session!.user.email, friendEmail);
-    if (response) messagesContext?.changeMessages(response);
+    if (response) messagesContext?.setMessages(response);
   };
 
   return (

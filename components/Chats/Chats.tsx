@@ -11,7 +11,7 @@ import getChats from "@/helpers/Api/getChats";
 const Chats = () => {
   // Get chats from context and destructure them
   const chatsContext = useContext<ChatsContextType>(ChatsContext);
-  const { allChats, handleChatsChange } = chatsContext;
+  const { allChats, setAllChats } = chatsContext;
 
   const session = useSession();
   const userEmail = session.data!.user!.email;
@@ -21,7 +21,7 @@ const Chats = () => {
   useEffect(() => {
     getChats(userEmail)
       .then((data) => {
-        return handleChatsChange(data.response);
+        return setAllChats(data.response);
       })
       .catch((error) => console.log(error));
     // eslint-disable-next-line react-hooks/exhaustive-deps

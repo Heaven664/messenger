@@ -1,13 +1,10 @@
 import { useContext, useEffect } from "react";
-import ChatWindowDesktop from "../ChatWindowDesktop/ChatWindowDesktop";
-import ChatWindowMobile from "../ChatWindowMobile/ChatWindowMobile";
-import NavbarDesktop from "../Navbar/NavbarDesktop";
-import styles from "./Layout.module.scss";
 import { ComponentProps } from "@/types/Layout/types";
 import ChatWindowContext from "@/context/ChatWindowContext";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { User } from "@/types/User";
+import ChatApp from "./ChatApp";
 
 const Layout = ({ children }: ComponentProps) => {
   const chatWindowDesktopContext = useContext(ChatWindowContext);
@@ -36,20 +33,7 @@ const Layout = ({ children }: ComponentProps) => {
 
   if (user) {
     return (
-      <div className={styles.layoutContainer}>
-        <NavbarDesktop />
-        {children}
-        <div className={styles.chatWindowDesktop}>
-          <ChatWindowDesktop />
-        </div>
-        {chatWindowSelected ? (
-          <div className={styles.chatWindowMobile}>
-            <ChatWindowMobile />
-          </div>
-        ) : (
-          <div className={styles.hidden}></div>
-        )}
-      </div>
+      <ChatApp chatWindowSelected={chatWindowSelected}>{children}</ChatApp>
     );
   }
 };

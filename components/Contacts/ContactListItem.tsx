@@ -10,6 +10,8 @@ import { useSession } from "next-auth/react";
 import removeContact from "@/helpers/Api/removeContact";
 import MessagesContext from "@/context/MessagesContext";
 import getMessages from "@/helpers/Api/getMessages";
+import WebSocketContext from "@/context/WebSocketContext";
+import { fetchProfileInfo } from "@/helpers/Api/fetchProfileInfo";
 
 type P = {
   imageSrc: string;
@@ -38,6 +40,8 @@ const ListItemContact = ({
   const session = useSession().data;
   const userEmail = session!.user.email;
 
+  const { socket } = useContext(WebSocketContext);
+
   // Get function for changing chat window header info
   const { changeChatWindowHeaderInfo } =
     chatWindowDesktopContext as HeaderContextType;
@@ -47,7 +51,7 @@ const ListItemContact = ({
   // Image error state
   const [imageError, setImageError] = useState(false);
   // Image path for src get request with timestamp to prevent caching
-  const imageGetPath = `${imageSrc}?timestamp=${new Date().getTime()}`;
+  const imageGetPath = `${process.env.NEXT_PUBLIC_API_URL}${imageSrc}`;
 
   // Trigger remove contact popup
   const handleClick = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
@@ -60,6 +64,12 @@ const ListItemContact = ({
     setFriends((prev: User[]) => {
       return prev.filter((contact: User) => contact.email !== friendEmail);
     });
+    if (socket) {
+      socket.emit("remove contact", {
+        userEmail,
+        friendEmail,
+      });
+    }
     setAnchorEl(null);
   };
 
@@ -70,18 +80,22 @@ const ListItemContact = ({
 
   // Updates chat window header info with contact info
   const handleStartChat = async () => {
-    const newHeaderInfo = {
-      name,
-      email,
-      isOnline,
-      lastSeenPermission,
-      lastSeenTime,
-      userId: id,
-      imageUrl: imageSrc,
-    };
+    // Get user info
+    const user = await fetchProfileInfo(id);
+    // Get messages
     const { response } = await getMessages(userEmail, email);
+    // Update chat window header info
+    const newHeaderInfo = {
+      name: user.name,
+      email: user.email,
+      isOnline: user.isOnline,
+      lastSeenPermission: user.lastSeenPermission,
+      lastSeenTime: user.lastSeenTime,
+      userId: user.id,
+      imageUrl: user.imageSrc,
+    };
     changeChatWindowHeaderInfo(newHeaderInfo);
-    if (response) messagesContext?.changeMessages(response);
+    if (response) messagesContext?.setMessages(response);
   };
 
   return (
@@ -89,7 +103,9 @@ const ListItemContact = ({
       <div className={styles.infoContainer}>
         <div className={styles.imageContainer} onClick={handleStartChat}>
           <Image
-            src={!imageError ? imageGetPath : "/general/default-profile-image.webp"}
+            src={
+              !imageError ? imageGetPath : "/general/default-profile-image.webp"
+            }
             width={35}
             height={35}
             alt={name}

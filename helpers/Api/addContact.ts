@@ -7,12 +7,16 @@ const addContact = async (data: addContactRequest, token: string) => {
   let response: any = null;
 
   try {
+<<<<<<< HEAD
     response = (
       await axios.post(url, data, {
         headers: { Authorization: `Bearer ${token}` },
       })
     ).data;
     console.log(response);
+=======
+    response = (await axios.post(url, data)).data;
+>>>>>>> main
   } catch (AxiosError: any) {
     // Get error message
     error = AxiosError.response.data.message.trim();
