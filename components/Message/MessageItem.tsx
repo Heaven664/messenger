@@ -26,7 +26,11 @@ const MessageItem = ({ message, lastMessage }: P) => {
   // Image error state
   const [imageError, setImageError] = useState(false);
   // Image path for src get request
-  const imageGetPath = `${process.env.NEXT_PUBLIC_API_URL}${message.senderImageUrl}`;
+  // Image path for src get request
+  const imageGetPath =
+    message.senderImageUrl !== "/images/default-profile-image.webp"
+      ? `${process.env.NEXT_PUBLIC_API_URL}${message.senderImageUrl}`
+      : "/general/default-profile-image.webp";
 
   return (
     <li className={isMessageOwner ? ownerStyles.container : styles.container}>

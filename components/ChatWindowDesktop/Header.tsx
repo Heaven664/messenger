@@ -23,6 +23,11 @@ const ChatWindowDesktopHeader = () => {
   const { socket } = useContext(WebSocketContext);
 
   useEffect(() => {
+    if (!headerInfo?.imageUrl) setImageError(true);
+    setImageError(false);
+  }, [headerInfo?.imageUrl]);
+
+  useEffect(() => {
     if (socket && headerInfo) {
       socket.on("check header online status", (email) => {
         if (email === headerInfo?.email) {
@@ -51,8 +56,12 @@ const ChatWindowDesktopHeader = () => {
 
   // Image error state
   const [imageError, setImageError] = useState(false);
+
   // Image path for src get request
-  const imageGetPath = `${process.env.NEXT_PUBLIC_API_URL}${imageUrl}`;
+  const imageGetPath =
+    imageUrl !== "/images/default-profile-image.webp"
+      ? `${process.env.NEXT_PUBLIC_API_URL}${imageUrl}`
+      : "/general/default-profile-image.webp";
 
   const router = useRouter();
 

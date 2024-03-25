@@ -42,7 +42,10 @@ const ListItemContact = ({ imageSrc, name, email, id, setFriends }: P) => {
   // Image error state
   const [imageError, setImageError] = useState(false);
   // Image path for src get request with timestamp to prevent caching
-  const imageGetPath = `${process.env.NEXT_PUBLIC_API_URL}${imageSrc}`;
+  const imageGetPath =
+    imageSrc !== "/images/default-profile-image.webp"
+      ? `${process.env.NEXT_PUBLIC_API_URL}${imageSrc}`
+      : "/general/default-profile-image.webp";
 
   // Trigger remove contact popup
   const handleClick = (event: React.MouseEvent<SVGSVGElement, MouseEvent>) => {
