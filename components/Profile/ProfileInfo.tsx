@@ -4,9 +4,9 @@ import Person from "@mui/icons-material/Person";
 import styles from "@/components/Profile/ProfileInfo.module.scss";
 
 type P = {
-  name: string;
-  residency: string | null;
-  email: string;
+  name: string | undefined;
+  residency: string | undefined;
+  email: string | undefined | null;
 };
 
 const ProfileInfo = ({ name, residency, email }: P) => {
@@ -15,11 +15,11 @@ const ProfileInfo = ({ name, residency, email }: P) => {
       <ul>
         <li className={styles.profileInfoElement}>
           <Person fontSize="inherit" />
-          <h3>{name}</h3>
+          <h3>{name || "Unknown"}</h3>
         </li>
         <li className={styles.profileInfoElement}>
           <SmsOutlined fontSize="inherit" />
-          <h3>{email}</h3>
+          <h3>{email || "Unknown"}</h3>
         </li>
         <li className={styles.profileInfoElement}>
           <LocationOnOutlined fontSize="inherit" />

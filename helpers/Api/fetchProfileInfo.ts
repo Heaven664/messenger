@@ -17,7 +17,6 @@ export const fetchProfileInfo = async (profileId: string) => {
   } catch (AxiosError: any) {
     error = AxiosError.response.data.message.trim();
   } finally {
-    console.log(response, error);
     return { response, error };
   }
 };

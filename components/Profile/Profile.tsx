@@ -53,11 +53,11 @@ const Profile = () => {
         handleClose={handleClose}
         anchorEl={anchorEl}
       />
-      <ProfileHero imageSrc={profileInfo!.imageSrc} name={profileInfo!.name} />
+      <ProfileHero imageSrc={profileInfo?.imageSrc} name={profileInfo?.name} />
       <ProfileInfo
-        name={profileInfo!.name}
-        residency={profileInfo!.residency}
-        email={profileInfo!.email}
+        name={profileInfo?.name}
+        residency={profileInfo?.residency}
+        email={profileInfo?.email}
       />
     </div>
   );

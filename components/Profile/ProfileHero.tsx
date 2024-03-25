@@ -3,15 +3,17 @@ import styles from "./ProfileHero.module.scss";
 import { useState } from "react";
 
 type P = {
-  imageSrc: string;
-  name: string;
+  imageSrc: string | undefined;
+  name: string | undefined;
 };
 
 const ProfileHero = ({ imageSrc, name }: P) => {
   // Image error state
   const [imageError, setImageError] = useState(false);
-  // Image path for src get request with timestamp to prevent caching
-  const imageGetPath = `${process.env.NEXT_PUBLIC_API_URL}${imageSrc}`;
+  // Image path for src get request
+  const imageGetPath = imageSrc
+    ? `${process.env.NEXT_PUBLIC_API_URL}${imageSrc}`
+    : `${process.env.NEXT_PUBLIC_API_URL}/images/default-profile-image.jpg`;
 
   return (
     <div className={styles.layout}>
@@ -32,7 +34,7 @@ const ProfileHero = ({ imageSrc, name }: P) => {
             />
           </div>
         </div>
-        <p>{name}</p>
+        <p>{name || "Unknown"}</p>
       </div>
       <hr />
     </div>
