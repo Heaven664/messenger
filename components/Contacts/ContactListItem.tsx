@@ -75,9 +75,12 @@ const ListItemContact = ({ imageSrc, name, email, id, setFriends }: P) => {
   // Updates chat window header info with contact info
   const handleStartChat = async () => {
     // Get user info
-    const user = await fetchProfileInfo(id);
+    const { response: user, error } = await fetchProfileInfo(id);
+    // If no user or error, log error
+    if (error || !user) return console.log(error);
     // Get messages
     const { response } = await getMessages(userEmail, email);
+    if (!response) return console.log("Failed getting messages");
     // Update chat window header info
     const newHeaderInfo = {
       name: user.name,
