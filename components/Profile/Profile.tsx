@@ -24,7 +24,7 @@ const Profile = () => {
   useEffect(() => {
     if (profileId) {
       fetchProfileInfo(profileId)
-        .then((userInfo) => setProfileInfo(userInfo))
+        .then(({ response }) => setProfileInfo(response))
         .catch((error) => console.log(error));
     }
   }, [profileId]);

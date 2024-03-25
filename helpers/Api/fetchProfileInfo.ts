@@ -10,12 +10,14 @@ export const fetchProfileInfo = async (profileId: string) => {
   let response: any = null;
   let error: string | null = null;
   try {
-    response = await axios.get(
+    const res = await axios.get(
       `${process.env.NEXT_PUBLIC_API_URL}/users/${profileId}`
-    );
+    )!;
+    response = res.data as User;
   } catch (AxiosError: any) {
     error = AxiosError.response.data.message.trim();
   } finally {
+    console.log(response, error);
     return { response, error };
   }
 };
