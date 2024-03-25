@@ -13,12 +13,12 @@ export const contactsDataToContactsList = (
   const contactsMap = new Map<string, User[]>();
 
   // Create Hash Map entry for each contact data entity by first letter
-  contacts.map((contact) => {
+  contacts?.map((contact) => {
     const firstLetter = contact.name[0].toUpperCase();
     const currentContacts = contactsMap.get(firstLetter);
     contactsMap.set(
       firstLetter,
-      currentContacts ? [...currentContacts, contact] : [contact]
+    currentContacts ? [...currentContacts, contact] : [contact]
     );
   });
 

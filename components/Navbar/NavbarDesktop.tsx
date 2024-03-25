@@ -22,7 +22,7 @@ const NavbarDesktop = () => {
 
   // Display a new activity badge if there are unread messages in the chats
   useEffect(() => {
-    const newChatActivity = allChats.some((chat) => chat.unreadMessages > 0);
+    const newChatActivity = allChats?.some((chat) => chat.unreadMessages > 0);
     if (newChatActivity) addNewActivityBadge("chats");
     else removeNewActivityBadge("chats");
   // eslint-disable-next-line react-hooks/exhaustive-deps

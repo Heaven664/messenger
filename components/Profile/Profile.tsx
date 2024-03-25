@@ -23,7 +23,9 @@ const Profile = () => {
   // Fetch profile info when profileId changes, skip if profileId is null (initial state)
   useEffect(() => {
     if (profileId) {
-      fetchProfileInfo(profileId).then((userInfo) => setProfileInfo(userInfo));
+      fetchProfileInfo(profileId)
+        .then((userInfo) => setProfileInfo(userInfo))
+        .catch((error) => console.log(error));
     }
   }, [profileId]);
 
@@ -62,4 +64,3 @@ const Profile = () => {
 };
 
 export default Profile;
-

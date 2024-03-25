@@ -29,11 +29,13 @@ const Chats = () => {
 
   // Sort chats based on last message timestamp when chats change
   useEffect(() => {
-    const newChats = [...allChats];
-    newChats.sort((a: ChatType, b: ChatType) => {
-      return b.lastMessage - a.lastMessage;
-    });
-    setCurrentChats(newChats);
+    if (allChats) {
+      const newChats = [...allChats];
+      newChats.sort((a: ChatType, b: ChatType) => {
+        return b.lastMessage - a.lastMessage;
+      });
+      setCurrentChats(newChats);
+    }
   }, [allChats]);
 
   // Change chats based on input value
