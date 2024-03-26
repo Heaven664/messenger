@@ -31,7 +31,7 @@ export const validateProfileImage = (file: File | null) => {
   }
 
   // Define max file size 3 MB
-  const maxFileSize = 1024 * 1024 * 4; // 3MB
+  const maxFileSize = 1024 * 1024 * 6; // 6MB
 
   // If file is to large
   if (file.size > maxFileSize) {

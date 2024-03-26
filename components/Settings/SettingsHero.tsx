@@ -7,9 +7,10 @@ import { useState } from "react";
 type P = {
   fileRef: React.RefObject<HTMLInputElement>;
   triggerUpload: () => void;
+  handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const SettingsHero = ({ fileRef, triggerUpload }: P) => {
+const SettingsHero = ({ fileRef, triggerUpload, handleFileChange }: P) => {
   // Image error state
   const [imageError, setImageError] = useState(false);
   const session = useSession()?.data;
@@ -40,7 +41,13 @@ const SettingsHero = ({ fileRef, triggerUpload }: P) => {
             <div className={styles.changeIconContainer} onClick={triggerUpload}>
               <CameraAltRounded className={styles.changeIcon} />
             </div>
-            <input type="file" className={styles.fileInput} ref={fileRef} />
+            <input
+              type="file"
+              className={styles.fileInput}
+              onChange={handleFileChange}
+              ref={fileRef}
+              accept=".jpeg, .png, .webp"
+            />
           </div>
           <p>{session?.user.name}</p>
         </div>
