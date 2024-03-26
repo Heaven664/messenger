@@ -4,8 +4,9 @@ import styles from "./MessageItem.module.scss";
 import ownerStyles from "./MessageOwner.module.scss";
 import { MessageType } from "@/types/ChatWindow/types";
 import { timestampToLocalTime } from "@/helpers/ChatWindow";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
+import ChatWindowContext from "@/context/ChatWindowContext";
 
 type P = {
   message: MessageType;
@@ -18,6 +19,7 @@ const MessageItem = ({ message, lastMessage }: P) => {
   const user = session?.user;
   const isMessageOwner = message.senderEmail === user!.email;
   const [isMessageRead, setIsMessageRead] = useState(message.viewed);
+  const { headerInfo } = useContext(ChatWindowContext)!;
 
   useEffect(() => {
     setIsMessageRead(message.viewed);
@@ -25,12 +27,20 @@ const MessageItem = ({ message, lastMessage }: P) => {
 
   // Image error state
   const [imageError, setImageError] = useState(false);
-  // Image path for src get request
-  // Image path for src get request
-  const imageGetPath =
-    message.senderImageUrl !== "/images/default-profile-image.webp"
-      ? `${process.env.NEXT_PUBLIC_API_URL}${message.senderImageUrl}`
-      : "/general/default-profile-image.webp";
+
+  // Set image path
+  let imageGetPath = "";
+  if (isMessageOwner) {
+    imageGetPath =
+      user.imageSrc !== "/images/default-profile-image.webp"
+        ? `${process.env.NEXT_PUBLIC_API_URL}${user.imageSrc}`
+        : "/general/default-profile-image.webp";
+  } else {
+    imageGetPath =
+      headerInfo?.imageUrl !== "/images/default-profile-image.webp"
+        ? `${process.env.NEXT_PUBLIC_API_URL}${headerInfo?.imageUrl}`
+        : "/general/default-profile-image.webp";
+  }
 
   return (
     <li className={isMessageOwner ? ownerStyles.container : styles.container}>
