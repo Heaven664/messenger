@@ -7,13 +7,12 @@ import { useSession } from "next-auth/react";
 import { validateProfileImage } from "@/helpers/Validation/profileImageValidation";
 import sendImageFile from "@/helpers/Api/sendImageFile";
 import removeImage from "@/helpers/Api/removeImage";
-import { Image, createCanvas } from "canvas";
-import { dataURItoBlob } from "@/helpers/General";
+import Compressor from "compressorjs";
 
 const Settings = () => {
   const fileRef = useRef<HTMLInputElement | null>(null);
   const [file, setFile] = useState<File | null>(null);
-  const [compressedFile, setCompressedFile] = useState<string | null>(null);
+  const [compressedFile, setCompressedFile] = useState<File | null>(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -38,13 +37,11 @@ const Settings = () => {
 
     if (!compressedFile) return;
 
-    const blobCompressedImage = dataURItoBlob(compressedFile);
-
     // Create form data and append the file
     const formData = new FormData();
     formData.append(
       "profileImage",
-      blobCompressedImage!,
+      compressedFile!,
       `${user?.email}-${new Date().getTime()}.${fileExtension}`
     );
 
@@ -94,27 +91,28 @@ const Settings = () => {
         // If file not found, set error message
         if (!validFile) return aboardFileUpload("File not found");
 
+        // Read the file and compress it
         const reader = new FileReader();
 
-        // Compress the image
         reader.onload = async (e) => {
-          const img = document.createElement("img") as unknown as Image;
+          const img = document.createElement("img");
           img.src = e.target?.result as string;
 
           img.onload = () => {
-            const MAX_WIDTH = 500;
-            const scaleSize = MAX_WIDTH / img.width;
-            const canvas = createCanvas(MAX_WIDTH, img.height * scaleSize);
-            const ctx = canvas.getContext("2d");
-            ctx.drawImage(img, 0, 0, MAX_WIDTH, img.height * scaleSize);
-
-            const compressedImage = canvas.toDataURL(`image/jpeg`);
-            setCompressedFile(compressedImage);
+            const MAX_WIDTH = 400;
+            const scaleSize = MAX_WIDTH / img.height;
+            new Compressor(validFile, {
+              width: MAX_WIDTH,
+              height: img.height * scaleSize,
+              success(compressedFile) {
+                setCompressedFile(compressedFile as File);
+              },
+              error: (error) => console.log(error),
+            });
           };
         };
         reader.readAsDataURL(validFile);
 
-        // Set the file
         setFile(validFile);
       }
     };
