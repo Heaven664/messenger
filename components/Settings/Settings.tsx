@@ -43,11 +43,13 @@ const Settings = () => {
 
     // Send request to remove old image
     const imageSrc = user!.imageSrc!.split("/")[2];
+    console.log("sending request to remove image");
     await removeImage(imageSrc, token!);
+    console.log("image removed, sending image");
 
     // Send request to update user image and destructure the response and error
     const { response: newImage, error } = await sendImageFile(formData, token!);
-
+    console.log("Image sent");
     // Exit if error
     if (error) return console.log(error);
 
