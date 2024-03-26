@@ -19,7 +19,7 @@ const ChatWindowMobile = () => {
     <div className={styles.container}>
       {chatWindowSelected ? (
         <>
-          <ChatWindowDesktopHeader />
+          <ChatWindowDesktopHeader isMobile={true} />
           <MessageContainer messages={messages} />
           <Footer />
         </>

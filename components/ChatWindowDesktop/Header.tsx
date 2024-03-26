@@ -12,7 +12,11 @@ import PageContext from "@/context/PageContext";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import WebSocketContext from "@/context/WebSocketContext";
 
-const ChatWindowDesktopHeader = () => {
+type P = {
+  isMobile?: boolean;
+};
+
+const ChatWindowDesktopHeader = ({ isMobile }: P) => {
   // Get ChatWindowContext and destructure for current header info
   const headerContext = useContext<HeaderContextType | null>(ChatWindowContext);
   const { headerInfo, changeChatWindowHeaderInfo, setHeaderInfo } =
@@ -86,6 +90,7 @@ const ChatWindowDesktopHeader = () => {
 
   // Changes profileContext and navigates to profile page
   const handleProfileOpen = () => {
+    if (isMobile) changeChatWindowHeaderInfo(null);
     handleProfileInfoChange(userId);
     router.push("/profile");
     changePage(null);
