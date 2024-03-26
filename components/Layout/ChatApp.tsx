@@ -3,7 +3,9 @@ import ChatWindowDesktop from "../ChatWindowDesktop/ChatWindowDesktop";
 import ChatWindowMobile from "../ChatWindowMobile/ChatWindowMobile";
 import NavbarDesktop from "../Navbar/NavbarDesktop";
 import styles from "./Layout.module.scss";
-import React from "react";
+import React, { useEffect } from "react";
+import { useSession } from "next-auth/react";
+import { fetchProfileInfo } from "@/helpers/Api/fetchProfileInfo";
 
 type P = {
   children: React.ReactNode;
@@ -11,6 +13,22 @@ type P = {
 };
 
 const ChatApp = ({ children, chatWindowSelected }: P) => {
+  const { data: session, update } = useSession();
+  const user = session?.user;
+  // Update session user info info on mount
+  useEffect(() => {
+    const fetchProfile = async () => {
+      if (user) {
+        const { response, error } = await fetchProfileInfo(user.id);
+        if (error) return console.log(error);
+        if (response) {
+          await update({ user: { ...user } });
+        }
+      }
+    };
+    fetchProfile();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.id]);
   // Connect to WebSocket server
   useWebSocketConnection(process.env.NEXT_PUBLIC_API_URL!);
 
