@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "@/components/Settings/SettingsBackground.module.scss";
-import EditRounded from "@mui/icons-material/EditRounded";
+import { CircularProgress } from "@mui/material";
 import { Button } from "@mui/material";
 
 type P = {
@@ -8,9 +8,16 @@ type P = {
   handleFileSend: () => void;
   error: string;
   hideError: () => void;
+  isLoading: boolean;
 };
 
-const SettingsBackground = ({ file, handleFileSend, error, hideError }: P) => {
+const SettingsBackground = ({
+  file,
+  handleFileSend,
+  error,
+  hideError,
+  isLoading,
+}: P) => {
   return (
     <div className={styles.backgroundContainer}>
       <Image
@@ -32,7 +39,10 @@ const SettingsBackground = ({ file, handleFileSend, error, hideError }: P) => {
             {error}
           </Button>
         )}
-        {(file && !error) && (
+        {isLoading && (
+          <CircularProgress color="success" size={30} thickness={5.0} />
+        )}
+        {file && !error && !isLoading && (
           <Button
             onClick={handleFileSend}
             variant="outlined"

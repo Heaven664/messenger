@@ -12,6 +12,7 @@ const Settings = () => {
   const fileRef = useRef<HTMLInputElement | null>(null);
   const [file, setFile] = useState<File | null>(null);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const { data: session, update, status } = useSession();
 
@@ -43,13 +44,11 @@ const Settings = () => {
 
     // Send request to remove old image
     const imageSrc = user!.imageSrc!.split("/")[2];
-    console.log("sending request to remove image");
+    setIsLoading(true);
     await removeImage(imageSrc, token!);
-    console.log("image removed, sending image");
 
     // Send request to update user image and destructure the response and error
     const { response: newImage, error } = await sendImageFile(formData, token!);
-    console.log("Image sent");
     // Exit if error
     if (error) return console.log(error);
 
@@ -60,6 +59,7 @@ const Settings = () => {
         await update({ user: newUser });
       }
     }
+    setIsLoading(false);
     // Reset file
     setFile(null);
   };
@@ -106,6 +106,7 @@ const Settings = () => {
   return (
     <div className={styles.container}>
       <SettingsBackground
+        isLoading={isLoading}
         file={file}
         handleFileSend={handleFileSend}
         error={errorMessage}
