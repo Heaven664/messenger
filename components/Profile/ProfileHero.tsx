@@ -11,9 +11,10 @@ const ProfileHero = ({ imageSrc, name }: P) => {
   // Image error state
   const [imageError, setImageError] = useState(false);
   // Image path for src get request
+  const imageUrl = imageSrc ? imageSrc : "/images/default-profile-image.webp";
   const imageGetPath =
     imageSrc !== "/images/default-profile-image.webp"
-      ? `${process.env.NEXT_PUBLIC_API_URL}${imageSrc}`
+      ? `${process.env.NEXT_PUBLIC_API_URL}${imageUrl}`
       : "/general/default-profile-image.webp";
 
   return (

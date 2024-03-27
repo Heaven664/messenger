@@ -108,6 +108,8 @@ Custom styling is implemented using the SASS extension language to harness its a
 
 Every user must create a personal account to interact with the application. Upon successful login, users are issued a JWT token to remain logged in for a certain period. Additionally, a socket event is emitted to notify their contacts that they are online.
 
+https://github.com/Heaven664/messenger/assets/105215745/3c984427-be3d-488f-9050-4ba86bea4216
+
 ### <span style="color: #4a9a64"> Profile</span>
 
 Clicking on either an image or the name of a contact within a chat window redirects you to their profile page, where you can view their essential details, including location, name, and email address. Or you can see your own information by clicking on profile icon on navigation bar. Also users can log out on the profile page.
@@ -127,6 +129,8 @@ Users can send private messages to each other. Messages are sent via web-sockets
 ### <span style="color: #4a9a64"> Settings</span>
 
 In the settings section, users can update some of their personal information and configure privacy settings, including the "last seen" permission. When the "last seen" permission is enabled, other users can see the last time a user was online in the chat window if the user is currently offline. Additionally, users have the option to upload their profile images.
+
+https://github.com/Heaven664/messenger/assets/105215745/0650ed9e-24f9-41eb-b321-6cc7926ea829
 
 ## Future Updates
 

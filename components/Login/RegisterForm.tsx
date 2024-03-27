@@ -29,6 +29,7 @@ const RegisterForm = () => {
       // Display error message
       setErrorMessage(error);
     } else {
+      console.log(response);
       // Extract user data from response and lon in user using next-auth
       const user = response.user;
       await signIn("credentials", {

@@ -35,6 +35,9 @@ const registerRequest = async (data: RegisterRequest) => {
         error = "Something went wrong";
     }
   } finally {
+    if (!response && !error) {
+      error = "Something went wrong";
+    }
     return { response, error };
   }
 };
