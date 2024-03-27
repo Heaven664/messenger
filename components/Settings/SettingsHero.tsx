@@ -13,6 +13,7 @@ type P = {
 const SettingsHero = ({ fileRef, triggerUpload, handleFileChange }: P) => {
   // Image error state
   const [imageError, setImageError] = useState(false);
+  // Get session
   const session = useSession()?.data;
 
   const imagePath = `${process.env.NEXT_PUBLIC_API_URL}${

@@ -13,23 +13,7 @@ type P = {
 };
 
 const ChatApp = ({ children, chatWindowSelected }: P) => {
-  const { data: session, update } = useSession();
-  const user = session?.user;
-  // Update session user info info on mount
-  useEffect(() => {
-    const fetchProfile = async () => {
-      if (user) {
-        const { response, error } = await fetchProfileInfo(user.id);
-        if (error) return console.log(error);
-        if (response) {
-          await update({ user: { ...user } });
-        }
-      }
-    };
-    fetchProfile();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user?.id]);
-  // Connect to WebSocket server
+  // Establish connection to WebSocket server
   useWebSocketConnection(process.env.NEXT_PUBLIC_API_URL!);
 
   return (
