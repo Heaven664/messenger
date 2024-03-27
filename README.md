@@ -143,3 +143,4 @@ https://github.com/Heaven664/messenger/assets/105215745/0650ed9e-24f9-41eb-b321-
 ## Future Updates
 
 This application serves as my primary pet project, and I am dedicated to releasing additional features in future updates and working on current ~~bugs~~(features). Currently, the main objective was to develop a functional application that meets the core requirements of a chat app. Stay tuned to this section for upcoming updates. I will update it as soon as I determine the next steps. Thank you for your interest!
+ 
