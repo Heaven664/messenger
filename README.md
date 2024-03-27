@@ -18,6 +18,8 @@ This repository contains client code. For server code visit [this repository](ht
 
 This application is deployed for public usage at [https://messenger664.vercel.app](https://messenger664.vercel.app).
 
+**My email is omarhamid@gmail.com Feel free to add me and send a message**
+
 I chose not to create a shared account and skipping the registration step for visitors. Maintaining such an account would require constant monitoring and removal of inappropriate messages.
 
 Therefore, each user will need to create their own private account. Feel free to remain anonymous and register with a fake email, as it primarily serves as a unique user identification and will not be used for mailing.
