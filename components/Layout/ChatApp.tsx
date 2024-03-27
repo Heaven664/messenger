@@ -11,7 +11,7 @@ type P = {
 };
 
 const ChatApp = ({ children, chatWindowSelected }: P) => {
-  // Connect to WebSocket server
+  // Establish connection to WebSocket server
   useWebSocketConnection(process.env.NEXT_PUBLIC_API_URL!);
 
   return (

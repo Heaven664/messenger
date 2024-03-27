@@ -10,8 +10,9 @@ type P = {
 const ProfileHero = ({ imageSrc, name }: P) => {
   // Image error state
   const [imageError, setImageError] = useState(false);
-  // Image path for src get request
+  // Configure image url
   const imageUrl = imageSrc ? imageSrc : "/images/default-profile-image.webp";
+  // Image path for src get request
   const imageGetPath =
     imageSrc !== "/images/default-profile-image.webp"
       ? `${process.env.NEXT_PUBLIC_API_URL}${imageUrl}`
