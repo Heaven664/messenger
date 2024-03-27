@@ -15,7 +15,7 @@ const ProfileHero = ({ imageSrc, name }: P) => {
   // Image path for src get request
   const imageGetPath =
     imageSrc !== "/images/default-profile-image.webp"
-      ? `${process.env.NEXT_PUBLIC_API_URL}${imageSrc}`
+      ? `${process.env.NEXT_PUBLIC_API_URL}${imageUrl}`
       : "/general/default-profile-image.webp";
 
   return (
