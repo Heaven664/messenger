@@ -16,9 +16,10 @@ const SettingsHero = ({ fileRef, triggerUpload, handleFileChange }: P) => {
   // Get session
   const session = useSession()?.data;
 
-  const imagePath = `${process.env.NEXT_PUBLIC_API_URL}${
-    session!.user!.imageSrc
-  }`;
+  const imagePath =
+    session?.user.imageSrc !== "/images/default-profile-image.webp"
+      ? `${process.env.NEXT_PUBLIC_API_URL}${session?.user.imageSrc}`
+      : "/general/default-profile-image.webp";
 
   return (
     <div className={styles.layout}>
