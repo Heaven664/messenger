@@ -114,17 +114,25 @@ https://github.com/Heaven664/messenger/assets/105215745/3c984427-be3d-488f-9050-
 
 Clicking on either an image or the name of a contact within a chat window redirects you to their profile page, where you can view their essential details, including location, name, and email address. Or you can see your own information by clicking on profile icon on navigation bar. Also users can log out on the profile page.
 
+https://github.com/Heaven664/messenger/assets/105215745/b0a30e66-e6df-431a-9495-3b4fd5a9d4da
+
 ### <span style="color: #4a9a64"> Contacts</span>
 
 Users can add contacts by entering the email address of a contact they used for registration, which serves as a unique identifier for each user. The application permits users to add contacts without requiring confirmation, enabling immediate conversation initiation. When a user adds a new contact, the contact receives a real-time notification via web-sockets and can also view their new contact. Contacts can be removed.
+
+https://github.com/Heaven664/messenger/assets/105215745/392d7f81-df8c-42e8-bfdb-c6be98dd1c94
 
 ### <span style="color: #4a9a64"> Chats</span>
 
 After a user sends first message to their new contact a new chat will be created. Chats are sorted based on the timestamp of the last message sent, it means that when there is a new message in a chat - chat will be automatically moved to the top of the list.
 
+https://github.com/Heaven664/messenger/assets/105215745/6caf5d99-225b-42fc-8015-d36b7bb5c025
+
 ### <span style="color: #4a9a64"> Messages</span>
 
 Users can send private messages to each other. Messages are sent via web-sockets same as events connected with the messages like updating 'isViewed' property on message object. Massages also include a timestamp of the time they were sent converted to a local time.
+
+https://github.com/Heaven664/messenger/assets/105215745/9ad0274e-4024-4222-8a24-b3b0d0e0612c
 
 ### <span style="color: #4a9a64"> Settings</span>
 
