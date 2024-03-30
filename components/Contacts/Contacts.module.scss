@@ -6,6 +6,11 @@
   overflow: scroll;
   color: $light-background-text-color-primary;
 
+  .contactsListContainer {
+    padding-bottom: $mobile-navbar-height;
+    overflow: scroll;
+  }
+
   @media (min-width: 999px) {
     margin-left: $desktop-navbar-width;
     width: 250px;

@@ -102,7 +102,7 @@ export const Contacts = () => {
           closeModal={() => setModalState(false)}
         />
       </ModalCustom>
-      <ul>{contactsList}</ul>
+      <ul className={styles.contactsListContainer}>{contactsList}</ul>
     </div>
   );
 };
