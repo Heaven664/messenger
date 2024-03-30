@@ -7,8 +7,11 @@
   color: $light-background-text-color-primary;
 
   .contactsListContainer {
-    padding-bottom: $mobile-navbar-height;
     overflow: scroll;
+    @media (max-width: 999px) {
+      padding-bottom: $mobile-navbar-height;
+      padding-top: $search-actions-height - 10px;
+    }
   }
 
   @media (min-width: 999px) {
