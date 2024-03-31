@@ -1,0 +1,8 @@
+@import "@/styles/_variables.scss";
+
+.chatsContainer {
+  margin-top: $search-actions-height - 30px;
+  @media (max-width: 999px) {
+    padding-bottom: $mobile-navbar-height;
+  }
+}

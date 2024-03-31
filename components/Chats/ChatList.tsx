@@ -1,5 +1,6 @@
 import { ChatType } from "@/types/Chats/types";
 import ChatListItem from "./ChatListItem";
+import styles from "./ChatList.module.scss";
 
 type P = {
   chatsData: ChatType[];
@@ -33,7 +34,7 @@ const ChatList = ({ chatsData }: P) => {
     )
   );
 
-  return <ul>{chatsList}</ul>;
+  return <ul className={styles.chatsContainer}>{chatsList}</ul>;
 };
 
 export default ChatList;
