@@ -10,7 +10,7 @@
     overflow: scroll;
     @media (max-width: 999px) {
       padding-bottom: $mobile-navbar-height;
-      padding-top: $search-actions-height - 10px;
+      padding-top: $search-actions-height + 5px;
     }
   }
 
